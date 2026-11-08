@@ -811,10 +811,15 @@
     <h1>🌱 Pesquisa de Atividades da Família</h1>
     <p>Cadastre os membros da sua casa, informe o sexo de cada um e escolha o formato da turma (Mista, Feminina ou Masculina). <strong>Todos os dados são salvos diretamente no banco de dados do projeto.</strong></p>
     <div class="hero-links">
-      <a href="index.html">🏠 Site Oficial do Projeto</a>
-      <a href="painel_respostas.html" class="highlight">📊 Painel do Banco de Dados</a>
-      <a href="ficha_pesquisa_imprimir.html" target="_blank">🖨️ Ficha A4 para Imprimir</a>
-      <a href="cartaz_comercios_qrcode.html" target="_blank">📌 Cartaz com QR Code</a>
+      <a href="index.html">🏠 Conhecer o Projeto Tabatinga Viva</a>
+    </div>
+
+    <!-- MODO COORDENAÇÃO (Só visível para a coordenação caso acesse com ?admin=1) -->
+    <div id="adminToolbar" style="display:none; margin-top:14px; background:rgba(0,0,0,0.55); border:1px solid #facc15; padding:8px 16px; border-radius:12px; font-size:12.5px; color:#facc15; box-shadow:0 4px 14px rgba(0,0,0,0.3);">
+      <strong>🛠️ Acesso da Coordenação:</strong>
+      <a href="painel_respostas.html" style="color:#ffffff; margin:0 8px; text-decoration:underline; font-weight:600;">📊 Painel de Respostas</a> |
+      <a href="cartaz_comercios_qrcode.html" target="_blank" style="color:#ffffff; margin:0 8px; text-decoration:underline; font-weight:600;">📌 Gerar Cartaz QR Code</a> |
+      <a href="ficha_pesquisa_imprimir.html" target="_blank" style="color:#ffffff; margin:0 8px; text-decoration:underline; font-weight:600;">🖨️ Ficha A4 Impressa</a>
     </div>
 
     <div style="margin-top:14px; display:inline-flex; align-items:center; gap:8px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.25); padding:6px 16px; border-radius:999px; font-size:12.5px; font-weight:700;">
@@ -937,9 +942,6 @@
           </button>
 
           <div class="secondary-actions">
-            <a href="painel_respostas.html" class="btn-secondary">
-              📊 Acessar Painel de Respostas &amp; Exportar Excel
-            </a>
             <button type="button" class="btn-secondary" onclick="limparFormulario()">
               🔄 Limpar Formulário
             </button>
@@ -963,11 +965,11 @@
       </div>
 
       <div class="modal-actions">
-        <a href="painel_respostas.html" class="btn-modal-primary">
-          📊 Visualizar no Painel de Dados do Projeto
+        <a href="index.html" class="btn-modal-primary">
+          🏠 Conhecer Mais Sobre o Projeto Tabatinga Viva
         </a>
         <button type="button" class="btn-modal-outline" onclick="fecharModalENovo()">
-          ➕ Preencher Ficha de Outra Família
+          ➕ Preencher Ficha de Outro Morador / Vizinho
         </button>
       </div>
     </div>
@@ -1643,8 +1645,22 @@
       }
     }
 
+    // Se a coordenação acessar com ?admin=1 na URL, exibe barra de atalhos administrativos
+    if (new URLSearchParams(window.location.search).get('admin') === '1') {
+      const adminBar = document.getElementById('adminToolbar');
+      if (adminBar) adminBar.style.display = 'inline-block';
+    }
+
     sincronizarAdesaoAoVivo();
     setInterval(sincronizarAdesaoAoVivo, 6000);
   </script>
+
+  <footer style="text-align:center; padding:35px 20px 45px; color:#94a3b8; font-size:12.5px;">
+    <p>🌱 <strong>Projeto Piloto Tabatinga Viva</strong> • Comunidade e Bairro em Movimento</p>
+    <p style="margin-top:6px; opacity:0.8;">Sua resposta ajuda a definir as atividades, horários e valores do Centro Comunitário.</p>
+    <p style="margin-top:12px; font-size:11px; opacity:0.4;">
+      <a href="painel_respostas.html" style="color:inherit; text-decoration:none;">Área Técnica da Coordenação</a>
+    </p>
+  </footer>
 </body>
 </html>
