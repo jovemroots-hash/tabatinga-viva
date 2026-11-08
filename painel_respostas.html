@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do Banco de Dados — Projeto Piloto Tabatinga Viva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #09313c;
+      --primary-light: #e0f2f1;
+      --accent: #e36414;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --pink: #db2777;
+      --pink-light: #fce7f3;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER */
+    .top-nav {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 16px 20px;
+      border-bottom: 4px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fde68a;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.15);
+      padding: 7px 13px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background 0.15s;
+    }
+    .nav-btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+    .nav-btn.primary {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 20px 16px;
+    }
+
+    /* BARRA DE AÇÕES RÁPIDAS E EXPORTAÇÃO */
+    .action-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .action-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+    .action-title p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-action {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-action:hover {
+      background: var(--primary-dark);
+    }
+    .btn-action.excel {
+      background: #15803d;
+    }
+    .btn-action.excel:hover {
+      background: #166534;
+    }
+    .btn-action.outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-action.outline:hover {
+      background: #f1f5f9;
+    }
+
+    /* CARDS DE MÉTRICAS / KPIS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .metric-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary);
+    }
+    .metric-card.pink::before { background: var(--pink); }
+    .metric-card.blue::before { background: var(--blue); }
+    .metric-card.green::before { background: var(--green); }
+    .metric-card.purple::before { background: var(--purple); }
+    .metric-card.orange::before { background: var(--accent); }
+
+    .metric-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .metric-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric-sub {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* SEÇÃO DE RANKING E PREFERÊNCIAS */
+    .analytics-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 860px) {
+      .analytics-row { grid-template-columns: 1fr; }
+    }
+
+    .panel-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ranking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .ranking-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .ranking-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ranking-bar-bg {
+      background: #f1f5f9;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .ranking-bar-fill {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.3s;
+    }
+
+    .turma-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .turma-stat-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+    }
+    .turma-stat-item.fem { border-left: 5px solid var(--pink); }
+    .turma-stat-item.masc { border-left: 5px solid var(--blue); }
+    .turma-stat-item.mista { border-left: 5px solid var(--primary); }
+
+    /* FILTROS E TABELA */
+    .table-section {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .filters-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .filter-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .filter-group select,
+    .filter-group input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .filter-group select:focus,
+    .filter-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      color: var(--muted);
+      font-weight: 800;
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--border);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    .pill-tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pill-tag.free { background: var(--green-light); color: var(--green); border: 1px solid #86efac; }
+    .pill-tag.rateio { background: var(--accent-light); color: #9a3412; border: 1px solid #fdba74; }
+    .pill-tag.fem { background: var(--pink-light); color: var(--pink); font-weight: 800; }
+    .pill-tag.masc { background: var(--blue-light); color: var(--blue); font-weight: 800; }
+    .pill-tag.mista { background: var(--purple-light); color: var(--purple); font-weight: 800; }
+
+    .btn-table {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-table:hover {
+      background: #e2e8f0;
+    }
+
+    /* MODAL DE DETALHES */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      z-index: 1000;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 640px;
+      width: 100%;
+      padding: 24px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+    }
+    .empty-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="brand-title">
+      <span>🌱 Tabatinga Viva</span>
+      <span class="brand-badge">Painel do Banco de Dados</span>
+    </div>
+    <div class="nav-actions">
+      <a href="pesquisa_online.html" class="nav-btn primary">➕ Nova Pesquisa Online</a>
+      <a href="ficha_pesquisa_imprimir.html" target="_blank" class="nav-btn">🖨️ Ficha A4</a>
+      <a href="cartaz_comercios_qrcode.html" target="_blank" class="nav-btn">📌 Cartaz QR</a>
+      <a href="https://app.netlify.com/projects/tabatinga-viva/forms" target="_blank" class="nav-btn">☁️ Netlify Forms</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- BARRA DE AÇÃO PRINCIPAL -->
+    <div class="action-bar">
+      <div class="action-title">
+        <h1>Banco de Dados das Famílias &amp; Demandas</h1>
+        <p>Visão consolidada de todas as respostas coletadas via site, celular e QR Code nos comércios.</p>
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="btn-action excel" onclick="exportarExcelCSV()">
+          📥 Exportar para Excel / CSV
+        </button>
+        <button type="button" class="btn-action outline" onclick="carregarDadosExemplo()">
+          🎲 Gerar 5 Respostas Exemplo
+        </button>
+        <button type="button" class="btn-action outline" onclick="limparBancoConfirm()">
+          🗑️ Limpar Banco
+        </button>
+      </div>
+    </div>
+
+    <!-- CARDS DE MÉTRICAS / KPIS -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total de Famílias</div>
+        <div class="metric-value" id="kpiFamilias">0</div>
+        <div class="metric-sub">Fichas cadastradas</div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-label">Vagas Demandadas</div>
+        <div class="metric-value" id="kpiVagas">0</div>
+        <div class="metric-sub">Inscrições somadas</div>
+      </div>
+      <div class="metric-card pink">
+        <div class="metric-label">Mulheres Inscritas</div>
+        <div class="metric-value" id="kpiMulheres">0</div>
+        <div class="metric-sub" id="kpiMulheresPct">0% do total</div>
+      </div>
+      <div class="metric-card blue">
+        <div class="metric-label">Homens Inscritos</div>
+        <div class="metric-value" id="kpiHomens">0</div>
+        <div class="metric-sub" id="kpiHomensPct">0% do total</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-label">Preferência Grátis</div>
+        <div class="metric-value" id="kpiGratis">0%</div>
+        <div class="metric-sub">Só se for voluntário/pref.</div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO DE ANALYTICS: RANKING DAS 12 ATIVIDADES E FORMATO DE TURMAS -->
+    <div class="analytics-row">
+      <!-- RANKING -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>🎯 Ranking das Atividades Mais Procuradas</span>
+          <span style="font-size: 11px; color: var(--muted);">Ordenado por total de interessados</span>
+        </div>
+        <div class="ranking-list" id="rankingContainer">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+
+      <!-- FORMATO DE TURMAS (MISTA, FEMININA, MASCULINA) -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>👥 Preferência de Formato das Turmas</span>
+        </div>
+        <div class="turma-breakdown">
+          <div class="turma-stat-item mista">
+            <div>
+              <strong>Turmas Mistas</strong>
+              <div style="font-size: 11px; color: var(--muted);">Homens e Mulheres juntos</div>
+            </div>
+            <div style="text-align: right;">
+              <span id="statTurmaMistaQtd" style="font-size: 18px; font-weight: 900; color: var(--primary);">0</span>
+              <div id="statTurmaMistaPct" style="font-size: 11px; color: var(--muted); font-weight: 700;">0%</div>
+            </div>
+          </div>
+
+          <div class="turma-stat-item fem">
+            <div>
+              <strong>Turmas Femininas</strong>
+              <div style="font-size: 11px; color: var(--pink);">Exclusivas para Mulheres</div>
+            </div>
+            <div style="text-align: right;">
+              <span id="statTurmaFemQtd" style="font-size: 18px; font-weight: 900; color: var(--pink);">0</span>
+              <div id="statTurmaFemPct" style="font-size: 11px; color: var(--muted); font-weight: 700;">0%</div>
+            </div>
+          </div>
+
+          <div class="turma-stat-item masc">
+            <div>
+              <strong>Turmas Masculinas</strong>
+              <div style="font-size: 11px; color: var(--blue);">Exclusivas para Homens</div>
+            </div>
+            <div style="text-align: right;">
+              <span id="statTurmaMascQtd" style="font-size: 18px; font-weight: 900; color: var(--blue);">0</span>
+              <div id="statTurmaMascPct" style="font-size: 11px; color: var(--muted); font-weight: 700;">0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted);">
+          💡 <em>Essa informação permite que o projeto abra turmas de Futebol, Boxe ou Dança tanto mistas quanto exclusivas femininas/masculinas de acordo com o interesse real manifestado!</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABELA COMPLETA DE RESPOSTAS -->
+    <div class="table-section">
+      <div class="panel-title" style="margin-bottom: 12px;">
+        <span>📋 Registros Detalhados das Famílias</span>
+        <span style="font-size: 12px; color: var(--muted);" id="registrosContador">0 registros</span>
+      </div>
+
+      <!-- FILTROS -->
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label>Buscar (WhatsApp / Nome):</label>
+          <input type="text" id="filtroBusca" placeholder="Digite para filtrar..." oninput="renderizarTabela()" />
+        </div>
+        <div class="filter-group">
+          <label>Filtrar Atividade:</label>
+          <select id="filtroAtividade" onchange="renderizarTabela()">
+            <option value="">Todas as Atividades</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Formato da Turma:</label>
+          <select id="filtroTurma" onchange="renderizarTabela()">
+            <option value="">Todos os Formatos</option>
+            <option value="Mista">Apenas Mista</option>
+            <option value="Feminina">Apenas Feminina</option>
+            <option value="Masculina">Apenas Masculina</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Vínculo com o Bairro:</label>
+          <select id="filtroVinculo" onchange="renderizarTabela()">
+            <option value="">Todos os Vínculos</option>
+            <option value="Ubatuba">Morador Ubatuba</option>
+            <option value="Caraguá">Morador Caraguá</option>
+            <option value="Proprietário">Proprietário / Veranista</option>
+            <option value="Trabalha">Trabalha no Bairro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- TABELA -->
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Protocolo / Data</th>
+              <th>WhatsApp &amp; Vínculo</th>
+              <th>Membros da Família</th>
+              <th>Atividades &amp; Turmas Escolhidas</th>
+              <th>Sugestão / Voluntário</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaCorpo">
+            <!-- Injetado via JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODAL DE DETALHES -->
+  <div class="modal-backdrop" id="modalDetalhes">
+    <div class="modal-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-family:'Outfit'; font-size:18px; font-weight:800;" id="detProtocolo">Protocolo</h3>
+        <button type="button" class="btn-table" onclick="document.getElementById('modalDetalhes').style.display='none'">✕ Fechar</button>
+      </div>
+      <div id="detConteudo" style="font-size:13px; line-height:1.5;"></div>
+    </div>
+  </div>
+
+  <script>
+    const ATIVIDADES_LISTA = [
+      '1. Futebol & Futsal',
+      '2. Vôlei de Praia & Adaptado (60+)',
+      '3. Boxe Educativo / Defesa Pessoal',
+      '4. Funcional, Alongamento & Mobilidade',
+      '5. Dança, Ritmos & Zumba',
+      '6. Canto Coral Comunitário',
+      '7. Violão & Ukulele (Iniciação)',
+      '8. Teatro, Expressão & Desenho',
+      '9. Tabatinga Lê & Brinca + Xadrez',
+      '10. Inglês Prático (Conversação)',
+      '11. Espanhol Prático (Turismo/Conversa)',
+      '12. Reforço Escolar & Apoio Pedagógico'
+    ];
+
+    function carregarBanco() {
+      return JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+    }
+
+    function salvarBanco(banco) {
+      localStorage.setItem('tabatinga_banco_pesquisas', JSON.stringify(banco));
+    }
+
+    function popularSelectAtividades() {
+      const select = document.getElementById('filtroAtividade');
+      ATIVIDADES_LISTA.forEach(at => {
+        const opt = document.createElement('option');
+        opt.value = at;
+        opt.textContent = at;
+        select.appendChild(opt);
+      });
+    }
+
+    function atualizarMetricasERanking() {
+      const banco = carregarBanco();
+
+      let totalFamilias = banco.length;
+      let totalVagas = 0;
+      let totalMulheres = 0;
+      let totalHomens = 0;
+      let totalOutros = 0;
+
+      let turmaMistaCount = 0;
+      let turmaFemCount = 0;
+      let turmaMascCount = 0;
+
+      let totalAtividadesEscolhas = 0;
+      let totalGratis = 0;
+
+      const contagemAtividades = {};
+      ATIVIDADES_LISTA.forEach(a => contagemAtividades[a] = 0);
+
+      banco.forEach(f => {
+        // Membros
+        (f.membros || []).forEach(m => {
+          if (m.sexo === 'Mulher') totalMulheres++;
+          else if (m.sexo === 'Homem') totalHomens++;
+          else totalOutros++;
+        });
+
+        // Atividades
+        (f.atividades || []).forEach(a => {
+          totalAtividadesEscolhas++;
+          const qtdAlunos = (a.alunos || []).length || 1;
+          totalVagas += qtdAlunos;
+
+          if (contagemAtividades.hasOwnProperty(a.titulo)) {
+            contagemAtividades[a.titulo] += qtdAlunos;
+          } else {
+            contagemAtividades[a.titulo] = (contagemAtividades[a.titulo] || 0) + qtdAlunos;
+          }
+
+          if (a.formatoTurma === 'Feminina') turmaFemCount += qtdAlunos;
+          else if (a.formatoTurma === 'Masculina') turmaMascCount += qtdAlunos;
+          else turmaMistaCount += qtdAlunos;
+
+          if ((a.valor || '').toLowerCase().includes('grátis') || (a.valor || '').toLowerCase().includes('gratuito')) {
+            totalGratis++;
+          }
+        });
+      });
+
+      // KPIs
+      document.getElementById('kpiFamilias').textContent = totalFamilias;
+      document.getElementById('kpiVagas').textContent = totalVagas;
+      document.getElementById('kpiMulheres').textContent = totalMulheres;
+      document.getElementById('kpiHomens').textContent = totalHomens;
+
+      const somaSexo = (totalMulheres + totalHomens + totalOutros) || 1;
+      document.getElementById('kpiMulheresPct').textContent = `${Math.round((totalMulheres / somaSexo) * 100)}% das pessoas`;
+      document.getElementById('kpiHomensPct').textContent = `${Math.round((totalHomens / somaSexo) * 100)}% das pessoas`;
+
+      const pctGratis = totalAtividadesEscolhas ? Math.round((totalGratis / totalAtividadesEscolhas) * 100) : 0;
+      document.getElementById('kpiGratis').textContent = `${pctGratis}%`;
+
+      // Turmas
+      const somaTurmas = (turmaMistaCount + turmaFemCount + turmaMascCount) || 1;
+      document.getElementById('statTurmaMistaQtd').textContent = turmaMistaCount;
+      document.getElementById('statTurmaMistaPct').textContent = `${Math.round((turmaMistaCount / somaTurmas) * 100)}%`;
+
+      document.getElementById('statTurmaFemQtd').textContent = turmaFemCount;
+      document.getElementById('statTurmaFemPct').textContent = `${Math.round((turmaFemCount / somaTurmas) * 100)}%`;
+
+      document.getElementById('statTurmaMascQtd').textContent = turmaMascCount;
+      document.getElementById('statTurmaMascPct').textContent = `${Math.round((turmaMascCount / somaTurmas) * 100)}%`;
+
+      // Ranking
+      const sorted = Object.entries(contagemAtividades).sort((a, b) => b[1] - a[1]);
+      const maxQtd = sorted[0]?.[1] || 1;
+
+      const rankingHtml = sorted.map(([titulo, qtd], idx) => {
+        const pctBarra = Math.round((qtd / maxQtd) * 100);
+        return `
+          <div class="ranking-item">
+            <div class="ranking-meta">
+              <span><strong>#${idx + 1}</strong> ${titulo}</span>
+              <span style="color:var(--primary);">${qtd} vaga(s)</span>
+            </div>
+            <div class="ranking-bar-bg">
+              <div class="ranking-bar-fill" style="width: ${pctBarra}%;"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('rankingContainer').innerHTML = rankingHtml;
+    }
+
+    function renderizarTabela() {
+      const banco = carregarBanco();
+      const tbody = document.getElementById('tabelaCorpo');
+
+      const busca = document.getElementById('filtroBusca').value.toLowerCase().trim();
+      const filtroAtiv = document.getElementById('filtroAtividade').value;
+      const filtroTurma = document.getElementById('filtroTurma').value;
+      const filtroVinc = document.getElementById('filtroVinculo').value;
+
+      const filtrados = banco.filter(f => {
+        // Busca
+        if (busca) {
+          const w = (f.whatsapp || '').toLowerCase();
+          const prot = (f.protocolo || '').toLowerCase();
+          const nomes = (f.membros || []).map(m => (m.nome || '').toLowerCase()).join(' ');
+          if (!w.includes(busca) && !prot.includes(busca) && !nomes.includes(busca)) {
+            return false;
+          }
+        }
+
+        // Vínculo
+        if (filtroVinc && !(f.vinculo || '').includes(filtroVinc)) {
+          return false;
+        }
+
+        // Atividade
+        if (filtroAtiv) {
+          const temAtiv = (f.atividades || []).some(a => a.titulo === filtroAtiv);
+          if (!temAtiv) return false;
+        }
+
+        // Formato Turma
+        if (filtroTurma) {
+          const temTurma = (f.atividades || []).some(a => a.formatoTurma === filtroTurma);
+          if (!temTurma) return false;
+        }
+
+        return true;
+      });
+
+      document.getElementById('registrosContador').textContent = `${filtrados.length} de ${banco.length} família(s)`;
+
+      if (filtrados.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-state">
+              <div class="empty-icon">📂</div>
+              <div>Nenhum registro encontrado para os filtros selecionados.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtrados.map((f, idx) => {
+        const membrosStr = (f.membros || []).map(m => {
+          const tagClass = m.sexo === 'Mulher' ? 'fem' : (m.sexo === 'Homem' ? 'masc' : 'mista');
+          return `<div>• <strong>${m.nome}</strong> (${m.idade ? m.idade + 'a, ' : ''}<span class="pill-tag ${tagClass}">${m.sexo}</span>)</div>`;
+        }).join('');
+
+        const ativStr = (f.atividades || []).map(a => {
+          const turmaTag = a.formatoTurma === 'Feminina' ? 'fem' : (a.formatoTurma === 'Masculina' ? 'masc' : 'mista');
+          const precoTag = (a.valor || '').toLowerCase().includes('grátis') ? 'free' : 'rateio';
+          const alunosNomes = (a.alunos || []).map(al => al.nome).join(', ');
+          return `
+            <div style="margin-bottom:4px;">
+              <strong>${a.titulo}</strong>
+              <div>
+                <span class="pill-tag ${turmaTag}">Turma ${a.formatoTurma}</span>
+                <span class="pill-tag ${precoTag}">${a.valor}</span>
+              </div>
+              <div style="font-size:11px; color:var(--muted);">Alunos: ${alunosNomes} | ${a.dias} ${a.horarioPreferido || ''}</div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <tr>
+            <td>
+              <strong>${f.protocolo || '—'}</strong><br>
+              <span style="font-size:11px; color:var(--muted);">${f.data_envio || ''}</span>
+            </td>
+            <td>
+              <strong style="color:var(--primary);">${f.whatsapp || '—'}</strong><br>
+              <span style="font-size:11px; color:var(--muted);">${f.vinculo || ''}</span>
+            </td>
+            <td>${membrosStr || '—'}</td>
+            <td>${ativStr || '—'}</td>
+            <td style="font-size:11px;">
+              ${f.outra_sugestao ? `<strong>Sugestão:</strong> ${f.outra_sugestao}<br>` : ''}
+              ${f.colaboracao_professor ? `<strong>Ajuda:</strong> ${f.colaboracao_professor}` : ''}
+              ${!f.outra_sugestao && !f.colaboracao_professor ? '—' : ''}
+            </td>
+            <td>
+              <button type="button" class="btn-table" onclick="abrirDetalhes(${idx})">Ver Ficha</button>
+              <button type="button" class="btn-table" style="color:#b91c1c; margin-top:4px;" onclick="excluirRegistro(${idx})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function abrirDetalhes(idx) {
+      const banco = carregarBanco();
+      const f = banco[idx];
+      if (!f) return;
+
+      document.getElementById('detProtocolo').textContent = `Ficha #${f.protocolo} — ${f.data_envio}`;
+      
+      let h = `<p><strong>WhatsApp:</strong> ${f.whatsapp}</p>`;
+      h += `<p><strong>Vínculo:</strong> ${f.vinculo}</p>`;
+      h += `<hr style="margin:10px 0; border:none; border-top:1px solid var(--border);">`;
+      
+      h += `<h4 style="font-weight:800; margin-bottom:6px;">Membros da Família:</h4>`;
+      f.membros.forEach(m => {
+        h += `<div>• <strong>${m.parentesco}:</strong> ${m.nome} (${m.idade || '?'} anos, Sexo: <strong>${m.sexo}</strong>)</div>`;
+      });
+
+      h += `<h4 style="font-weight:800; margin-top:12px; margin-bottom:6px;">Atividades Selecionadas:</h4>`;
+      f.atividades.forEach(a => {
+        h += `<div style="background:#f8fafc; padding:8px; border-radius:6px; margin-bottom:6px; border:1px solid var(--border);">`;
+        h += `<strong>${a.titulo}</strong><br>`;
+        h += `Formato da Turma: <strong>${a.formatoTurma}</strong> | Valor: <strong>${a.valor}</strong><br>`;
+        h += `Alunos da Família: ${a.alunos.map(al => `${al.nome} (${al.sexo})`).join(', ')}<br>`;
+        h += `Dias e Horários: ${a.dias} ${a.horarioPreferido}`;
+        h += `</div>`;
+      });
+
+      if (f.outra_sugestao) h += `<p style="margin-top:10px;"><strong>Outra Atividade Sugerida:</strong> ${f.outra_sugestao}</p>`;
+      if (f.colaboracao_professor) h += `<p><strong>Interesse em Ensinar / Voluntariado:</strong> ${f.colaboracao_professor}</p>`;
+
+      document.getElementById('detConteudo').innerHTML = h;
+      document.getElementById('modalDetalhes').style.display = 'flex';
+    }
+
+    function excluirRegistro(idx) {
+      if (!confirm('Tem certeza que deseja excluir este registro do banco de dados?')) return;
+      const banco = carregarBanco();
+      banco.splice(idx, 1);
+      salvarBanco(banco);
+      atualizarMetricasERanking();
+      renderizarTabela();
+    }
+
+    function limparBancoConfirm() {
+      if (!confirm('Deseja realmente apagar todos os registros do banco de dados local?')) return;
+      localStorage.removeItem('tabatinga_banco_pesquisas');
+      atualizarMetricasERanking();
+      renderizarTabela();
+    }
+
+    // EXPORTAR EXCEL / CSV COM BOM UTF-8
+    function exportarExcelCSV() {
+      const banco = carregarBanco();
+      if (banco.length === 0) {
+        alert('O banco de dados ainda não possui registros para exportar.');
+        return;
+      }
+
+      const cabecalho = [
+        'Protocolo',
+        'Data_Envio',
+        'WhatsApp',
+        'Vinculo',
+        'Membro_Parentesco',
+        'Membro_Nome',
+        'Membro_Idade',
+        'Membro_Sexo',
+        'Atividade_Titulo',
+        'Formato_Turma',
+        'Valor_Rateio',
+        'Dias_Horarios',
+        'Horario_Ideal',
+        'Outra_Sugestao',
+        'Colaboracao_Professor'
+      ];
+
+      const linhas = [];
+
+      banco.forEach(f => {
+        (f.atividades || []).forEach(a => {
+          (a.alunos || []).forEach(al => {
+            linhas.push([
+              f.protocolo,
+              f.data_envio,
+              f.whatsapp,
+              f.vinculo,
+              al.label || '',
+              al.nome || '',
+              al.idade || '',
+              al.sexo || '',
+              a.titulo,
+              a.formatoTurma,
+              a.valor,
+              a.dias,
+              a.horarioPreferido || '',
+              f.outra_sugestao || '',
+              f.colaboracao_professor || ''
+            ]);
+          });
+        });
+      });
+
+      const escapeCSV = (val) => {
+        const s = String(val ?? '').replace(/"/g, '""');
+        return `"${s}"`;
+      };
+
+      const csvContent = '\uFEFF' + [
+        cabecalho.map(escapeCSV).join(';'),
+        ...linhas.map(row => row.map(escapeCSV).join(';'))
+      ].join('\r\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `pesquisas_tabatinga_viva_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // GERAR DADOS EXEMPLO (PARA DEMONSTRAÇÃO)
+    function carregarDadosExemplo() {
+      const exemplos = [
+        {
+          protocolo: 'TAB-2026-X8F2',
+          data_envio: '08/11/2026 09:15:20',
+          whatsapp: '(12) 99712-3456',
+          vinculo: 'Morador Fixo (Lado Ubatuba)',
+          membros: [
+            { parentesco: 'Eu', nome: 'Thiago', idade: 44, sexo: 'Homem' },
+            { parentesco: 'Cônjuge', nome: 'Tais', idade: 55, sexo: 'Mulher' },
+            { parentesco: 'Filho 1', nome: 'Dante', idade: 12, sexo: 'Homem' }
+          ],
+          atividades: [
+            {
+              id: 'boxe',
+              titulo: '3. Boxe Educativo / Defesa Pessoal',
+              formatoTurma: 'Masculina',
+              valor: 'Até R$ 65/mês',
+              dias: 'Ter/Qui, Noite',
+              horarioPreferido: '19h00',
+              alunos: [{ nome: 'Thiago', sexo: 'Homem' }, { nome: 'Dante', sexo: 'Homem' }]
+            },
+            {
+              id: 'funcional',
+              titulo: '4. Funcional, Alongamento & Mobilidade',
+              formatoTurma: 'Feminina',
+              valor: 'Até R$ 60/mês',
+              dias: 'Seg/Qua, Manhã',
+              horarioPreferido: '08h00',
+              alunos: [{ nome: 'Tais', sexo: 'Mulher' }]
+            }
+          ],
+          outra_sugestao: 'Yoga na praia ao pôr do sol',
+          colaboracao_professor: ''
+        },
+        {
+          protocolo: 'TAB-2026-M4K9',
+          data_envio: '08/11/2026 09:40:11',
+          whatsapp: '(12) 98845-9988',
+          vinculo: 'Morador Fixo (Lado Caraguá)',
+          membros: [
+            { parentesco: 'Eu', nome: 'Mariana', idade: 38, sexo: 'Mulher' },
+            { parentesco: 'Filho 1', nome: 'Lucas', idade: 10, sexo: 'Homem' },
+            { parentesco: 'Filho 2', nome: 'Sofia', idade: 7, sexo: 'Mulher' }
+          ],
+          atividades: [
+            {
+              id: 'futebol',
+              titulo: '1. Futebol & Futsal',
+              formatoTurma: 'Mista',
+              valor: '🟢 Só se for Grátis',
+              dias: 'Sábado, Manhã',
+              horarioPreferido: '09h00',
+              alunos: [{ nome: 'Lucas', sexo: 'Homem' }]
+            },
+            {
+              id: 'danca',
+              titulo: '5. Dança, Ritmos & Zumba',
+              formatoTurma: 'Feminina',
+              valor: 'Até R$ 40/mês',
+              dias: 'Seg/Qua, Noite',
+              horarioPreferido: '19h30',
+              alunos: [{ nome: 'Mariana', sexo: 'Mulher' }]
+            },
+            {
+              id: 'leitura',
+              titulo: '9. Tabatinga Lê & Brinca + Xadrez',
+              formatoTurma: 'Mista',
+              valor: '🟢 Gratuito (Voluntário)',
+              dias: 'Sábado, Manhã',
+              horarioPreferido: '',
+              alunos: [{ nome: 'Sofia', sexo: 'Mulher' }, { nome: 'Lucas', sexo: 'Homem' }]
+            }
+          ],
+          outra_sugestao: '',
+          colaboracao_professor: 'Posso ajudar como voluntária na leitura aos sábados'
+        },
+        {
+          protocolo: 'TAB-2026-W3R7',
+          data_envio: '08/11/2026 10:12:05',
+          whatsapp: '(11) 99123-0001',
+          vinculo: 'Proprietário / Veranista',
+          membros: [
+            { parentesco: 'Eu', nome: 'Carlos Alberto', idade: 67, sexo: 'Homem' },
+            { parentesco: 'Cônjuge', nome: 'Helena', idade: 65, sexo: 'Mulher' }
+          ],
+          atividades: [
+            {
+              id: 'volei',
+              titulo: '2. Vôlei de Praia & Adaptado (60+)',
+              formatoTurma: 'Mista',
+              valor: 'Até R$ 55/mês',
+              dias: 'Ter/Qui, Manhã',
+              horarioPreferido: '07h30',
+              alunos: [{ nome: 'Carlos Alberto', sexo: 'Homem' }, { nome: 'Helena', sexo: 'Mulher' }]
+            },
+            {
+              id: 'coral',
+              titulo: '6. Canto Coral Comunitário',
+              formatoTurma: 'Mista',
+              valor: 'Até R$ 40/mês',
+              dias: 'Sábado, Tarde',
+              horarioPreferido: '16h00',
+              alunos: [{ nome: 'Helena', sexo: 'Mulher' }]
+            }
+          ],
+          outra_sugestao: 'Bocha ou caminhada orientada',
+          colaboracao_professor: ''
+        }
+      ];
+
+      const banco = carregarBanco();
+      exemplos.forEach(ex => banco.unshift(ex));
+      salvarBanco(banco);
+
+      atualizarMetricasERanking();
+      renderizarTabela();
+      alert('✅ 3 respostas de exemplo foram adicionadas para você testar a visualização e os filtros do painel!');
+    }
+
+    // INICIALIZAÇÃO
+    popularSelectAtividades();
+    atualizarMetricasERanking();
+    renderizarTabela();
+  </script>
+</body>
+</html>

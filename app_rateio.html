@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabatinga Viva | Gestor de Rateios & Zeladoria</title>
+  <meta name="description" content="Aplicativo Comunitário de Gestão de Rateios e Zeladoria do Centro Comunitário da Tabatinga.">
+  <style>
+    :root {
+      --primary: #0a4b78;
+      --primary-dark: #062e4a;
+      --primary-light: #1572b6;
+      --accent: #00a896;
+      --accent-warm: #f4a261;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding-bottom: 70px;
+    }
+
+    /* Topbar & Perfil Switcher */
+    .app-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: var(--shadow);
+    }
+    .header-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .role-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .role-btn {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .role-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    /* Container Principal */
+    .main-wrap {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 16px;
+    }
+
+    /* Alerta de Lembrete Inteligente */
+    .alert-banner {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+      animation: fadeIn 0.3s ease;
+    }
+    .alert-warning {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+    .alert-danger {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+    .alert-success {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+    .alert-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 12px;
+    }
+    .card-title h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .card-title p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-pendente { background: #fef3c7; color: #b45309; }
+    .badge-pago { background: #d1fae5; color: #047857; }
+    .badge-atrasado { background: #fee2e2; color: #b91c1c; }
+
+    /* Informações de Pagamento / PIX */
+    .payment-info-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 15px;
+    }
+    .pix-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .pix-key-val {
+      font-family: monospace;
+      font-size: 0.92rem;
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      color: var(--primary-dark);
+      word-break: break-all;
+    }
+    .btn-copy-pix {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s;
+    }
+    .btn-copy-pix:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Card da Zeladoria (Obrigatória para todos) */
+    .zeladoria-card {
+      border-left: 5px solid var(--accent);
+      background: #fafdfd;
+    }
+    .zeladoria-header-tag {
+      background: rgba(0, 168, 150, 0.12);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    /* Ações de Comprovante */
+    .upload-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .file-input-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .file-input-wrapper input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .btn-upload {
+      background: #fff;
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-upload:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .receipt-link {
+      font-size: 0.82rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Visão do Professor */
+    .prof-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .stat-val {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .data-table th {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 800;
+      border-bottom: 2px solid var(--border);
+    }
+    .data-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table tr:hover {
+      background: #f8fafc;
+    }
+
+    .btn-cash {
+      background: #10b981;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s;
+    }
+    .btn-cash:hover {
+      background: #059669;
+    }
+    .btn-whatsapp-zap {
+      background: #25d366;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    /* Modal de Comprovante */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .modal-img-preview {
+      max-width: 100%;
+      max-height: 350px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      margin: 15px 0;
+      object-fit: contain;
+    }
+    .btn-modal-close {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Troca de Perfil -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">T</div>
+        <div class="brand-text">
+          <h1>Tabatinga Viva</h1>
+          <span>Gestão de Rateio & Zeladoria</span>
+        </div>
+      </div>
+
+      <!-- Seletor de Perfil p/ Simulação e Acesso -->
+      <div class="role-switcher">
+        <button class="role-btn active" id="btnRoleAluno" onclick="switchRole('aluno')">👤 Aluno</button>
+        <button class="role-btn" id="btnRoleProfessor" onclick="switchRole('professor')">👨‍🏫 Professor</button>
+        <button class="role-btn" id="btnRoleCoord" onclick="switchRole('coordenacao')">🏛️ Zeladoria</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-wrap">
+
+    <!-- ========================================== -->
+    <!-- 1. VISÃO DO ALUNO / PARTICIPANTE           -->
+    <!-- ========================================== -->
+    <div id="viewAluno">
+      <!-- Sistema Inteligente de Lembretes Automáticos -->
+      <div id="alunoReminderBox"></div>
+
+      <!-- Card Especial Obrigatório: Rateio da Zeladoria & Limpeza Pesada -->
+      <div class="card zeladoria-card">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="zeladoria-header-tag">🧹 Zeladoria Técnica & Cultura do Cuidado</span>
+            <h3>Rateio da Limpeza Pesada, Banheiros e Roçada</h3>
+            <p><strong>Salas de aula:</strong> mantidas limpas por nós mesmos nos 5 minutos finais de cada aula (inspiração Japão & Waldorf).<br>
+            <strong>Este rateio:</strong> paga exclusivamente a limpeza pesada/química dos banheiros, faxina geral e roçada do mato!</p>
+          </div>
+          <span class="status-badge" id="badgeZeladoria">Pendente</span>
+        </div>
+
+        <div class="payment-info-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Cota de Limpeza Mensal</span>
+              <div style="font-size:1.4rem; font-weight:900; color:var(--primary-dark);">R$ 10,00 <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">/ mês</span></div>
+            </div>
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Vencimento Todo Dia</span>
+              <div style="font-size:1.1rem; font-weight:800; color:var(--accent-coral);">Dia 05 do Mês</div>
+            </div>
+          </div>
+
+          <div class="pix-row">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Chave PIX da Zeladoria Comunitária (Diarista Local):</div>
+              <div class="pix-key-val" id="pixKeyZeladoria">zeladoria.tabatinga@pix.com.br</div>
+            </div>
+            <button class="btn-copy-pix" onclick="copyPix('zeladoria.tabatinga@pix.com.br')">📋 Copiar Chave PIX</button>
+          </div>
+        </div>
+
+        <div class="upload-area">
+          <div class="file-input-wrapper">
+            <button class="btn-upload">📎 Anexar Comprovante PIX</button>
+            <input type="file" accept="image/*,.pdf" onchange="uploadComprovante('zeladoria', event)">
+          </div>
+          <span id="zeladoriaComprovanteStatus" style="font-size:0.82rem; color:var(--text-muted);">Nenhum comprovante anexado.</span>
+        </div>
+      </div>
+
+      <!-- Atividades Inscritas do Aluno -->
+      <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:14px; color:var(--primary-dark);">
+        Minhas Oficinas e Rateios de Aula
+      </h3>
+
+      <!-- Atividade 1: Inglês de Conversação -->
+      <div class="card" id="cardAtiv-ingles">
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Inglês de Conversação Prática</h3>
+            <p>Instrutor: Prof. Carlos Mendes • Turma Terça e Quinta (19h)</p>
+          </div>
+          <span class="status-badge" id="badge-ingles">Pendente</span>
+        </div>
+
+        <div class="payment-info-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Cota Mensal da Aula</span>
+              <div style="font-size:1.4rem; font-weight:900; color:var(--primary-dark);">R$ 45,00 <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">(Turma com 8 alunos)</span></div>
+            </div>
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Vencimento Mensal</span>
+              <div style="font-size:1.1rem; font-weight:800; color:var(--accent-coral);">Dia 05 do Mês</div>
+            </div>
+          </div>
+
+          <div class="pix-row">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Chave PIX MEI do Professor:</div>
+              <div class="pix-key-val" id="pixKeyProfIngles">carlos.mendes.idiomas@gmail.com</div>
+            </div>
+            <button class="btn-copy-pix" onclick="copyPix('carlos.mendes.idiomas@gmail.com')">📋 Copiar Chave PIX</button>
+          </div>
+        </div>
+
+        <div class="upload-area">
+          <div class="file-input-wrapper">
+            <button class="btn-upload">📎 Anexar Comprovante do Professor</button>
+            <input type="file" accept="image/*,.pdf" onchange="uploadComprovante('ingles', event)">
+          </div>
+          <span id="inglesComprovanteStatus" style="font-size:0.82rem; color:var(--text-muted);">Nenhum comprovante anexado.</span>
+        </div>
+      </div>
+
+      <!-- Atividade 2: Condicionamento e Mobilidade -->
+      <div class="card" id="cardAtiv-funcional">
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Condicionamento Físico & Mobilidade</h3>
+            <p>Instrutora: Profa. Juliana Prado • Turma Segunda e Quarta (8h)</p>
+          </div>
+          <span class="status-badge" id="badge-funcional">Pendente</span>
+        </div>
+
+        <div class="payment-info-box">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Cota Mensal da Aula</span>
+              <div style="font-size:1.4rem; font-weight:900; color:var(--primary-dark);">R$ 30,00 <span style="font-size:0.8rem; font-weight:600; color:var(--text-muted);">(Turma com 12 alunos)</span></div>
+            </div>
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Vencimento Mensal</span>
+              <div style="font-size:1.1rem; font-weight:800; color:var(--accent-coral);">Dia 05 do Mês</div>
+            </div>
+          </div>
+
+          <div class="pix-row">
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Chave PIX MEI da Professora:</div>
+              <div class="pix-key-val" id="pixKeyProfFunc">12997881122</div>
+            </div>
+            <button class="btn-copy-pix" onclick="copyPix('12997881122')">📋 Copiar Chave PIX</button>
+          </div>
+        </div>
+
+        <div class="upload-area">
+          <div class="file-input-wrapper">
+            <button class="btn-upload">📎 Anexar Comprovante do Professor</button>
+            <input type="file" accept="image/*,.pdf" onchange="uploadComprovante('funcional', event)">
+          </div>
+          <span id="funcionalComprovanteStatus" style="font-size:0.82rem; color:var(--text-muted);">Nenhum comprovante anexado.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. VISÃO DO PROFESSOR / PRESTADOR          -->
+    <!-- ========================================== -->
+    <div id="viewProfessor" style="display:none;">
+      <div class="card" style="background: linear-gradient(135deg, #062e4a, #0a4b78); color:#fff;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <span style="background:rgba(255,255,255,0.15); font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase;">Painel do Instrutor</span>
+            <h2 style="font-size:1.4rem; font-weight:800; margin-top:4px;">Prof. Carlos Mendes (Inglês)</h2>
+            <p style="color:#cbd5e1; font-size:0.85rem;">Turma Terça e Quinta (19h) • Custo Mensal da Turma: R$ 360,00</p>
+          </div>
+          <button class="btn btn-outline" style="background:#fff; color:var(--primary); font-size:0.85rem; padding:8px 16px;" onclick="enviarLembreteGeralZap()">
+            📲 Disparar Lembrete WhatsApp p/ Pendentes
+          </button>
+        </div>
+      </div>
+
+      <!-- Resumo Financeiro da Turma -->
+      <div class="prof-stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Total de Alunos</div>
+          <div class="stat-val" id="profTotalAlunos">8</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Pagos (Confirmados)</div>
+          <div class="stat-val" style="color:var(--success);" id="profTotalPagos">5</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Pendentes / Atrasados</div>
+          <div class="stat-val" style="color:var(--warning);" id="profTotalPendentes">3</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Recebido</div>
+          <div class="stat-val" style="color:var(--primary-light);" id="profTotalValor">R$ 225,00</div>
+        </div>
+      </div>
+
+      <!-- Lista de Alunos e Gestão Manual -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Lista de Chamada & Controle de Rateio</h3>
+            <p>Você pode validar o comprovante PIX ou marcar como pago diretamente se recebeu em dinheiro vivo.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Aluno(a)</th>
+                <th>Cota</th>
+                <th>Status</th>
+                <th>Comprovante PIX</th>
+                <th>Ação do Professor</th>
+              </tr>
+            </thead>
+            <tbody id="profTabelaAlunos">
+              <!-- Renderizado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 3. VISÃO DA COORDENAÇÃO & ZELADORIA       -->
+    <!-- ========================================== -->
+    <div id="viewCoordenacao" style="display:none;">
+      <div class="card" style="background: linear-gradient(135deg, #005f56, #00a896); color:#fff;">
+        <span style="background:rgba(255,255,255,0.15); font-size:0.75rem; font-weight:800; padding:2px 8px; border-radius:4px; text-transform:uppercase;">Gestão do Espaço</span>
+        <h2 style="font-size:1.4rem; font-weight:800; margin-top:4px;">Centro Comunitário: Zeladoria & Limpeza</h2>
+        <p style="color:#e6fffa; font-size:0.85rem;">Todos os participantes das oficinas contribuem com R$ 10/mês para limpeza contínua e roçada do pátio.</p>
+      </div>
+
+      <div class="prof-stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Participantes Ativos</div>
+          <div class="stat-val">32</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Cotas de Limpeza Pagas</div>
+          <div class="stat-val" style="color:var(--success);">26</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Fundo de Limpeza do Mês</div>
+          <div class="stat-val" style="color:var(--accent);">R$ 260,00</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Custo Diarista / Roçada</div>
+          <div class="stat-val">R$ 250,00</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <h3>Divisão do Cuidado: Autogestão ("O-soji" / Waldorf) + Limpeza Técnica</h3>
+            <p>Como mantemos o Centro Comunitário sempre limpo sem pesar no bolso de ninguém.</p>
+          </div>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin-bottom:12px;">
+          • <strong>Nível 1 — Cuidado Diário das Salas (Custo Zero):</strong> Inspirados nas escolas japonesas (<em>O-soji</em>) e na Pedagogia Waldorf, nos últimos 5 minutos de toda aula os próprios alunos e o professor guardam os materiais, higienizam os colchoetes e passam uma vassoura rápida na sala.<br>
+          • <strong>Nível 2 — Limpeza Técnica e Pesada (Custeada por este Rateio de R$ 10/mês):</strong> Lavagem e desinfecção química dos <strong>banheiros</strong>, faxina pesada periódica do piso e <strong>roçada mensal da grama</strong>.<br>
+          • A Prefeitura mantém varrição urbana nas ruas do bairro, enquanto nossa comunidade garante o interior do Centro Comunitário impecável!
+        </p>
+        <button class="btn-copy-pix" style="background:var(--accent);" onclick="alert('Relatório de prestação de contas da Zeladoria impresso para afixação no mural!')">
+          📄 Gerar Balancete p/ Mural do Centro Comunitário
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Visualizador de Comprovante -->
+  <div class="modal-overlay" id="comprovanteModal">
+    <div class="modal-box">
+      <h3 style="font-size:1.1rem; color:var(--primary-dark); font-weight:800;">Comprovante de Pagamento Anexado</h3>
+      <p id="modalAlunoNome" style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;"></p>
+      <img id="modalImg" src="" alt="Comprovante" class="modal-img-preview">
+      <div>
+        <button class="btn-modal-close" onclick="fecharModal()">Fechar Visualização</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="appToast">Chave PIX copiada com sucesso!</div>
+
+  <!-- JavaScript do Aplicativo -->
+  <script>
+    // 1. Dados em Memória / LocalStorage para a Turma de Inglês (Exemplo)
+    const DADOS_INICIAIS = [
+      { id: 1, nome: "Maria Silva (Você)", whats: "12988112233", cota: 45, status: "pendente", comprovante: null },
+      { id: 2, nome: "João Pedro Santos", whats: "12991223344", cota: 45, status: "pago", comprovante: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400" },
+      { id: 3, nome: "Ana Paula Ribeiro", whats: "12997334455", cota: 45, status: "pago", comprovante: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400" },
+      { id: 4, nome: "Lucas Fernandes", whats: "12981445566", cota: 45, status: "atrasado", comprovante: null },
+      { id: 5, nome: "Renata Oliveira", whats: "12996556677", cota: 45, status: "pago", comprovante: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400" },
+      { id: 6, nome: "Carlos Eduardo", whats: "12982667788", cota: 45, status: "pendente", comprovante: null },
+      { id: 7, nome: "Fernanda Costa", whats: "12993778899", cota: 45, status: "pago", comprovante: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400" },
+      { id: 8, nome: "Gabriel Moreira", whats: "12988889900", cota: 45, status: "pago", comprovante: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400" }
+    ];
+
+    function carregarDados() {
+      const salvo = localStorage.getItem('tabatinga_turma_ingles');
+      return salvo ? JSON.parse(salvo) : DADOS_INICIAIS;
+    }
+
+    function salvarDados(dados) {
+      localStorage.setItem('tabatinga_turma_ingles', JSON.stringify(dados));
+    }
+
+    let turmaIngles = carregarDados();
+
+    // 2. Estado do Aluno Principal (Maria Silva)
+    let estadoAluno = {
+      zeladoria: { pago: false, comprovante: null },
+      ingles: { pago: false, comprovante: null },
+      funcional: { pago: false, comprovante: null }
+    };
+
+    function carregarEstadoAluno() {
+      const salvo = localStorage.getItem('tabatinga_aluno_maria');
+      if (salvo) {
+        estadoAluno = JSON.parse(salvo);
+      }
+      atualizarTelaAluno();
+    }
+
+    function salvarEstadoAluno() {
+      localStorage.setItem('tabatinga_aluno_maria', JSON.stringify(estadoAluno));
+      atualizarTelaAluno();
+    }
+
+    // 3. Sistema de Lembrete Inteligente (2 dias / 1 dia / Atrasado)
+    function verificarLembretes() {
+      const box = document.getElementById('alunoReminderBox');
+      const hoje = new Date().getDate();
+      const diaVencimento = 5;
+
+      // Se Maria já pagou tudo, não gera lembrete de pendência!
+      const tudoPago = estadoAluno.zeladoria.pago && estadoAluno.ingles.pago && estadoAluno.funcional.pago;
+      if (tudoPago) {
+        box.innerHTML = `
+          <div class="alert-banner alert-success">
+            <div class="alert-icon">🎉</div>
+            <div>
+              <strong>Tudo 100% em dia!</strong> Seus rateios de aula e da zeladoria deste mês estão confirmados. Muito obrigado por manter o projeto vivo!
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Simulação da proximidade do dia 05
+      // Para demonstração visual, simulamos que hoje faltam 2 dias para o vencimento
+      box.innerHTML = `
+        <div class="alert-banner alert-warning">
+          <div class="alert-icon">⏰</div>
+          <div>
+            <strong>Lembrete Automático: Faltam 2 dias para o vencimento do rateio (Dia 05)!</strong><br>
+            Faça o PIX direto para o professor e para a zeladoria e anexe o comprovante abaixo para garantir a continuidade da turma.
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. Atualização da Interface do Aluno
+    function atualizarTelaAluno() {
+      // Zeladoria
+      const bZel = document.getElementById('badgeZeladoria');
+      const sZel = document.getElementById('zeladoriaComprovanteStatus');
+      if (estadoAluno.zeladoria.pago) {
+        bZel.className = "status-badge badge-pago";
+        bZel.innerText = "✓ Pago & Confirmado";
+        sZel.innerHTML = `<span style="color:var(--success); font-weight:700;">✓ Comprovante validado com sucesso!</span>`;
+      } else {
+        bZel.className = "status-badge badge-pendente";
+        bZel.innerText = "Pendente";
+        sZel.innerText = estadoAluno.zeladoria.comprovante ? "Comprovante enviado (Aguardando conferência)" : "Nenhum comprovante anexado.";
+      }
+
+      // Inglês
+      const bIng = document.getElementById('badge-ingles');
+      const sIng = document.getElementById('inglesComprovanteStatus');
+      if (estadoAluno.ingles.pago) {
+        bIng.className = "status-badge badge-pago";
+        bIng.innerText = "✓ Pago & Confirmado";
+        sIng.innerHTML = `<span style="color:var(--success); font-weight:700;">✓ Comprovante validado pelo Prof. Carlos!</span>`;
+      } else {
+        bIng.className = "status-badge badge-pendente";
+        bIng.innerText = "Pendente";
+        sIng.innerText = estadoAluno.ingles.comprovante ? "Comprovante enviado (Aguardando professor)" : "Nenhum comprovante anexado.";
+      }
+
+      // Funcional
+      const bFunc = document.getElementById('badge-funcional');
+      const sFunc = document.getElementById('funcionalComprovanteStatus');
+      if (estadoAluno.funcional.pago) {
+        bFunc.className = "status-badge badge-pago";
+        bFunc.innerText = "✓ Pago & Confirmado";
+        sFunc.innerHTML = `<span style="color:var(--success); font-weight:700;">✓ Comprovante validado pela Profa. Juliana!</span>`;
+      } else {
+        bFunc.className = "status-badge badge-pendente";
+        bFunc.innerText = "Pendente";
+        sFunc.innerText = estadoAluno.funcional.comprovante ? "Comprovante enviado (Aguardando professora)" : "Nenhum comprovante anexado.";
+      }
+
+      verificarLembretes();
+    }
+
+    // 5. Upload de Comprovante
+    function uploadComprovante(tipo, event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const url = e.target.result;
+        if (tipo === 'zeladoria') {
+          estadoAluno.zeladoria.pago = true;
+          estadoAluno.zeladoria.comprovante = url;
+        } else if (tipo === 'ingles') {
+          estadoAluno.ingles.pago = true;
+          estadoAluno.ingles.comprovante = url;
+          // Atualiza também na lista do professor
+          turmaIngles[0].status = 'pago';
+          turmaIngles[0].comprovante = url;
+          salvarDados(turmaIngles);
+          renderTabelaProfessor();
+        } else if (tipo === 'funcional') {
+          estadoAluno.funcional.pago = true;
+          estadoAluno.funcional.comprovante = url;
+        }
+        salvarEstadoAluno();
+        showToast("Comprovante anexado e marcado como Pago!");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 6. Visão do Professor: Renderização e Ação de Pagamento em Dinheiro
+    function renderTabelaProfessor() {
+      const tbody = document.getElementById('profTabelaAlunos');
+      tbody.innerHTML = "";
+
+      let pagos = 0;
+      let pendentes = 0;
+      let totalValor = 0;
+
+      turmaIngles.forEach((aluno, index) => {
+        if (aluno.status === 'pago') {
+          pagos++;
+          totalValor += aluno.cota;
+        } else {
+          pendentes++;
+        }
+
+        let badgeClass = aluno.status === 'pago' ? 'badge-pago' : (aluno.status === 'atrasado' ? 'badge-atrasado' : 'badge-pendente');
+        let statusTexto = aluno.status === 'pago' ? '✓ Pago' : (aluno.status === 'atrasado' ? '⚠️ Atrasado' : '⏳ Pendente');
+
+        let comprovanteHtml = aluno.comprovante 
+          ? `<span class="receipt-link" onclick="abrirModal('${aluno.nome}', '${aluno.comprovante}')">👁️ Ver Comprovante</span>`
+          : `<span style="color:#94a3b8; font-size:0.8rem;">Sem anexo</span>`;
+
+        let botaoAcao = aluno.status === 'pago'
+          ? `<span style="color:var(--success); font-weight:700; font-size:0.8rem;">✓ Confirmado</span>`
+          : `<button class="btn-cash" onclick="marcarPagoDinheiro(${index})">💵 Marcar Pago em Dinheiro</button>`;
+
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${aluno.nome}</strong><br><span style="font-size:0.75rem; color:#64748b;">${aluno.whats}</span></td>
+          <td>R$ ${aluno.cota},00</td>
+          <td><span class="status-badge ${badgeClass}">${statusTexto}</span></td>
+          <td>${comprovanteHtml}</td>
+          <td>${botaoAcao}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('profTotalAlunos').innerText = turmaIngles.length;
+      document.getElementById('profTotalPagos').innerText = pagos;
+      document.getElementById('profTotalPendentes').innerText = pendentes;
+      document.getElementById('profTotalValor').innerText = "R$ " + totalValor.toFixed(2).replace('.', ',');
+    }
+
+    function marcarPagoDinheiro(index) {
+      turmaIngles[index].status = 'pago';
+      salvarDados(turmaIngles);
+
+      // Se for a aluna Maria (índice 0), reflete na tela dela também
+      if (index === 0) {
+        estadoAluno.ingles.pago = true;
+        salvarEstadoAluno();
+      }
+
+      renderTabelaProfessor();
+      showToast(`Pagamento em dinheiro confirmado para ${turmaIngles[index].nome}!`);
+    }
+
+    function enviarLembreteGeralZap() {
+      const pendentes = turmaIngles.filter(a => a.status !== 'pago');
+      if (pendentes.length === 0) {
+        alert("Todos os alunos desta turma já estão com o pagamento 100% em dia!");
+        return;
+      }
+
+      const mensagem = `*PROJETO TABATINGA VIVA - LEMBRETE DE RATEIO*%0A%0A` +
+        `Olá! Lembrando que o vencimento da cota mensal de *Inglês (R$ 45,00)* é todo dia 05.%0A` +
+        `Chave PIX do Prof. Carlos: carlos.mendes.idiomas@gmail.com%0A%0A` +
+        `Após efetuar o PIX ou pagamento em dinheiro, favor anexar no aplicativo ou avisar o professor. Obrigado por manter a turma unida!`;
+
+      window.open(`https://api.whatsapp.com/send?text=${mensagem}`, '_blank');
+    }
+
+    // 7. Utilitários (Copiar PIX, Modal, Toast e Troca de Perfil)
+    function copyPix(key) {
+      navigator.clipboard.writeText(key).then(() => {
+        showToast("Chave PIX copiada: " + key);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('appToast');
+      t.innerText = msg;
+      t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2800);
+    }
+
+    function switchRole(role) {
+      document.getElementById('btnRoleAluno').classList.remove('active');
+      document.getElementById('btnRoleProfessor').classList.remove('active');
+      document.getElementById('btnRoleCoord').classList.remove('active');
+
+      document.getElementById('viewAluno').style.display = 'none';
+      document.getElementById('viewProfessor').style.display = 'none';
+      document.getElementById('viewCoordenacao').style.display = 'none';
+
+      if (role === 'aluno') {
+        document.getElementById('btnRoleAluno').classList.add('active');
+        document.getElementById('viewAluno').style.display = 'block';
+        atualizarTelaAluno();
+      } else if (role === 'professor') {
+        document.getElementById('btnRoleProfessor').classList.add('active');
+        document.getElementById('viewProfessor').style.display = 'block';
+        renderTabelaProfessor();
+      } else {
+        document.getElementById('btnRoleCoord').classList.add('active');
+        document.getElementById('viewCoordenacao').style.display = 'block';
+      }
+    }
+
+    function abrirModal(nome, imgSrc) {
+      document.getElementById('modalAlunoNome').innerText = "Enviado por: " + nome;
+      document.getElementById('modalImg').src = imgSrc;
+      document.getElementById('comprovanteModal').classList.add('active');
+    }
+
+    function fecharModal() {
+      document.getElementById('comprovanteModal').classList.remove('active');
+    }
+
+    // Inicialização
+    carregarEstadoAluno();
+    renderTabelaProfessor();
+  </script>
+</body>
+</html>

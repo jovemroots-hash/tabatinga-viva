@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Piloto Tabatinga Viva | Esporte, Cultura, Idiomas e Saúde</title>
+  <meta name="description" content="Projeto Piloto Comunitário no Bairro Tabatinga (Caraguatatuba/Ubatuba). Incubadora de saberes, esporte, cultura e saúde com modelo de rateio progressivo direto.">
+  <style>
+    :root {
+      --primary: #0a4b78;
+      --primary-dark: #062e4a;
+      --primary-light: #1572b6;
+      --accent: #00a896;
+      --accent-warm: #f4a261;
+      --accent-coral: #e76f51;
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Banner Piloto */
+    .pilot-topbar {
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 10px 0;
+      font-size: 0.88rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .pilot-badge {
+      background-color: var(--accent-warm);
+      color: #000;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      margin-right: 8px;
+      display: inline-block;
+    }
+
+    /* Header Nav */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary-dark);
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+    .brand-text h1 {
+      font-size: 1.25rem;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--primary-light);
+    }
+    .btn-nav {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+      transition: all 0.2s;
+    }
+    .btn-nav:hover {
+      background: #008778;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, #ffffff 0%, #edf8f8 100%);
+      padding: 60px 0 50px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 168, 150, 0.12);
+      color: #007a6e;
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      max-width: 860px;
+      margin: 0 auto 18px;
+      letter-spacing: -0.8px;
+    }
+    .hero h2 span {
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 30px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(10, 75, 120, 0.25);
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 168, 150, 0.25);
+    }
+    .btn-accent:hover {
+      background: #00897b;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    .btn-outline:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Badges Bar */
+    .hero-badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .badge-card {
+      background: #fff;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: var(--shadow);
+    }
+    .badge-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .badge-info h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+    .badge-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    /* Section Global */
+    section {
+      padding: 65px 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+    .section-title span {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .section-title h3 {
+      font-size: 2rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .section-title p {
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 10px auto 0;
+      font-size: 1.05rem;
+    }
+
+    /* O Modelo Piloto */
+    .why-pilot-box {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 35px;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .why-item {
+      display: flex;
+      gap: 16px;
+    }
+    .why-num {
+      width: 44px;
+      height: 44px;
+      background: rgba(10, 75, 120, 0.1);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .why-content h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+    .why-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Calculadora Interativa de Rateio */
+    .calc-section {
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .calc-card {
+      background: linear-gradient(135deg, #093758, #0e568a);
+      color: #fff;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    .calc-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .calc-header h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .calc-header p {
+      color: #cbd5e1;
+      font-size: 1rem;
+    }
+
+    /* Seletor de Categoria na Calculadora */
+    .calc-cat-selector {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+    .calc-cat-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .calc-cat-btn.active, .calc-cat-btn:hover {
+      background: var(--accent-warm);
+      color: #000;
+      border-color: var(--accent-warm);
+      transform: translateY(-2px);
+    }
+
+    .slider-box {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .slider-val {
+      font-size: 1.45rem;
+      color: var(--accent-warm);
+      background: rgba(0,0,0,0.3);
+      padding: 3px 14px;
+      border-radius: 8px;
+    }
+    input[type=range] {
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.3);
+      outline: none;
+      cursor: pointer;
+      accent-color: var(--accent-warm);
+    }
+
+    .calc-results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+    .res-box {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+    .res-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .res-num {
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+    .res-highlight {
+      color: #38ef7d !important;
+    }
+    .res-tag {
+      font-size: 0.78rem;
+      color: var(--accent-warm);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .calc-rules {
+      background: rgba(255,255,255,0.06);
+      border-left: 4px solid var(--accent-warm);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .calc-rules strong {
+      color: var(--accent-warm);
+    }
+
+    /* Tabela de Calibração Pedagógica */
+    .pedagogy-box {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-top: 30px;
+    }
+    .pedagogy-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+    .pedagogy-table th {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 800;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .pedagogy-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+    .pedagogy-table tr:hover {
+      background: #f8fafc;
+    }
+    .badge-size {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .badge-small { background: #fee2e2; color: #991b1b; }
+    .badge-mid { background: #fef3c7; color: #92400e; }
+    .badge-large { background: #dcfce7; color: #166534; }
+
+    /* Modalidades (Grid de Atividades) */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+    .tab-btn {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+    }
+    .activity-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 4px solid var(--primary);
+    }
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .act-badge-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .act-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .act-cost {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #059669;
+      background: #d1fae5;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .act-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    .act-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .act-features {
+      list-style: none;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      border-top: 1px solid #f1f5f9;
+      padding-top: 12px;
+      margin-bottom: 16px;
+    }
+    .act-features li {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-card-act {
+      background: #f1f5f9;
+      color: var(--primary);
+      text-align: center;
+      padding: 9px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: block;
+      transition: background 0.2s;
+    }
+    .btn-card-act:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Os 5 Pilares Científicos */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .pillar-card {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .pillar-icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      background: rgba(10, 75, 120, 0.08);
+      color: var(--primary);
+    }
+    .pillar-card h4 {
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .pillar-impact {
+      margin-bottom: 12px;
+    }
+    .pillar-impact strong {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .pillar-impact p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Governança e Regras de Ouro */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .rule-box {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .rule-box h4 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rule-box p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Seção de Cadastro / Formulários */
+    .forms-wrapper {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      padding: 35px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .form-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 25px;
+    }
+    .form-tab-btn {
+      flex: 1;
+      text-align: center;
+      padding: 14px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .form-tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+    .form-pane {
+      display: none;
+    }
+    .form-pane.active {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(10, 75, 120, 0.1);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-dark);
+      color: #94a3b8;
+      padding: 50px 0 25px;
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .footer-col h5 {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+    .footer-col p {
+      line-height: 1.6;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 1.85rem; }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .calc-card { padding: 24px; }
+      .pedagogy-table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner Piloto -->
+  <div class="pilot-topbar">
+    <div class="container">
+      <span class="pilot-badge">Fase Piloto</span>
+      Iniciativa Comunitária Integrada — Bairro Tabatinga (Divisa Caraguatatuba e Ubatuba)
+    </div>
+  </div>
+
+  <!-- Header Nav -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand">
+        <div class="brand-icon">T</div>
+        <div class="brand-text">
+          <h1>Tabatinga Viva</h1>
+          <span>Projeto Piloto Comunitário</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#como-funciona">Como Funciona</a></li>
+        <li><a href="#atividades">Atividades</a></li>
+        <li><a href="#calculadora">Calculadora de Rateio</a></li>
+        <li><a href="pesquisa_online.html" style="background:#f4a261; color:#000; padding:7px 14px; border-radius:8px; font-weight:700; text-decoration:none;">👨‍👩‍👧‍👦 Pesquisa Online</a></li>
+        <li><a href="painel_respostas.html" style="background:#0f4c5c; color:#fff; padding:7px 14px; border-radius:8px; font-weight:700; text-decoration:none;">📊 Painel de Dados</a></li>
+        <li><a href="app_rateio.html" style="background:#00a896; color:#fff; padding:7px 14px; border-radius:8px; font-weight:700; text-decoration:none;">📲 App Rateio</a></li>
+        <li><a href="#cadastro" class="btn-nav">Quero Participar</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-tag">🌱 Não esperamos promessas: começamos com o que temos</div>
+      <h2>O Bairro Tabatinga em Movimento: <span>Esporte, Cultura, Idiomas e Saúde</span></h2>
+      <p>Um modelo inteligente de incubação comunitária no Centro Comunitário, campo e praia. Turmas calibradas com embasamento pedagógico, sem depender de política e com bolsas gratuitas para as crianças.</p>
+      
+      <div class="hero-cta">
+        <a href="pesquisa_online.html" class="btn btn-primary" style="background:#16a34a; border-color:#16a34a;">👨‍👩‍👧‍👦 Responder Pesquisa da Família (Online)</a>
+        <a href="ficha_pesquisa_imprimir.html" target="_blank" class="btn btn-outline">🖨️ Imprimir Ficha A4 (Bingo)</a>
+        <a href="#calculadora" class="btn btn-accent">Simular Cota do Rateio</a>
+      </div>
+
+      <div class="hero-badges">
+        <div class="badge-card">
+          <div class="badge-icon">🚀</div>
+          <div class="badge-info">
+            <h4>Arranque Rápido</h4>
+            <p>A turma já começa sem esperar multidão.</p>
+          </div>
+        </div>
+        <div class="badge-card">
+          <div class="badge-icon">📉</div>
+          <div class="badge-info">
+            <h4>Rateio Progressivo</h4>
+            <p>Mais alunos entram = mensalidade cai para todos.</p>
+          </div>
+        </div>
+        <div class="badge-card">
+          <div class="badge-icon">🛡️</div>
+          <div class="badge-info">
+            <h4>Professor Titular Âncora</h4>
+            <p>Supervisiona estagiários e garante continuidade.</p>
+          </div>
+        </div>
+        <div class="badge-card">
+          <div class="badge-icon">🤝</div>
+          <div class="badge-info">
+            <h4>Bolsas Infantis Automáticas</h4>
+            <p>O rateio adulto viabiliza vagas gratuitas para crianças.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona o Piloto -->
+  <section id="como-funciona">
+    <div class="container">
+      <div class="section-title">
+        <span>Engrenagem sem Frustrações</span>
+        <h3>Por Que o Projeto Tabatinga Viva Realmente Funciona?</h3>
+        <p>A comunidade da Tabatinga está cansada de projetos que começam e param quando muda a gestão ou acabam as férias da faculdade. Desenhamos um sistema blindado contra a descontinuidade.</p>
+      </div>
+
+      <div class="why-pilot-box">
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-num">1</div>
+            <div class="why-content">
+              <h4>Arranque com Grupos Iniciais</h4>
+              <p>Não esperamos a Prefeitura enviar verba nem precisamos de 25 inscritos. Juntou o grupo mínimo da modalidade, a turma já começa de imediato com o Professor Titular!</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num">2</div>
+            <div class="why-content">
+              <h4>O Professor Responsável (Âncora)</h4>
+              <p>Cada área tem um profissional qualificado contratado via rateio direto. Ele cria o <strong>Cronograma Oficial Padronizado</strong> do projeto, garantindo aula toda semana sem improvisos.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num">3</div>
+            <div class="why-content">
+              <h4>Acolhimento de Estagiários com Supervisão</h4>
+              <p>Quando chegam estagiários das faculdades (Módulo/IFSP) ou monitores públicos, eles não ficam soltos: seguem o cronograma do Coordenador Titular, abrindo turmas extras e barateando o custo de todos!</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num">4</div>
+            <div class="why-content">
+              <h4>Blindagem: E Se o Estagiário Sair?</h4>
+              <p>Se o estagiário entrar em férias ou sair, a turma não morre de surpresa: o Professor Titular assume o cronograma, trocamos rapidamente ou ajustamos a cota com 100% de transparência.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num">5</div>
+            <div class="why-content">
+              <h4>Cota Mensal Fixa (Sem Aula Avulsa)</h4>
+              <p>Para o professor ter segurança e a turma se manter firme, o compromisso é mensal. Proibido pagar "por aula avulsa", garantindo estabilidade ao longo do ano.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num">6</div>
+            <div class="why-content">
+              <h4>Professor Faltou sem Repor? NÃO Recebe!</h4>
+              <p>Se o professor faltar e não repuser dentro do próprio mês, o valor da aula é descontado do pagamento dele, abatendo a mensalidade dos alunos no mês seguinte.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculadora Interativa de Rateio Calibrada -->
+  <section id="calculadora" class="calc-section">
+    <div class="container">
+      <div class="calc-card">
+        <div class="calc-header">
+          <h3>Calculadora de Rateio Calibrada por Modalidade</h3>
+          <p>Escolha o tipo de oficina abaixo e arraste o botão para ver como a cota mensal se comporta no tamanho pedagógico correto:</p>
+        </div>
+
+        <!-- Seletor de Categoria -->
+        <div class="calc-cat-selector">
+          <button class="calc-cat-btn active" id="catBtn-foco" onclick="selectCalcCategory('foco')">
+            🗣️ Idiomas & Violão (5 a 10 alunos)
+          </button>
+          <button class="calc-cat-btn" id="catBtn-esporte" onclick="selectCalcCategory('esporte')">
+            🥊 Lutas, Funcional & Vôlei (8 a 18 alunos)
+          </button>
+          <button class="calc-cat-btn" id="catBtn-coletivo" onclick="selectCalcCategory('coletivo')">
+            💃 Dança & Coral (12 a 30 alunos)
+          </button>
+        </div>
+
+        <div class="slider-box">
+          <div class="slider-label">
+            <span id="sliderCategoryTitle">Número de Alunos na Turma:</span>
+            <span class="slider-val" id="displayAlunos">6 alunos</span>
+          </div>
+          <input type="range" id="alunosRange" min="5" max="10" value="6" step="1" oninput="updateCalculator()">
+        </div>
+
+        <div class="calc-results-grid">
+          <div class="res-box">
+            <div class="res-title">Sua Cota Mensal Fixa</div>
+            <div class="res-num res-highlight" id="resMensalidade">R$ 60,00</div>
+            <div class="res-tag" id="resPorAula">aprox. R$ 15,00 por semana</div>
+          </div>
+
+          <div class="res-box">
+            <div class="res-title">Status da Turma</div>
+            <div class="res-num" style="font-size:1.25rem; margin-top:8px;" id="resStatus">Turma Inicial</div>
+            <div class="res-tag" id="resStatusDesc">Já pode começar a aula!</div>
+          </div>
+
+          <div class="res-box">
+            <div class="res-title">Bolsas Infantis Geradas</div>
+            <div class="res-num" id="resBolsas">1 bolsa</div>
+            <div class="res-tag">100% gratuita para criança da escola</div>
+          </div>
+
+          <div class="res-box">
+            <div class="res-title">Economia vs. Mercado Particular</div>
+            <div class="res-num" id="resEconomia">83%</div>
+            <div class="res-tag" id="resEconomiaDesc">em relação a R$ 350/mês</div>
+          </div>
+        </div>
+
+        <div class="calc-rules" id="calcExplanation">
+          <strong>💡 Regra Pedagógica da Modalidade:</strong> Para idiomas e instrumentos, turmas reduzidas garantem que todos falem e pratiquem ativamente a cada encontro. Cada amigo novo reduz a mensalidade de todos no mês seguinte!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Calibração Pedagógica -->
+  <section id="pedagogia" style="background:#f8fafc; padding:55px 0;">
+    <div class="container">
+      <div class="section-title">
+        <span>Critério Técnico</span>
+        <h3>Por Que Cada Oficina Tem um Tamanho Diferente?</h3>
+        <p>Nem toda aula pode ter a mesma quantidade de alunos. Respeitamos a pedagogia de cada atividade para garantir aprendizado real, atenção individual e segurança física.</p>
+      </div>
+
+      <div class="pedagogy-box">
+        <table class="pedagogy-table">
+          <thead>
+            <tr>
+              <th>Modalidade</th>
+              <th>Tipo de Turma</th>
+              <th>Tamanho Recomendado</th>
+              <th>Por Que Este Tamanho? (Justificativa Pedagógica)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Inglês e Espanhol</strong></td>
+              <td><span class="badge-size badge-small">Foco & Conversação</span></td>
+              <td><strong>6 a 10 alunos</strong> (Máx. 10)</td>
+              <td>Para falar de verdade, o aluno precisa de tempo de fala (*speaking time*). Turmas com mais de 10 pessoas inibem a prática oral e reduzem a correção de pronúncia.</td>
+            </tr>
+            <tr>
+              <td><strong>Violão e Ukulele</strong></td>
+              <td><span class="badge-size badge-small">Iniciação Instrumental</span></td>
+              <td><strong>6 a 8 alunos</strong> (Máx. 8)</td>
+              <td>O professor precisa ouvir cada instrumento, conferir a afinação e corrigir a posição dos dedos nos trastes. Com 4 instrumentos disponíveis pelo projeto, é a rotação perfeita.</td>
+            </tr>
+            <tr>
+              <td><strong>Boxe Educativo</strong></td>
+              <td><span class="badge-size badge-mid">Luta & Coordenação</span></td>
+              <td><strong>10 a 16 alunos</strong> (Máx. 16)</td>
+              <td>Trabalho dinâmico em 5 a 8 duplas alternando manoplas, cordas e movimentação de pernas com espaço seguro para evitar esbarrões.</td>
+            </tr>
+            <tr>
+              <td><strong>Funcional & Mobilidade</strong></td>
+              <td><span class="badge-size badge-mid">Saúde & Postura</span></td>
+              <td><strong>10 a 16 alunos</strong> (Máx. 16)</td>
+              <td>Cada colchoete ocupa cerca de 2m². O instrutor precisa circular para corrigir a postura de coluna, joelhos e respiração, prevenindo lesões articulares em idosos.</td>
+            </tr>
+            <tr>
+              <td><strong>Vôlei Adaptado (60+) e Praia</strong></td>
+              <td><span class="badge-size badge-mid">Esporte Coletivo</span></td>
+              <td><strong>12 a 18 alunos</strong> (Máx. 18)</td>
+              <td>Dois times de 6 jogadores em quadra mais 4 a 6 em revezamento dinâmico. Menos de 10 não fecha jogo; mais de 18 gera tempo de espera longo no banco.</td>
+            </tr>
+            <tr>
+              <td><strong>Dança e Ritmos</strong></td>
+              <td><span class="badge-size badge-large">Expressão Coletiva</span></td>
+              <td><strong>15 a 30 alunos</strong> (Máx. 30)</td>
+              <td>A dança se beneficia da energia contagiante do grupo! O salão do Centro Comunitário comporta até 30 pessoas com braços abertos em segurança.</td>
+            </tr>
+            <tr>
+              <td><strong>Canto Coral Comunitário</strong></td>
+              <td><span class="badge-size badge-large">Voz Coletiva</span></td>
+              <td><strong>15 a 35+ alunos</strong> (Livre)</td>
+              <td>O coral precisa de volume sonoro para dividir naipes de vozes (sopranos, contraltos, tenores e baixos). Quanto mais vozes reunidas, mais encorpado e bonito fica!</td>
+            </tr>
+            <tr>
+              <td><strong>Futebol Comunitário Sub-12</strong></td>
+              <td><span class="badge-size badge-large">Iniciação Esportiva</span></td>
+              <td><strong>15 a 24 crianças</strong></td>
+              <td>Dois times completos no campo ou na areia com reservas para rodízio e participação de todos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Atividades Principais -->
+  <section id="atividades">
+    <div class="container">
+      <div class="section-title">
+        <span>Oportunidades no Bairro</span>
+        <h3>As 10 Atividades Principais do Projeto</h3>
+        <p>Modalidades selecionadas a dedo: sem exigência de quimonos ou materiais caros para o aluno e aproveitando o Centro Comunitário, o campo e a praia.</p>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterActivities('todas')">Todas as Modalidades</button>
+        <button class="tab-btn" onclick="filterActivities('esporte')">Esporte & Luta</button>
+        <button class="tab-btn" onclick="filterActivities('cultura')">Cultura & Música</button>
+        <button class="tab-btn" onclick="filterActivities('cognicao')">Cognição & Idiomas</button>
+        <button class="tab-btn" onclick="filterActivities('saude')">Saúde & Bem-Estar</button>
+      </div>
+
+      <div class="activities-grid">
+        <!-- 1. Futebol Sub-12 -->
+        <div class="activity-card" data-cat="esporte">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Esporte</span>
+              <span class="act-cost">100% Gratuito</span>
+            </div>
+            <h4 class="act-title">Futebol Comunitário Sub-12</h4>
+            <p class="act-desc">Iniciação esportiva, fundamentos, coordenação motora, espírito de equipe e disciplina para crianças de até 12 anos.</p>
+            <ul class="act-features">
+              <li>📍 Campo do Bairro / Praia</li>
+              <li>👟 Tênis comum ou descalço na areia</li>
+              <li>🤝 Conduzido por voluntários locais</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Futebol Sub-12')">Tenho Interesse</a>
+        </div>
+
+        <!-- 2. Vôlei Adaptado e Praia -->
+        <div class="activity-card" data-cat="esporte saude">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Esporte & Saúde</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Vôlei Adaptado (60+) & Praia</h4>
+            <p class="act-desc">Modalidade nº 1 da melhor idade no litoral! Movimento articular, socialização e dinamismo no salão coberto ou na areia.</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário / Praia</li>
+              <li>🏐 Demanda apenas rede e bolas macias</li>
+              <li>👵 Turma de 12 a 18 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Vôlei Adaptado / Praia')">Tenho Interesse</a>
+        </div>
+
+        <!-- 3. Boxe Educativo -->
+        <div class="activity-card" data-cat="esporte">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Luta Educativa</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Boxe Educativo & Funcional</h4>
+            <p class="act-desc">Substitui o judô/karatê: sem tatame e sem quimono! Trabalho de pernas, reflexo, esquiva, pular corda, disciplina e autocontrole.</p>
+            <ul class="act-features">
+              <li>📍 Salão Coberto (Piso comum)</li>
+              <li>🥊 Luvas e manoplas compartilhadas</li>
+              <li>⚡ Turma de 10 a 16 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Boxe Educativo')">Tenho Interesse</a>
+        </div>
+
+        <!-- 4. Condicionamento e Alongamento -->
+        <div class="activity-card" data-cat="saude">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Saúde</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Condicionamento, Alongamento e Mobilidade</h4>
+            <p class="act-desc">Exercícios posturais com colchoetes, elásticos e bastões. Alívio de dores nas costas, fortalecimento e prevenção de quedas.</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário</li>
+              <li>🧘 Colchoetes + elásticos funcionais</li>
+              <li>💚 Turma de 10 a 16 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Condicionamento e Mobilidade')">Tenho Interesse</a>
+        </div>
+
+        <!-- 5. Dança e Ritmos -->
+        <div class="activity-card" data-cat="cultura saude">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Cultura & Movimento</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Dança, Ritmos e Expressão</h4>
+            <p class="act-desc">Forró, dança livre, ritmos populares e consciência corporal. Turmas amplas e animadas com custo rateado super baixo.</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário</li>
+              <li>🎶 Apenas caixa de som Bluetooth</li>
+              <li>💃 Turma de 15 a 30 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Dança e Ritmos')">Tenho Interesse</a>
+        </div>
+
+        <!-- 6. Violão e Ukulele -->
+        <div class="activity-card" data-cat="cultura">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Música</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Iniciação Musical: Violão & Ukulele</h4>
+            <p class="act-desc">Começa já com 2 violões e 2 ukuleles disponíveis pelo projeto! O ukulele tem 4 cordas macias, ideal para crianças tocarem na 1ª aula.</p>
+            <ul class="act-features">
+              <li>📍 Salas do Centro Comunitário</li>
+              <li>🎸 Instrumentos rodiziados nas aulas</li>
+              <li>🎼 Turma de foco: 6 a 8 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Violão e Ukulele')">Tenho Interesse</a>
+        </div>
+
+        <!-- 7. Canto e Coral -->
+        <div class="activity-card" data-cat="cultura">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Música</span>
+              <span class="act-cost">Gratuito / Rateio</span>
+            </div>
+            <h4 class="act-title">Canto Coral Comunitário</h4>
+            <p class="act-desc">Respiração, ritmo corporal, afinação e harmonia em grupo. União de crianças e idosos em apresentações nas festas do bairro.</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário</li>
+              <li>🎤 Usa a própria voz e violão de apoio</li>
+              <li>👨‍👩‍👧‍👦 Turma coletiva de 15 a 35+ vozes</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Canto Coral')">Tenho Interesse</a>
+        </div>
+
+        <!-- 8. Tabatinga Lê & Brinca -->
+        <div class="activity-card" data-cat="cognicao">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Cognição & Leitura</span>
+              <span class="act-cost">100% Gratuito</span>
+            </div>
+            <h4 class="act-title">Tabatinga Lê & Brinca + Xadrez</h4>
+            <p class="act-desc">Feira mensal de trocas de livros e gibis, causos caiçaras e jogos de raciocínio lógico (Xadrez, Damas, Dominó e Mancala).</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário / Pátio</li>
+              <li>📚 Plataforma web + acervo comunitário</li>
+              <li>♟️ Concentração e estratégia</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Tabatinga Lê e Jogos')">Tenho Interesse</a>
+        </div>
+
+        <!-- 9. Idiomas: Inglês e Espanhol -->
+        <div class="activity-card" data-cat="cognicao">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Idiomas</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Inglês e Espanhol de Conversação</h4>
+            <p class="act-desc">Conversação prática do dia a dia, vocabulário cotidiano e acolhimento turístico. Sem obrigação de comprar apostilas caras.</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário</li>
+              <li>🗣️ Prática falada no quadro branco</li>
+              <li>🌍 Turma reduzida: 6 a 10 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Inglês e Espanhol')">Tenho Interesse</a>
+        </div>
+
+        <!-- 10. Teatro e Desenho -->
+        <div class="activity-card" data-cat="cultura">
+          <div>
+            <div class="act-badge-area">
+              <span class="act-tag">Cultura</span>
+              <span class="act-cost">Rateio Leve</span>
+            </div>
+            <h4 class="act-title">Teatro & Desenho Criativo</h4>
+            <p class="act-desc">Jogos dramáticos para desinibição e oratória, combinados com desenho e pintura acessível (iniciando em papel e guache).</p>
+            <ul class="act-features">
+              <li>📍 Centro Comunitário</li>
+              <li>🎨 Materiais básicos e acessíveis</li>
+              <li>🎭 Turma de 10 a 15 alunos</li>
+            </ul>
+          </div>
+          <a href="#cadastro" class="btn-card-act" onclick="selectActivity('Teatro e Desenho')">Tenho Interesse</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Os 5 Pilares Científicos -->
+  <section id="pilares" style="background:#edf8f8;">
+    <div class="container">
+      <div class="section-title">
+        <span>Rigor e Propósito</span>
+        <h3>O Embasamento nos 5 Pilares da Qualidade de Vida</h3>
+        <p>Não é passatempo: cada atividade foi estruturada com embasamento médico, psicológico, pedagógico, social e cultural para transformar a realidade da Tabatinga.</p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pilar 1: Médico -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">🩺</div>
+          <h4>1. Pilar Médico e Fisiológico</h4>
+          <div class="pillar-impact">
+            <strong>Impacto Imediato:</strong>
+            <p>Combate ao sedentarismo, controle da pressão arterial, melhora da glicemia e alívio de dores crônicas na coluna e ombros.</p>
+          </div>
+          <div class="pillar-impact">
+            <strong>Impacto de Longo Prazo:</strong>
+            <p>Prevenção de infarto, AVC e sarcopenia (perda de massa muscular no envelhecimento). Redução direta das filas no posto de saúde (UBS).</p>
+          </div>
+        </div>
+
+        <!-- Pilar 2: Psicológico -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">🧠</div>
+          <h4>2. Pilar Psicológico e Emocional</h4>
+          <div class="pillar-impact">
+            <strong>Impacto Imediato:</strong>
+            <p>Alívio rápido de estresse e ansiedade com liberação de endorfina. Desconexão saudável do excesso de telas e celulares para as crianças.</p>
+          </div>
+          <div class="pillar-impact">
+            <strong>Impacto de Longo Prazo:</strong>
+            <p>Construção de resiliência, autocontrole (boxe/esportes), elevação da autoestima e prevenção da solidão e depressão na melhor idade.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 3: Pedagógico -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">📖</div>
+          <h4>3. Pilar Pedagógico e Cognitivo</h4>
+          <div class="pillar-impact">
+            <strong>Impacto Imediato:</strong>
+            <p>Estímulo à leitura ativa, memória de trabalho, coordenação motora fina (instrumentos de corda) e raciocínio estratégico (xadrez).</p>
+          </div>
+          <div class="pillar-impact">
+            <strong>Impacto de Longo Prazo:</strong>
+            <p>Neuroplasticidade cerebral, melhora no rendimento escolar, bilinguismo prático e prevenção do declínio cognitivo senil.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 4: Social -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">🤝</div>
+          <h4>4. Pilar Social e Comunitário</h4>
+          <div class="pillar-impact">
+            <strong>Impacto Imediato:</strong>
+            <p>Ocupação segura do contraturno escolar e integração sadia entre moradores de Caraguatatuba e Ubatuba em nossa comunidade integrada de fronteira.</p>
+          </div>
+          <div class="pillar-impact">
+            <strong>Impacto de Longo Prazo:</strong>
+            <p>Prevenção contra a vulnerabilidade juvenil e drogas, fortalecimento dos laços comunitários e qualificação profissional de jovens da comunidade.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 5: Cultural -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">🎭</div>
+          <h4>5. Pilar Cultural e Identitário</h4>
+          <div class="pillar-impact">
+            <strong>Impacto Imediato:</strong>
+            <p>Democratização do violão, coral, teatro e artes plásticas, antes restritos a famílias com alto poder aquisitivo.</p>
+          </div>
+          <div class="pillar-impact">
+            <strong>Impacto de Longo Prazo:</strong>
+            <p>Resgate da rica tradição caiçara do bairro, formação de novos músicos e talentos locais, construindo orgulho de pertencer à Tabatinga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cultura do Cuidado Coletivo (Japão & Waldorf) -->
+  <section id="cuidado-coletivo" style="background:#ffffff; border-bottom:1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-title">
+        <span>Fazer por Si e por Todos</span>
+        <h3>A Pedagogia do Cuidado Coletivo (Inspiração Japão & Waldorf)</h3>
+        <p>No Tabatinga Viva, ninguém é "cliente passivo" — somos todos guardiões do nosso espaço. Quando dividimos pequenas tarefas com alegria, o cuidado não pesa para ninguém e nossas crianças aprendem pelo exemplo!</p>
+      </div>
+
+      <div class="why-pilot-box" style="background: linear-gradient(180deg, #ffffff 0%, #f0fdfa 100%); border-left: 5px solid var(--accent);">
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-num" style="background:rgba(0,168,150,0.15); color:var(--accent);">🇯🇵</div>
+            <div class="why-content">
+              <h4>Como no Japão (Os "5 Minutos de Ouro")</h4>
+              <p>Nas escolas japonesas (<em>O-soji</em>), alunos e professores limpam juntos a própria sala ao final da aula. Aqui, nos <strong>últimos 5 minutos de toda oficina</strong>, a turma guarda seus materiais, higieniza seu colchoete, passa uma vassoura rápida na sala e deixa tudo impecável para o próximo grupo!</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num" style="background:rgba(0,168,150,0.15); color:var(--accent);">🌱</div>
+            <div class="why-content">
+              <h4>Como na Pedagogia Waldorf (Famílias Ativas)</h4>
+              <p>As crianças aprendem imitando os gestos dos adultos. Pais, avós e jovens participam ativamente dos encontros mensais, da organização do acervo e dos mutirões caiçaras, construindo pertencimento real à comunidade.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-num" style="background:rgba(0,168,150,0.15); color:var(--accent);">🧹</div>
+            <div class="why-content">
+              <h4>Rateio Exclusivo p/ Limpeza Pesada e Banheiros</h4>
+              <p>Como cada turma mantém sua sala limpa e arrumada todos os dias, nosso pequeno rateio de zeladoria fica super barato e é usado <strong>somente para o serviço pesado e técnico</strong>: lavagem e desinfecção profissional dos banheiros, faxina pesada e roçada do mato!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Governança e Regras de Ouro -->
+  <section id="governanca">
+    <div class="container">
+      <div class="section-title">
+        <span>Transparência Absoluta</span>
+        <h3>Regras de Ouro da Governança Comunitária</h3>
+        <p>Um modelo desenhado para garantir confiança mútua, sem passagem de dinheiro pelo CPF da coordenação e com respeito aos alunos e professores.</p>
+      </div>
+
+      <div class="rules-grid">
+        <div class="rule-box">
+          <h4>💳 Pagamento Direto ao Professor</h4>
+          <p>Nenhum dinheiro passa pelo bolso da coordenação. A cota mensal é paga diretamente pelos alunos na chave PIX/MEI do próprio professor titular até o dia 05.</p>
+        </div>
+
+        <div class="rule-box">
+          <h4>📅 Cota Mensal Fixa</h4>
+          <p>Não existe pagamento "por aula avulsa". O compromisso é mensal para sustentar o professor. Se um aluno faltar por motivo pessoal, sua cota mantém a turma viva.</p>
+        </div>
+
+        <div class="rule-box">
+          <h4>⏱️ Professor Faltou? Desconto!</h4>
+          <p>Se o instrutor faltar a uma aula e não realizar a reposição no próprio mês, o valor proporcional (25%) é descontado do pagamento dele e abate a cota dos alunos.</p>
+        </div>
+
+        <div class="rule-box">
+          <h4>🧹 Zeladoria em Dois Níveis</h4>
+          <p><strong>Salas de aula:</strong> mantidas limpas nos 5 minutos finais por alunos e professores. <strong>Banheiros, faxina pesada e roçada:</strong> custeados pelo rateio técnico de zeladoria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cadastro e Inscrição -->
+  <section id="cadastro" style="background:#f1f5f9;">
+    <div class="container">
+      <div class="section-title">
+        <span>Participe do Piloto</span>
+        <h3>Faça Seu Cadastro Pré-Piloto</h3>
+        <p>Preencha os dados abaixo. Assim que o grupo inicial demonstrar interesse na mesma oficina, convocamos a turma para iniciar no Centro Comunitário!</p>
+      </div>
+
+      <div class="forms-wrapper">
+        <div class="form-tabs">
+          <button class="form-tab-btn active" id="tabAlunoBtn" onclick="setFormTab('aluno')">Quero Aprender / Inscrever Aluno</button>
+          <button class="form-tab-btn" id="tabProfBtn" onclick="setFormTab('professor')">Sou Professor / Quero Oferecer Oficina</button>
+        </div>
+
+        <!-- Formulário Aluno/Morador -->
+        <div class="form-pane active" id="formAlunoPane">
+          <form id="alunoForm" onsubmit="enviarInscricaoAluno(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="alunoNome">Nome Completo *</label>
+                <input type="text" id="alunoNome" class="form-control" placeholder="Seu nome ou do seu filho" required>
+              </div>
+              <div class="form-group">
+                <label for="alunoWhats">WhatsApp com DDD *</label>
+                <input type="tel" id="alunoWhats" class="form-control" placeholder="(12) 99999-9999" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="alunoIdade">Idade do Participante *</label>
+                <input type="number" id="alunoIdade" class="form-control" placeholder="Ex: 10, 25, 62" required>
+              </div>
+              <div class="form-group">
+                <label for="alunoCidade">Região Onde Você Mora? *</label>
+                <select id="alunoCidade" class="form-control" required>
+                  <option value="">Selecione...</option>
+                  <option value="Tabatinga (Lado Caraguatatuba / Mococa)">Tabatinga (Lado Caraguatatuba / Mococa)</option>
+                  <option value="Tabatinga (Lado Ubatuba / Caçandoca)">Tabatinga (Lado Ubatuba / Caçandoca)</option>
+                  <option value="Outro bairro vizinho da região">Outro bairro vizinho na região</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="alunoModalidade">Modalidade de Maior Interesse *</label>
+              <select id="alunoModalidade" class="form-control" required>
+                <option value="">Escolha a atividade que quer praticar...</option>
+                <option value="Futebol Comunitário Sub-12 (Gratuito)">Futebol Comunitário Sub-12 (Gratuito)</option>
+                <option value="Vôlei Adaptado (60+) e Praia (Rateio Leve)">Vôlei Adaptado (60+) e Praia (Rateio Leve - 12 a 18 alunos)</option>
+                <option value="Boxe Educativo e Funcional (Rateio Leve)">Boxe Educativo e Funcional (Rateio Leve - 10 a 16 alunos)</option>
+                <option value="Condicionamento e Mobilidade (Rateio Leve)">Condicionamento Físico e Mobilidade (Rateio Leve - 10 a 16 alunos)</option>
+                <option value="Dança e Ritmos (Rateio Leve)">Dança e Ritmos (Rateio Leve - 15 a 30 alunos)</option>
+                <option value="Violão e Ukulele (Rateio Leve)">Violão e Ukulele (Turma de foco - 6 a 8 alunos)</option>
+                <option value="Canto Coral Comunitário">Canto Coral Comunitário (Turma ampla de vozes)</option>
+                <option value="Inglês e Espanhol de Conversação (Rateio Leve)">Inglês e Espanhol de Conversação (Turma de foco - 6 a 10 alunos)</option>
+                <option value="Teatro e Desenho Criativo (Rateio Leve)">Teatro e Desenho Criativo (Rateio Leve - 10 a 15 alunos)</option>
+                <option value="Tabatinga Lê & Brinca (Troca de livros e xadrez - Gratuito)">Tabatinga Lê & Brinca (Xadrez e Leitura - Gratuito)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="alunoTipoVaga">Modalidade de Vaga Pretendida *</label>
+              <select id="alunoTipoVaga" class="form-control" required>
+                <option value="Rateio Adulto Solidário (Participante ativo na cota)">Rateio Solidário (Adulto/Jovem contribuindo na cota mensal acessível)</option>
+                <option value="Bolsa Social 100% Gratuita (Criança/Adolescente rede pública)">Bolsa Social Gratuita (Criança/Adolescente da rede pública escolar)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:15px; font-size:1.05rem;">
+              Enviar Cadastro de Interesse via WhatsApp 📲
+            </button>
+          </form>
+        </div>
+
+        <!-- Formulário Professor/Instrutor -->
+        <div class="form-pane" id="formProfPane">
+          <form id="profForm" onsubmit="enviarInscricaoProfessor(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profNome">Nome Completo do Profissional *</label>
+                <input type="text" id="profNome" class="form-control" placeholder="Seu nome profissional" required>
+              </div>
+              <div class="form-group">
+                <label for="profWhats">WhatsApp com DDD *</label>
+                <input type="tel" id="profWhats" class="form-control" placeholder="(12) 99999-9999" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="profArea">Área / Modalidade que Deseja Lecionar *</label>
+                <input type="text" id="profArea" class="form-control" placeholder="Ex: Inglês, Boxe, Vôlei, Violão, Dança" required>
+              </div>
+              <div class="form-group">
+                <label for="profMEI">Possui MEI ou Emite Nota Fiscal? *</label>
+                <select id="profMEI" class="form-control" required>
+                  <option value="Sim, possuo MEI ativo">Sim, possuo MEI ativo para serviços</option>
+                  <option value="Não, mas posso abrir MEI gratuito">Não, mas posso abrir MEI se aprovado</option>
+                  <option value="Sou estudante de graduação / Estagiário">Sou estudante universitário (Busco Estágio/Extensão)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="profProposta">Resumo da Sua Experiência e Disponibilidade *</label>
+              <textarea id="profProposta" class="form-control" rows="3" placeholder="Conte brevemente sobre sua formação e quais dias/horários tem disponíveis para o Centro Comunitário." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-accent" style="width:100%; padding:15px; font-size:1.05rem;">
+              Enviar Proposta de Oficina via WhatsApp 📲
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h5>Projeto Tabatinga Viva</h5>
+          <p>Programa Comunitário Integrado de Desenvolvimento Humano, Esporte, Cultura e Saúde. Realizado por voluntários e moradores do Bairro Tabatinga (Caraguatatuba e Ubatuba - SP).</p>
+        </div>
+        <div class="footer-col">
+          <h5>Locais de Ação</h5>
+          <p>• Centro Comunitário da Tabatinga<br>
+          • Campo Comunitário do Bairro<br>
+          • Orla e Praia da Tabatinga<br>
+          • Integração com a comunidade escolar</p>
+        </div>
+        <div class="footer-col">
+          <h5>Governança & Contato</h5>
+          <p><strong>Coordenação Geral:</strong> Thiago Siqueira<br>
+          <strong>Modelo:</strong> Rateio Direto Aluno → Professor<br>
+          <strong>Apoio Estratégico:</strong> Parceria com Rotary Club, Prefeituras e Faculdades locais.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Projeto Piloto Tabatinga Viva — Todos os direitos reservados. Iniciativa comunitária sem fins lucrativos.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Interativo -->
+  <script>
+    // 1. Dados e Configuração das Categorias na Calculadora
+    const CATEGORIAS_CALC = {
+      foco: {
+        titulo: "Número de Alunos na Turma (Idiomas / Violão / Ukulele):",
+        min: 5,
+        max: 10,
+        defaultVal: 6,
+        custoTotal: 360,
+        mercadoRef: 320,
+        explicacao: "<strong>💡 Regra de Foco Individual:</strong> Para idiomas e instrumentos, turmas reduzidas (6 a 10 alunos) garantem que todos falem, toquem e recebam atenção direta do professor. Com 6 alunos a turma já começa a R$ 60/mês e com 8 alunos cai para R$ 45/mês!"
+      },
+      esporte: {
+        titulo: "Número de Alunos na Turma (Boxe / Funcional / Mobilidade / Vôlei):",
+        min: 8,
+        max: 18,
+        defaultVal: 12,
+        custoTotal: 360,
+        mercadoRef: 160,
+        explicacao: "<strong>💡 Regra de Espaço & Postura:</strong> Em lutas, funcional e vôlei, turmas de 10 a 16 alunos equilibram dinâmica em duplas e espaço seguro para o professor corrigir postura e respiração. A cota mensal fica entre R$ 22 e R$ 36/mês!"
+      },
+      coletivo: {
+        titulo: "Número de Alunos na Turma (Dança / Ritmos / Canto Coral):",
+        min: 12,
+        max: 30,
+        defaultVal: 20,
+        custoTotal: 400,
+        mercadoRef: 120,
+        explicacao: "<strong>💡 Regra Coletiva:</strong> A dança e o coral se alimentam da energia do grupo! O salão do Centro Comunitário comporta até 30 pessoas com braços abertos. Como a turma é ampla, a cota mensal é extremamente baixa: de R$ 13 a R$ 26/mês!"
+      }
+    };
+
+    let categoriaAtual = 'foco';
+
+    function selectCalcCategory(catKey) {
+      categoriaAtual = catKey;
+
+      // Atualiza botões
+      document.querySelectorAll('.calc-cat-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('catBtn-' + catKey).classList.add('active');
+
+      const config = CATEGORIAS_CALC[catKey];
+      const slider = document.getElementById('alunosRange');
+      slider.min = config.min;
+      slider.max = config.max;
+      slider.value = config.defaultVal;
+
+      document.getElementById('sliderCategoryTitle').innerText = config.titulo;
+      document.getElementById('calcExplanation').innerHTML = config.explicacao;
+
+      updateCalculator();
+    }
+
+    function updateCalculator() {
+      const config = CATEGORIAS_CALC[categoriaAtual];
+      const slider = document.getElementById('alunosRange');
+      const val = parseInt(slider.value);
+      
+      document.getElementById('displayAlunos').innerText = val + " alunos";
+
+      const cota = (config.custoTotal / val);
+      const cotaSemanal = (cota / 4);
+      document.getElementById('resMensalidade').innerText = "R$ " + cota.toFixed(2).replace('.', ',');
+      document.getElementById('resPorAula').innerText = "aprox. R$ " + cotaSemanal.toFixed(2).replace('.', ',') + " por semana";
+
+      // Status pedagógico
+      let status = "Turma Ativa";
+      let statusDesc = "Já começa a funcionar!";
+      let bolsas = "1 bolsa";
+
+      if (val === config.min) {
+        status = "Mínimo de Arranque";
+        statusDesc = "Turma já confirmada!";
+        bolsas = "1 bolsa gratuita";
+      } else if (val < config.max - 2) {
+        status = "Turma em Crescimento";
+        statusDesc = "Custo caiu bastante p/ todos!";
+        bolsas = (val >= 10 ? "2 bolsas gratuitas" : "1 bolsa gratuita");
+      } else if (val < config.max) {
+        status = "Turma Consolidada";
+        statusDesc = "Excelente custo-benefício!";
+        bolsas = (val >= 15 ? "3 bolsas gratuitas" : "2 bolsas gratuitas");
+      } else {
+        status = "Capacidade Ideal";
+        statusDesc = "Cota mínima da modalidade alcançada!";
+        bolsas = (val >= 25 ? "4 bolsas gratuitas" : "3 bolsas gratuitas");
+      }
+
+      document.getElementById('resStatus').innerText = status;
+      document.getElementById('resStatusDesc').innerText = statusDesc;
+      document.getElementById('resBolsas').innerText = bolsas;
+
+      // Economia vs mercado
+      const econ = Math.round(((config.mercadoRef - cota) / config.mercadoRef) * 100);
+      document.getElementById('resEconomia').innerText = Math.max(econ, 40) + "%";
+      document.getElementById('resEconomiaDesc').innerText = `em relação a R$ ${config.mercadoRef}/mês de mercado`;
+    }
+
+    // 2. Filtro de Atividades
+    function filterActivities(categoria) {
+      const cards = document.querySelectorAll('.activity-card');
+      const buttons = document.querySelectorAll('.filter-tabs .tab-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        const cats = card.getAttribute('data-cat');
+        if (categoria === 'todas' || cats.includes(categoria)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function selectActivity(nome) {
+      setFormTab('aluno');
+      const select = document.getElementById('alunoModalidade');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].text.includes(nome) || select.options[i].value.includes(nome)) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // 3. Controle das Abas do Formulário
+    function setFormTab(tipo) {
+      const tabAlunoBtn = document.getElementById('tabAlunoBtn');
+      const tabProfBtn = document.getElementById('tabProfBtn');
+      const formAlunoPane = document.getElementById('formAlunoPane');
+      const formProfPane = document.getElementById('formProfPane');
+
+      if (tipo === 'aluno') {
+        tabAlunoBtn.classList.add('active');
+        tabProfBtn.classList.remove('active');
+        formAlunoPane.classList.add('active');
+        formProfPane.classList.remove('active');
+      } else {
+        tabProfBtn.classList.add('active');
+        tabAlunoBtn.classList.remove('active');
+        formProfPane.classList.add('active');
+        formAlunoPane.classList.remove('active');
+      }
+    }
+
+    // 4. Integração WhatsApp
+    const NUMERO_COORDENADOR = "5512999999999"; // Substitua pelo seu WhatsApp real
+
+    function enviarInscricaoAluno(e) {
+      e.preventDefault();
+      const nome = document.getElementById('alunoNome').value;
+      const whats = document.getElementById('alunoWhats').value;
+      const idade = document.getElementById('alunoIdade').value;
+      const cidade = document.getElementById('alunoCidade').value;
+      const mod = document.getElementById('alunoModalidade').value;
+      const tipo = document.getElementById('alunoTipoVaga').value;
+
+      const texto = `*INSCRIÇÃO NO PILOTO - PROJETO TABATINGA VIVA*%0A%0A` +
+        `👤 *Nome:* ${encodeURIComponent(nome)}%0A` +
+        `📱 *WhatsApp:* ${encodeURIComponent(whats)}%0A` +
+        `🎂 *Idade:* ${encodeURIComponent(idade)} anos%0A` +
+        `📍 *Mora em:* ${encodeURIComponent(cidade)}%0A` +
+        `🎯 *Modalidade:* ${encodeURIComponent(mod)}%0A` +
+        `📋 *Tipo de Vaga:* ${encodeURIComponent(tipo)}%0A%0A` +
+        `_Cadastro enviado pelo site do Projeto Piloto Tabatinga Viva._`;
+
+      window.open(`https://api.whatsapp.com/send?phone=${NUMERO_COORDENADOR}&text=${texto}`, '_blank');
+    }
+
+    function enviarInscricaoProfessor(e) {
+      e.preventDefault();
+      const nome = document.getElementById('profNome').value;
+      const whats = document.getElementById('profWhats').value;
+      const area = document.getElementById('profArea').value;
+      const mei = document.getElementById('profMEI').value;
+      const proposta = document.getElementById('profProposta').value;
+
+      const texto = `*PROPOSTA DE INSTRUTOR/OFICINA - TABATINGA VIVA*%0A%0A` +
+        `👨‍🏫 *Profissional:* ${encodeURIComponent(nome)}%0A` +
+        `📱 *WhatsApp:* ${encodeURIComponent(whats)}%0A` +
+        `🎯 *Área / Oficina:* ${encodeURIComponent(area)}%0A` +
+        `📄 *Status MEI:* ${encodeURIComponent(mei)}%0A` +
+        `📝 *Proposta / Disponibilidade:* ${encodeURIComponent(proposta)}%0A%0A` +
+        `_Proposta enviada pelo site do Projeto Piloto Tabatinga Viva._`;
+
+      window.open(`https://api.whatsapp.com/send?phone=${NUMERO_COORDENADOR}&text=${texto}`, '_blank');
+    }
+
+    // Inicialização
+    selectCalcCategory('foco');
+  </script>
+</body>
+</html>

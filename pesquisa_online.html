@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesquisa da Família — Projeto Piloto Tabatinga Viva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #09313c;
+      --primary-light: #e0f2f1;
+      --accent: #e36414;
+      --accent-light: #fff3e0;
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --green-light: #dcfce7;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --pink: #db2777;
+      --pink-light: #fce7f3;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+      padding-bottom: 70px;
+    }
+
+    /* TOPO */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      padding: 30px 18px 26px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fde68a;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 14px;
+      color: #e2e8f0;
+    }
+    .hero-links {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      background: rgba(255,255,255,0.14);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background 0.15s;
+    }
+    .hero-links a:hover {
+      background: rgba(255,255,255,0.24);
+    }
+    .hero-links a.highlight {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 800;
+      border-color: #facc15;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 18px 14px;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+    .step-num {
+      background: var(--primary);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* BLOCO 1: FAMÍLIA (COM SEXO: MULHER, HOMEM, OUTRO) */
+    .family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .member-input-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      background: #f8fafc;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .member-input-card:focus-within {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.12);
+    }
+    .member-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .member-avatar-mini {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+    .member-role-title {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--primary-dark);
+    }
+    .member-role-hint {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .member-fields {
+      display: grid;
+      grid-template-columns: 1fr 85px;
+      gap: 8px;
+    }
+    .input-field {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* SELETOR DE SEXO (MULHER, HOMEM, OUTRO) */
+    .sex-selector-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .sex-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+    }
+    .sex-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+    .sex-pill {
+      cursor: pointer;
+      user-select: none;
+      border: 1.5px solid #cbd5e1;
+      background: #fff;
+      border-radius: 7px;
+      padding: 6px 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .sex-pill:hover {
+      border-color: var(--primary);
+    }
+    .sex-pill.active[data-sex="Mulher"] {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    .sex-pill.active[data-sex="Homem"] {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+    .sex-pill.active[data-sex="Outro"] {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+    }
+    .field-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+    .vinculo-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .vinculo-pill {
+      cursor: pointer;
+      user-select: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .vinculo-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* AVISO */
+    .info-banner {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: #14532d;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .info-banner strong {
+      color: #166534;
+    }
+
+    /* BARRA FLUTUANTE DE CONTAGEM */
+    .selection-bar {
+      position: sticky;
+      top: 10px;
+      z-index: 30;
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+    }
+    .selection-bar-text {
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+    .selection-bar-badge {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      margin-right: 6px;
+    }
+    .btn-jump {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* GRADE DOS 12 QUADROS DE ATIVIDADES */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+    }
+
+    .act-card {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .act-card.selected {
+      border-color: var(--primary);
+      box-shadow: 0 6px 18px rgba(15, 76, 92, 0.14);
+    }
+
+    .act-header {
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-bottom: 1.5px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .act-card.selected .act-header {
+      background: var(--primary);
+      color: #fff;
+      border-bottom-color: var(--primary-dark);
+    }
+    .act-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .act-card.selected .act-title {
+      color: #fff;
+    }
+    .act-sub {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .act-card.selected .act-sub {
+      color: #e2e8f0;
+    }
+    .act-price-tag {
+      background: var(--accent-light);
+      color: #9a3412;
+      border: 1px solid #fdba74;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .act-card.selected .act-price-tag {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .act-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      flex: 1;
+    }
+
+    .block-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* BONEQUINHOS DA FAMÍLIA DENTRO DE CADA ATIVIDADE */
+    .figures-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+    }
+    .figure-btn {
+      cursor: pointer;
+      user-select: none;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      background: #f8fafc;
+      padding: 6px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .figure-btn:hover {
+      border-color: var(--primary);
+      background: #f1f5f9;
+    }
+    .figure-btn.active {
+      border-color: var(--green);
+      background: var(--green-light);
+      box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.25);
+      transform: translateY(-1px);
+    }
+    .figure-btn.active::after {
+      content: "✓";
+      position: absolute;
+      top: -6px;
+      right: -5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fig-emoji {
+      font-size: 20px;
+      margin-bottom: 2px;
+      display: block;
+    }
+    .fig-role {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.1;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 2px;
+    }
+    .fig-info-sub {
+      font-size: 9px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .figure-btn.active .fig-role,
+    .figure-btn.active .fig-info-sub {
+      color: #14532d;
+    }
+
+    /* FORMATO DA TURMA: MISTA, FEMININO, MASCULINO */
+    .turma-format-row {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 9px;
+      padding: 8px 10px;
+    }
+    .turma-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      margin-top: 5px;
+    }
+    .turma-pill {
+      cursor: pointer;
+      user-select: none;
+      border: 1.5px solid #cbd5e1;
+      background: #fff;
+      border-radius: 7px;
+      padding: 6px 4px;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .turma-pill:hover {
+      border-color: var(--primary);
+    }
+    .turma-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .turma-pill.active[data-format="Feminina"] {
+      background: var(--pink);
+      border-color: var(--pink);
+    }
+    .turma-pill.active[data-format="Masculina"] {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    /* OPÇÕES DE VALOR (SEMPRE COM GRÁTIS) */
+    .price-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .price-pill {
+      cursor: pointer;
+      user-select: none;
+      border: 1.5px solid #cbd5e1;
+      background: #fff;
+      border-radius: 8px;
+      padding: 7px 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .price-pill.free-option {
+      border-color: #86efac;
+      background: #f0fdf4;
+      color: #166534;
+    }
+    .price-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .price-pill.free-option.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    /* DIAS E HORÁRIOS */
+    .sched-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .sched-pill {
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #334155;
+      transition: all 0.15s;
+    }
+    .sched-pill.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .time-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .time-input-row span {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .time-input-row input {
+      flex: 1;
+      padding: 5px 8px;
+      font-size: 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+    }
+
+    /* BOTÕES FINAIS (GRAVAR NO BANCO DE DADOS) */
+    .submit-area {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .btn-save-database {
+      background: linear-gradient(135deg, #15803d, #16a34a);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 17px 22px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 18px rgba(21, 128, 61, 0.3);
+      transition: transform 0.15s, background 0.15s;
+    }
+    .btn-save-database:hover {
+      background: linear-gradient(135deg, #166534, #15803d);
+      transform: translateY(-1px);
+    }
+    .btn-save-database:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .secondary-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-secondary {
+      flex: 1;
+      min-width: 200px;
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    /* MODAL DE SUCESSO DO BANCO DE DADOS */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      z-index: 1000;
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 580px;
+      width: 100%;
+      padding: 26px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border: 3px solid #86efac;
+      text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: #14532d;
+      margin-bottom: 8px;
+    }
+    .modal-protocol {
+      display: inline-block;
+      background: #f0fdf4;
+      border: 1.5px dashed #16a34a;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      color: #15803d;
+      margin-bottom: 14px;
+    }
+    .modal-desc {
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      text-align: left;
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-modal-primary {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-modal-outline {
+      background: #fff;
+      color: var(--primary-dark);
+      border: 1.5px solid var(--border);
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 540px) {
+      .figures-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPO -->
+  <header class="hero">
+    <div class="hero-badge">Pesquisa Oficial • Projeto Piloto Tabatinga Viva</div>
+    <h1>🌱 Pesquisa de Atividades da Família</h1>
+    <p>Cadastre os membros da sua casa, informe o sexo de cada um e escolha o formato da turma (Mista, Feminina ou Masculina). <strong>Todos os dados são salvos diretamente no banco de dados do projeto.</strong></p>
+    <div class="hero-links">
+      <a href="index.html">🏠 Site Oficial do Projeto</a>
+      <a href="painel_respostas.html" class="highlight">📊 Painel do Banco de Dados</a>
+      <a href="ficha_pesquisa_imprimir.html" target="_blank">🖨️ Ficha A4 para Imprimir</a>
+      <a href="cartaz_comercios_qrcode.html" target="_blank">📌 Cartaz com QR Code</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- FORMULÁRIO NATIVO DO NETLIFY (DATABASE DE SUBMISSÕES) -->
+    <form
+      name="pesquisa-tabatinga-viva"
+      method="POST"
+      data-netlify="true"
+      netlify
+      netlify-honeypot="bot-field"
+      id="formPesquisaTabatinga"
+      onsubmit="event.preventDefault(); submeterPesquisaAoBanco();"
+    >
+      <!-- CAMPOS OCULTOS PARA O BOT DO NETLIFY FORMS REGISTRAR O SCHEMA -->
+      <input type="hidden" name="form-name" value="pesquisa-tabatinga-viva" />
+      <p style="display:none;"><label>Não preencha: <input name="bot-field" /></label></p>
+      <input type="hidden" name="protocolo" id="net_protocolo" />
+      <input type="hidden" name="data_envio" id="net_data_envio" />
+      <input type="hidden" name="whatsapp" id="net_whatsapp" />
+      <input type="hidden" name="vinculo" id="net_vinculo" />
+      <input type="hidden" name="total_membros" id="net_total_membros" />
+      <input type="hidden" name="total_atividades" id="net_total_atividades" />
+      <input type="hidden" name="detalhes_familia" id="net_detalhes_familia" />
+      <input type="hidden" name="detalhes_atividades" id="net_detalhes_atividades" />
+      <input type="hidden" name="preferencias_turmas" id="net_preferencias_turmas" />
+      <input type="hidden" name="outra_sugestao" id="net_outra_sugestao" />
+      <input type="hidden" name="colaboracao_professor" id="net_colaboracao_professor" />
+      <input type="hidden" name="resumo_completo" id="net_resumo_completo" />
+
+      <!-- PASSO 1: QUEM PARTICIPA DA FAMÍLIA -->
+      <section class="section-card">
+        <div class="section-header">
+          <span class="step-num">1</span>
+          <h2>Quem participa da sua família? (Nome, Idade e Sexo)</h2>
+        </div>
+        <p class="section-sub">
+          Preencha quem da sua casa gostaria de participar das oficinas. <strong>O sexo e a idade ajudam a dimensionar as turmas Mistas, Femininas ou Masculinas.</strong>
+        </p>
+
+        <div class="family-grid" id="familyInputsContainer">
+          <!-- Renderizado via JavaScript com campos de Nome, Idade e Sexo -->
+        </div>
+
+        <div class="contact-row">
+          <div>
+            <label class="field-label" for="whatsappInput">📱 WhatsApp para Contato (Obrigatório para avisarmos quando a turma abrir):</label>
+            <input type="tel" id="whatsappInput" class="input-field" placeholder="Ex: (12) 99700-0000" required />
+          </div>
+          <div>
+            <label class="field-label">🏡 Vínculo com o Bairro Tabatinga:</label>
+            <div class="vinculo-pills" id="vinculoContainer">
+              <div class="vinculo-pill active" data-val="Morador Fixo (Lado Ubatuba)">Morador Fixo (Ubatuba)</div>
+              <div class="vinculo-pill" data-val="Morador Fixo (Lado Caraguá)">Morador Fixo (Caraguá)</div>
+              <div class="vinculo-pill" data-val="Proprietário / Veranista">Proprietário / Veranista</div>
+              <div class="vinculo-pill" data-val="Trabalha no Bairro">Trabalha no Bairro</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BARRA FLUTUANTE DE CONTAGEM -->
+      <div class="selection-bar">
+        <div class="selection-bar-text">
+          <span class="selection-bar-badge" id="selectedCountBadge">0</span>
+          <span id="selectedCountText">Nenhuma atividade marcada ainda. Toque nos bonequinhos abaixo!</span>
+        </div>
+        <button type="button" class="btn-jump" onclick="document.getElementById('finalSection').scrollIntoView({behavior:'smooth'})">
+          Ir para Enviar ao Banco ↓
+        </button>
+      </div>
+
+      <!-- PASSO 2: QUADROS DE ATIVIDADES -->
+      <section class="section-card">
+        <div class="section-header">
+          <span class="step-num">2</span>
+          <h2>Quadros de Atividades — Quem participa, Formato da Turma e Horários</h2>
+        </div>
+
+        <div class="info-banner">
+          <div>💡</div>
+          <div>
+            <strong>Como funcionam as Turmas e Valores:</strong>
+            Para cada modalidade, marque <strong>quem da família tem interesse</strong>, se prefere <strong>Turma Mista, Feminina ou Masculina</strong>, até quanto pagaria no rateio mensal (ou <strong>"🟢 Só se for Grátis"</strong> via voluntários/Prefeitura) e os melhores horários!
+          </div>
+        </div>
+
+        <div class="activities-grid" id="activitiesContainer">
+          <!-- Renderizado via JavaScript com os 12 quadros -->
+        </div>
+      </section>
+
+      <!-- PASSO 3: SUGESTÕES E GRAVAÇÃO NO BANCO -->
+      <section class="section-card" id="finalSection">
+        <div class="section-header">
+          <span class="step-num">3</span>
+          <h2>Outras Sugestões e Gravação no Banco de Dados</h2>
+        </div>
+
+        <div class="contact-row" style="border-top:none; padding-top:0;">
+          <div>
+            <label class="field-label" for="outraAtividade">✨ Sente falta de alguma outra atividade no bairro? Qual?</label>
+            <input type="text" id="outraAtividade" class="input-field" placeholder="Ex: Yoga, Capoeira, Costura, Informática, Hidroginástica..." />
+          </div>
+          <div>
+            <label class="field-label" for="profissionalInput">🤝 Alguém da família quer dar aula ou colaborar com o projeto?</label>
+            <input type="text" id="profissionalInput" class="input-field" placeholder="Ex: Sou professor de boxe / Posso ajudar na limpeza/coordenação..." />
+          </div>
+        </div>
+
+        <div class="submit-area">
+          <button type="submit" class="btn-save-database" id="btnSalvarBanco">
+            <span>💾 Gravar Ficha da Família no Banco de Dados</span>
+          </button>
+
+          <div class="secondary-actions">
+            <a href="painel_respostas.html" class="btn-secondary">
+              📊 Acessar Painel de Respostas &amp; Exportar Excel
+            </a>
+            <button type="button" class="btn-secondary" onclick="limparFormulario()">
+              🔄 Limpar Formulário
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </form>
+
+  </div>
+
+  <!-- MODAL DE CONFIRMAÇÃO DO BANCO DE DADOS -->
+  <div class="modal-backdrop" id="modalSucesso">
+    <div class="modal-box">
+      <div class="modal-icon">✅</div>
+      <h3 class="modal-title">Ficha Registrada no Banco de Dados!</h3>
+      <div class="modal-protocol" id="modalProtocoloText">Protocolo #TAB-0000</div>
+      
+      <div class="modal-desc" id="modalResumoCorpo">
+        Carregando resumo dos dados salvos...
+      </div>
+
+      <div class="modal-actions">
+        <a href="painel_respostas.html" class="btn-modal-primary">
+          📊 Visualizar no Painel de Dados do Projeto
+        </a>
+        <button type="button" class="btn-modal-outline" onclick="fecharModalENovo()">
+          ➕ Preencher Ficha de Outra Família
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // SLOTS DA FAMÍLIA COM SEXO PADRÃO
+    const FAMILY_SLOTS = [
+      { id: 'eu', label: 'Eu (Responsável)', shortDefault: 'Eu', defaultSex: 'Homem', placeholderName: 'Ex: Thiago', placeholderAge: '44' },
+      { id: 'conjuge', label: 'Cônjuge / Par', shortDefault: 'Cônjuge', defaultSex: 'Mulher', placeholderName: 'Ex: Tais', placeholderAge: '55' },
+      { id: 'filho1', label: 'Filho(a) 1', shortDefault: 'Filho 1', defaultSex: 'Homem', placeholderName: 'Nome do Filho 1', placeholderAge: '12' },
+      { id: 'filho2', label: 'Filho(a) 2', shortDefault: 'Filho 2', defaultSex: 'Mulher', placeholderName: 'Nome do Filho 2', placeholderAge: '9' },
+      { id: 'filho3', label: 'Filho(a) 3', shortDefault: 'Filho 3', defaultSex: 'Homem', placeholderName: 'Nome do Filho 3', placeholderAge: '6' },
+      { id: 'idoso', label: 'Idoso / Outro', shortDefault: 'Idoso/Outro', defaultSex: 'Mulher', placeholderName: 'Ex: Avô / Avó', placeholderAge: '68' }
+    ];
+
+    // AS 12 ATIVIDADES
+    const ACTIVITIES = [
+      {
+        id: 'futebol',
+        title: '1. Futebol & Futsal',
+        sub: 'Infantil, Juvenil e Adulto • Quadra / Campo',
+        badge: 'Grátis ou R$ 30–70',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 30/mês', 'Até R$ 50/mês', 'Até R$ 70/mês']
+      },
+      {
+        id: 'volei',
+        title: '2. Vôlei de Praia & Adaptado (60+)',
+        sub: 'Jovens, Adultos e Melhor Idade • Praia / Quadra',
+        badge: 'Grátis ou R$ 35–80',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 35/mês', 'Até R$ 55/mês', 'Até R$ 80/mês']
+      },
+      {
+        id: 'boxe',
+        title: '3. Boxe Educativo / Defesa Pessoal',
+        sub: 'Sem tatame/kimono • Disciplina, Foco e Saúde',
+        badge: 'Grátis ou R$ 40–90',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 40/mês', 'Até R$ 65/mês', 'Até R$ 90/mês']
+      },
+      {
+        id: 'funcional',
+        title: '4. Funcional, Alongamento & Mobilidade',
+        sub: 'Fortalecimento, Postura e Alívio de Dores',
+        badge: 'Grátis ou R$ 35–85',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 35/mês', 'Até R$ 60/mês', 'Até R$ 85/mês']
+      },
+      {
+        id: 'danca',
+        title: '5. Dança, Ritmos & Zumba',
+        sub: 'Turma Coletiva (até 30 alunos) • Alegria e Cardio',
+        badge: 'Grátis ou R$ 25–60',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 25/mês', 'Até R$ 40/mês', 'Até R$ 60/mês']
+      },
+      {
+        id: 'coral',
+        title: '6. Canto Coral Comunitário',
+        sub: 'Custo Zero de Material • Respiração e Memória',
+        badge: 'Grátis ou R$ 25–55',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 25/mês', 'Até R$ 40/mês', 'Até R$ 55/mês']
+      },
+      {
+        id: 'violao',
+        title: '7. Violão & Ukulele (Iniciação)',
+        sub: 'Turma Reduzida (6 a 8 alunos) • Temos 4 instrumentos!',
+        badge: 'Grátis ou R$ 50–110',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 50/mês', 'Até R$ 80/mês', 'Até R$ 110/mês']
+      },
+      {
+        id: 'teatro',
+        title: '8. Teatro, Expressão & Desenho',
+        sub: 'Criatividade, Desinibição e Artes Visuais',
+        badge: 'Grátis ou R$ 35–75',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 35/mês', 'Até R$ 55/mês', 'Até R$ 75/mês']
+      },
+      {
+        id: 'leitura',
+        title: '9. Tabatinga Lê & Brinca + Xadrez',
+        sub: 'Clube do Livro, Raciocínio Lógico e Jogos de Tabuleiro',
+        badge: '100% Gratuito ou Apoio',
+        prices: ['🟢 Gratuito (Voluntário)', 'Apoio R$ 15/mês', 'Apoio R$ 25/mês', 'Apoio R$ 35/mês']
+      },
+      {
+        id: 'ingles',
+        title: '10. Inglês Prático (Conversação)',
+        sub: 'Turma Reduzida (6 a 8 alunos) • Viagens, Jovens e Comércio',
+        badge: 'Grátis ou R$ 55–120',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 55/mês', 'Até R$ 85/mês', 'Até R$ 120/mês']
+      },
+      {
+        id: 'espanhol',
+        title: '11. Espanhol Prático (Turismo/Conversa)',
+        sub: 'Turma Reduzida (6 a 8 alunos) • Recepção de Turistas',
+        badge: 'Grátis ou R$ 55–120',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 55/mês', 'Até R$ 85/mês', 'Até R$ 120/mês']
+      },
+      {
+        id: 'reforco',
+        title: '12. Reforço Escolar & Apoio Pedagógico',
+        sub: 'Português, Matemática e Ajuda na Lição de Casa',
+        badge: 'Grátis ou R$ 35–80',
+        prices: ['🟢 Só se for Grátis', 'Até R$ 35/mês', 'Até R$ 55/mês', 'Até R$ 80/mês']
+      }
+    ];
+
+    const SCHED_OPTIONS = ['1x/sem', '2x/sem', 'Seg/Qua', 'Ter/Qui', 'Sábado', 'Manhã', 'Tarde', 'Noite'];
+
+    // ESTADO DA APLICAÇÃO
+    const state = {
+      vinculo: 'Morador Fixo (Lado Ubatuba)',
+      family: {},
+      activities: {}
+    };
+
+    FAMILY_SLOTS.forEach(s => {
+      state.family[s.id] = { name: '', age: '', sexo: s.defaultSex };
+    });
+
+    ACTIVITIES.forEach(a => {
+      state.activities[a.id] = {
+        members: [],
+        turmaFormat: 'Mista', // Mista, Feminina, Masculina
+        price: '',
+        schedules: [],
+        preferredTime: ''
+      };
+    });
+
+    function getEmojiForMember(slotId) {
+      const sexo = state.family[slotId]?.sexo || 'Outro';
+      if (sexo === 'Mulher') {
+        if (slotId === 'filho2' || slotId === 'filho3') return '👧';
+        if (slotId === 'idoso') return '👵';
+        return '👩';
+      }
+      if (sexo === 'Homem') {
+        if (slotId === 'filho1' || slotId === 'filho3') return '🧒';
+        if (slotId === 'idoso') return '👴';
+        return '👨';
+      }
+      return '🧑';
+    }
+
+    // PASSO 1: RENDERIZAR INPUTS DA FAMÍLIA COM SEXO
+    function renderFamilyInputs() {
+      const container = document.getElementById('familyInputsContainer');
+      container.innerHTML = FAMILY_SLOTS.map(slot => `
+        <div class="member-input-card">
+          <div class="member-top">
+            <div class="member-avatar-mini" id="avatar_mini_${slot.id}">${getEmojiForMember(slot.id)}</div>
+            <div>
+              <div class="member-role-title">${slot.label}</div>
+              <div class="member-role-hint">Aparece nos quadros de atividades</div>
+            </div>
+          </div>
+
+          <div class="member-fields">
+            <input
+              type="text"
+              class="input-field"
+              placeholder="${slot.placeholderName}"
+              value="${state.family[slot.id].name}"
+              oninput="updateFamilyMember('${slot.id}', 'name', this.value)"
+              id="input_name_${slot.id}"
+            />
+            <input
+              type="number"
+              min="0"
+              max="115"
+              class="input-field"
+              placeholder="Idade (${slot.placeholderAge})"
+              value="${state.family[slot.id].age}"
+              oninput="updateFamilyMember('${slot.id}', 'age', this.value)"
+              id="input_age_${slot.id}"
+            />
+          </div>
+
+          <div class="sex-selector-row">
+            <span class="sex-label">Sexo / Gênero:</span>
+            <div class="sex-pills">
+              <div
+                class="sex-pill ${state.family[slot.id].sexo === 'Mulher' ? 'active' : ''}"
+                data-sex="Mulher"
+                onclick="setMemberSex('${slot.id}', 'Mulher')"
+              >👩 Mulher</div>
+              <div
+                class="sex-pill ${state.family[slot.id].sexo === 'Homem' ? 'active' : ''}"
+                data-sex="Homem"
+                onclick="setMemberSex('${slot.id}', 'Homem')"
+              >👨 Homem</div>
+              <div
+                class="sex-pill ${state.family[slot.id].sexo === 'Outro' ? 'active' : ''}"
+                data-sex="Outro"
+                onclick="setMemberSex('${slot.id}', 'Outro')"
+              >⚧️ Outro</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // PASSO 2: RENDERIZAR OS 12 QUADROS COM FORMATO DE TURMA
+    function renderActivities() {
+      const container = document.getElementById('activitiesContainer');
+      container.innerHTML = ACTIVITIES.map(act => `
+        <div class="act-card" id="card_${act.id}">
+          <div class="act-header">
+            <div>
+              <div class="act-title">${act.title}</div>
+              <div class="act-sub">${act.sub}</div>
+            </div>
+            <span class="act-price-tag">${act.badge}</span>
+          </div>
+
+          <div class="act-body">
+            <!-- 1. Bonequinhos da Família -->
+            <div>
+              <div class="block-label">
+                <span>1. Quem da família tem interesse?</span>
+              </div>
+              <div class="figures-grid">
+                ${FAMILY_SLOTS.map(slot => `
+                  <div
+                    class="figure-btn"
+                    id="fig_${act.id}_${slot.id}"
+                    onclick="toggleMemberInActivity('${act.id}', '${slot.id}')"
+                    title="Clique para marcar ${slot.label}"
+                  >
+                    <span class="fig-emoji" id="fig_emoji_${act.id}_${slot.id}">${getEmojiForMember(slot.id)}</span>
+                    <span class="fig-role" data-fig-role="${slot.id}">${state.family[slot.id].name || slot.shortDefault}</span>
+                    <span class="fig-info-sub" data-fig-sub="${slot.id}">
+                      ${state.family[slot.id].age ? state.family[slot.id].age + 'a' : '—'}
+                    </span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 2. Formato da Turma: Mista, Feminina ou Masculina -->
+            <div class="turma-format-row">
+              <div class="block-label" style="margin-bottom:2px;">
+                <span>2. Formato da Turma Preferido:</span>
+              </div>
+              <div class="turma-pills">
+                <div
+                  class="turma-pill ${state.activities[act.id].turmaFormat === 'Mista' ? 'active' : ''}"
+                  data-format="Mista"
+                  id="turma_${act.id}_Mista"
+                  onclick="selectTurmaFormat('${act.id}', 'Mista')"
+                >👥 Mista</div>
+                <div
+                  class="turma-pill ${state.activities[act.id].turmaFormat === 'Feminina' ? 'active' : ''}"
+                  data-format="Feminina"
+                  id="turma_${act.id}_Feminina"
+                  onclick="selectTurmaFormat('${act.id}', 'Feminina')"
+                >👩 Feminina</div>
+                <div
+                  class="turma-pill ${state.activities[act.id].turmaFormat === 'Masculina' ? 'active' : ''}"
+                  data-format="Masculina"
+                  id="turma_${act.id}_Masculina"
+                  onclick="selectTurmaFormat('${act.id}', 'Masculina')"
+                >👨 Masculina</div>
+              </div>
+            </div>
+
+            <!-- 3. Faixa de Valor (sempre com Grátis) -->
+            <div>
+              <div class="block-label">
+                <span>3. Até quanto pagaria por mês (por pessoa)?</span>
+              </div>
+              <div class="price-options">
+                ${act.prices.map((p, idx) => `
+                  <div
+                    class="price-pill ${idx === 0 ? 'free-option' : ''} ${state.activities[act.id].price === p ? 'active' : ''}"
+                    id="price_${act.id}_${idx}"
+                    onclick="selectPrice('${act.id}', '${p}', ${idx}, ${act.prices.length})"
+                  >
+                    ${p}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- 4. Dias e Horários -->
+            <div>
+              <div class="block-label">
+                <span>4. Dias e período de preferência:</span>
+              </div>
+              <div class="sched-pills">
+                ${SCHED_OPTIONS.map((sch, sIdx) => `
+                  <div
+                    class="sched-pill ${state.activities[act.id].schedules.includes(sch) ? 'active' : ''}"
+                    id="sched_${act.id}_${sIdx}"
+                    onclick="toggleSchedule('${act.id}', '${sch}', ${sIdx})"
+                  >
+                    ${sch}
+                  </div>
+                `).join('')}
+              </div>
+              <div class="time-input-row">
+                <span>⏰ Horário ideal:</span>
+                <input
+                  type="text"
+                  placeholder="Ex: 18h30, 08h00, após a escola..."
+                  value="${state.activities[act.id].preferredTime}"
+                  oninput="updatePreferredTime('${act.id}', this.value)"
+                  id="time_${act.id}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ATUALIZAÇÃO DO SEXO DO MEMBRO
+    function setMemberSex(slotId, sexo) {
+      state.family[slotId].sexo = sexo;
+      renderFamilyInputs();
+      updateAvatarsInCards(slotId);
+    }
+
+    function updateFamilyMember(slotId, field, value) {
+      state.family[slotId][field] = value.trim();
+      const slotMeta = FAMILY_SLOTS.find(s => s.id === slotId);
+      const displayName = state.family[slotId].name || slotMeta.shortDefault;
+      const displaySub = state.family[slotId].age ? `${state.family[slotId].age}a` : '—';
+
+      document.querySelectorAll(`[data-fig-role="${slotId}"]`).forEach(el => {
+        el.textContent = displayName;
+      });
+      document.querySelectorAll(`[data-fig-sub="${slotId}"]`).forEach(el => {
+        el.textContent = displaySub;
+      });
+    }
+
+    function updateAvatarsInCards(slotId) {
+      const emoji = getEmojiForMember(slotId);
+      ACTIVITIES.forEach(act => {
+        const el = document.getElementById(`fig_emoji_${act.id}_${slotId}`);
+        if (el) el.textContent = emoji;
+      });
+    }
+
+    // SELEÇÃO DO FORMATO DA TURMA
+    function selectTurmaFormat(actId, formato) {
+      state.activities[actId].turmaFormat = formato;
+      ['Mista', 'Feminina', 'Masculina'].forEach(f => {
+        const pill = document.getElementById(`turma_${actId}_${f}`);
+        if (pill) pill.classList.toggle('active', f === formato);
+      });
+      refreshCardState(actId);
+    }
+
+    function toggleMemberInActivity(actId, slotId) {
+      const arr = state.activities[actId].members;
+      const idx = arr.indexOf(slotId);
+      const btn = document.getElementById(`fig_${actId}_${slotId}`);
+
+      if (idx === -1) {
+        arr.push(slotId);
+        btn.classList.add('active');
+        if (!state.activities[actId].price) {
+          const actObj = ACTIVITIES.find(a => a.id === actId);
+          selectPrice(actId, actObj.prices[0], 0, actObj.prices.length);
+        }
+      } else {
+        arr.splice(idx, 1);
+        btn.classList.remove('active');
+      }
+
+      refreshCardState(actId);
+      refreshSelectionCounter();
+    }
+
+    function selectPrice(actId, priceLabel, chosenIdx, totalPrices) {
+      state.activities[actId].price = priceLabel;
+      for (let i = 0; i < totalPrices; i++) {
+        const el = document.getElementById(`price_${actId}_${i}`);
+        if (el) el.classList.toggle('active', i === chosenIdx);
+      }
+      refreshCardState(actId);
+    }
+
+    function toggleSchedule(actId, schedLabel, sIdx) {
+      const arr = state.activities[actId].schedules;
+      const idx = arr.indexOf(schedLabel);
+      const el = document.getElementById(`sched_${actId}_${sIdx}`);
+
+      if (idx === -1) {
+        arr.push(schedLabel);
+        el.classList.add('active');
+      } else {
+        arr.splice(idx, 1);
+        el.classList.remove('active');
+      }
+      refreshCardState(actId);
+    }
+
+    function updatePreferredTime(actId, val) {
+      state.activities[actId].preferredTime = val.trim();
+    }
+
+    function refreshCardState(actId) {
+      const card = document.getElementById(`card_${actId}`);
+      const hasMembers = state.activities[actId].members.length > 0;
+      card.classList.toggle('selected', hasMembers);
+    }
+
+    function refreshSelectionCounter() {
+      let activeActivities = 0;
+      let totalParticipations = 0;
+
+      ACTIVITIES.forEach(a => {
+        const count = state.activities[a.id].members.length;
+        if (count > 0) {
+          activeActivities++;
+          totalParticipations += count;
+        }
+      });
+
+      document.getElementById('selectedCountBadge').textContent = activeActivities;
+      const textEl = document.getElementById('selectedCountText');
+      if (activeActivities === 0) {
+        textEl.textContent = 'Nenhuma atividade marcada ainda. Toque nos bonequinhos abaixo!';
+      } else {
+        textEl.textContent = `${activeActivities} atividade(s) selecionada(s) (${totalParticipations} vaga(s) na família)`;
+      }
+    }
+
+    // VÍNCULO
+    document.getElementById('vinculoContainer').addEventListener('click', (e) => {
+      const pill = e.target.closest('.vinculo-pill');
+      if (!pill) return;
+      document.querySelectorAll('.vinculo-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      state.vinculo = pill.dataset.val;
+    });
+
+    // COMPILAR DADOS DA PESQUISA PARA O BANCO DE DADOS
+    function prepararPayload() {
+      const whatsapp = document.getElementById('whatsappInput').value.trim();
+      const outra = document.getElementById('outraAtividade').value.trim();
+      const prof = document.getElementById('profissionalInput').value.trim();
+
+      const membrosArray = [];
+      FAMILY_SLOTS.forEach(slot => {
+        const info = state.family[slot.id];
+        if (info.name || info.age) {
+          membrosArray.push({
+            parentesco: slot.shortDefault,
+            nome: info.name || '(Sem nome)',
+            idade: info.age ? parseInt(info.age, 10) : null,
+            sexo: info.sexo || 'Outro'
+          });
+        }
+      });
+
+      const atividadesArray = [];
+      let totalVagas = 0;
+
+      ACTIVITIES.forEach(act => {
+        const st = state.activities[act.id];
+        if (st.members.length > 0) {
+          totalVagas += st.members.length;
+          const inscritos = st.members.map(mId => {
+            const fInfo = state.family[mId];
+            const meta = FAMILY_SLOTS.find(s => s.id === mId);
+            return {
+              slot: mId,
+              label: meta.shortDefault,
+              nome: fInfo.name || meta.shortDefault,
+              idade: fInfo.age || null,
+              sexo: fInfo.sexo || 'Outro'
+            };
+          });
+
+          atividadesArray.push({
+            id: act.id,
+            titulo: act.title,
+            formatoTurma: st.turmaFormat, // Mista, Feminina, Masculina
+            valor: st.price || 'Grátis',
+            dias: st.schedules.length ? st.schedules.join(', ') : 'A combinar',
+            horarioPreferido: st.preferredTime || '',
+            alunos: inscritos
+          });
+        }
+      });
+
+      const agora = new Date();
+      const protocolo = 'TAB-' + agora.getFullYear() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+      return {
+        protocolo: protocolo,
+        data_envio: agora.toLocaleString('pt-BR'),
+        timestamp: agora.getTime(),
+        whatsapp: whatsapp,
+        vinculo: state.vinculo,
+        total_membros: membrosArray.length,
+        total_atividades: atividadesArray.length,
+        total_vagas: totalVagas,
+        membros: membrosArray,
+        atividades: atividadesArray,
+        outra_sugestao: outra,
+        colaboracao_professor: prof
+      };
+    }
+
+    // SUBMETER AO BANCO DE DADOS (NETLIFY FORMS + LOCALSTORAGE)
+    async function submeterPesquisaAoBanco() {
+      const whatsapp = document.getElementById('whatsappInput').value.trim();
+      if (!whatsapp) {
+        alert('Por favor, informe seu WhatsApp de contato para podermos avisar quando a turma abrir!');
+        document.getElementById('whatsappInput').focus();
+        return;
+      }
+
+      const payload = prepararPayload();
+      if (payload.total_atividades === 0) {
+        alert('Por favor, escolha pelo menos 1 atividade tocando nos bonequinhos da sua família antes de salvar!');
+        document.getElementById('activitiesContainer').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      const btn = document.getElementById('btnSalvarBanco');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Gravando no Banco de Dados...</span>';
+
+      // 1. Salvar no Banco Local (localStorage) imediatamente
+      salvarNoBancoLocal(payload);
+
+      // 2. Preencher os campos ocultos do Netlify Form
+      document.getElementById('net_protocolo').value = payload.protocolo;
+      document.getElementById('net_data_envio').value = payload.data_envio;
+      document.getElementById('net_whatsapp').value = payload.whatsapp;
+      document.getElementById('net_vinculo').value = payload.vinculo;
+      document.getElementById('net_total_membros').value = payload.total_membros;
+      document.getElementById('net_total_atividades').value = payload.total_atividades;
+      document.getElementById('net_detalhes_familia').value = JSON.stringify(payload.membros);
+      document.getElementById('net_detalhes_atividades').value = JSON.stringify(payload.atividades);
+      document.getElementById('net_preferencias_turmas').value = payload.atividades.map(a => `${a.titulo}: ${a.formatoTurma}`).join('; ');
+      document.getElementById('net_outra_sugestao').value = payload.outra_sugestao;
+      document.getElementById('net_colaboracao_professor').value = payload.colaboracao_professor;
+      document.getElementById('net_resumo_completo').value = gerarResumoTextoFormatado(payload);
+
+      // 3. Submeter ao Netlify Forms via AJAX se estiver hospedado
+      try {
+        const formData = new FormData(document.getElementById('formPesquisaTabatinga'));
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        });
+      } catch (err) {
+        console.log('Envio ao Netlify Forms (modo local ou rede restrita), garantido no banco local:', err);
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<span>💾 Gravar Ficha da Família no Banco de Dados</span>';
+
+      // 4. Exibir Modal de Sucesso com o Protocolo
+      exibirModalSucesso(payload);
+    }
+
+    function salvarNoBancoLocal(payload) {
+      const banco = JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+      // Adiciona no topo
+      banco.unshift(payload);
+      localStorage.setItem('tabatinga_banco_pesquisas', JSON.stringify(banco));
+    }
+
+    function gerarResumoTextoFormatado(p) {
+      let txt = `PROTOCOLO: ${p.protocolo}\nDATA: ${p.data_envio}\nWHATSAPP: ${p.whatsapp}\nVÍNCULO: ${p.vinculo}\n\n`;
+      txt += `FAMÍLIA:\n`;
+      p.membros.forEach(m => {
+        txt += `• ${m.parentesco}: ${m.nome} (${m.idade || '?'} anos, ${m.sexo})\n`;
+      });
+      txt += `\nATIVIDADES:\n`;
+      p.atividades.forEach(a => {
+        const alunosStr = a.alunos.map(al => `${al.nome} [${al.sexo}]`).join(', ');
+        txt += `📌 ${a.titulo} | Turma: ${a.formatoTurma} | ${a.valor}\n   Alunos: ${alunosStr}\n   Dias: ${a.dias} ${a.horarioPreferido}\n\n`;
+      });
+      if (p.outra_sugestao) txt += `OUTRA ATIVIDADE: ${p.outra_sugestao}\n`;
+      if (p.colaboracao_professor) txt += `COLABORAÇÃO: ${p.colaboracao_professor}\n`;
+      return txt;
+    }
+
+    function exibirModalSucesso(p) {
+      document.getElementById('modalProtocoloText').textContent = `Protocolo Oficial #${p.protocolo}`;
+      
+      let html = `<p><strong>WhatsApp Cadastrado:</strong> ${p.whatsapp}</p>`;
+      html += `<p><strong>Vínculo:</strong> ${p.vinculo}</p>`;
+      html += `<p style="margin-top:8px;"><strong>Membros da Família (${p.membros.length}):</strong><br>`;
+      html += p.membros.map(m => `• ${m.nome} (${m.idade ? m.idade + 'a, ' : ''}${m.sexo})`).join('<br>') || '—';
+      html += `</p>`;
+
+      html += `<p style="margin-top:10px;"><strong>Atividades Escolhidas (${p.atividades.length}):</strong><br>`;
+      html += p.atividades.map(a => {
+        const alunos = a.alunos.map(al => al.nome).join(', ');
+        return `• <strong>${a.titulo}</strong> (Turma <em>${a.formatoTurma}</em>) — Alunos: ${alunos} [${a.valor}]`;
+      }).join('<br>');
+      html += `</p>`;
+
+      document.getElementById('modalResumoCorpo').innerHTML = html;
+      document.getElementById('modalSucesso').style.display = 'flex';
+    }
+
+    function fecharModalENovo() {
+      document.getElementById('modalSucesso').style.display = 'none';
+      limparFormulario();
+    }
+
+    function limparFormulario() {
+      document.getElementById('whatsappInput').value = '';
+      document.getElementById('outraAtividade').value = '';
+      document.getElementById('profissionalInput').value = '';
+
+      FAMILY_SLOTS.forEach(s => {
+        state.family[s.id] = { name: '', age: '', sexo: s.defaultSex };
+      });
+      ACTIVITIES.forEach(a => {
+        state.activities[a.id] = { members: [], turmaFormat: 'Mista', price: '', schedules: [], preferredTime: '' };
+      });
+
+      renderFamilyInputs();
+      renderActivities();
+      refreshSelectionCounter();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // INICIALIZAÇÃO
+    renderFamilyInputs();
+    renderActivities();
+    refreshSelectionCounter();
+  </script>
+</body>
+</html>
