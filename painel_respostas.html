@@ -423,47 +423,194 @@
       font-size: 40px;
       margin-bottom: 8px;
     }
+
+    /* TELA DE LOGIN EXCLUSIVA DA COORDENAÇÃO */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, #0f4c5c, #072a33 75%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 38px 32px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      animation: loginFadeIn 0.3s ease-out;
+    }
+    @keyframes loginFadeIn {
+      from { opacity: 0; transform: translateY(-15px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .login-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .login-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 23px;
+      font-weight: 800;
+      color: #072a33;
+      margin-bottom: 6px;
+    }
+    .login-subtitle {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 22px;
+      line-height: 1.45;
+    }
+    .login-input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #cbd5e1;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .login-input:focus {
+      border-color: #0f4c5c;
+      box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.2);
+    }
+    .login-error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #b91c1c;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: none;
+      text-align: left;
+    }
+    .btn-login-submit {
+      width: 100%;
+      padding: 13px 18px;
+      background: #0f4c5c;
+      color: #fff;
+      font-weight: 800;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-login-submit:hover {
+      background: #072a33;
+    }
+    .btn-login-submit:active {
+      transform: scale(0.98);
+    }
+    .login-back-link {
+      margin-top: 18px;
+      display: block;
+      font-size: 12.5px;
+      color: #64748b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .login-back-link:hover {
+      color: #0f4c5c;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
-  <!-- TOP NAV -->
-  <nav class="top-nav">
-    <div class="brand-title">
-      <span>🌱 Tabatinga Viva</span>
-      <span class="brand-badge">Painel do Banco de Dados</span>
-    </div>
-    <div class="nav-actions">
-      <a href="pesquisa_online.html" class="nav-btn primary">➕ Nova Pesquisa Online</a>
-      <a href="ficha_pesquisa_imprimir.html" target="_blank" class="nav-btn">🖨️ Ficha A4</a>
-      <a href="cartaz_comercios_qrcode.html" target="_blank" class="nav-btn">📌 Cartaz QR</a>
-      <a href="https://app.netlify.com/projects/tabatinga-viva/forms" target="_blank" class="nav-btn">☁️ Netlify Forms</a>
-    </div>
-  </nav>
+  <!-- TELA DE LOGIN EXCLUSIVA DA COORDENAÇÃO -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-card">
+      <div class="login-badge">🌱 Tabatinga Viva • Acesso Restrito</div>
+      <h2 class="login-title">🔐 Painel da Coordenação</h2>
+      <p class="login-subtitle">Área de acesso exclusivo para coordenadores e gestores do Projeto Piloto da Tabatinga.</p>
 
-  <div class="container">
+      <form id="adminLoginForm" onsubmit="event.preventDefault(); fazerLoginAdmin();">
+        <div style="text-align:left; margin-bottom:14px;">
+          <label style="display:block; font-size:12px; font-weight:700; color:#475569; margin-bottom:6px;">Senha de Administrador:</label>
+          <input
+            type="password"
+            id="adminPassInput"
+            class="login-input"
+            placeholder="Digite a senha de acesso"
+            autocomplete="current-password"
+            required
+            autofocus
+          />
+        </div>
 
-    <!-- BARRA DE AÇÃO PRINCIPAL -->
-    <div class="action-bar">
-      <div class="action-title">
-        <h1>Banco de Dados das Famílias &amp; Demandas</h1>
-        <p>Visão consolidada de todas as respostas coletadas via site, celular e QR Code nos comércios.</p>
-        <div id="cloudStatusIndicator" style="font-size:12px; font-weight:700; color:#15803d; margin-top:4px;">
-          🟢 Sincronização em tempo real ativa com o Netlify
+        <div style="text-align:left; margin-bottom:16px; font-size:12.5px; color:#475569; display:flex; align-items:center; gap:8px;">
+          <input type="checkbox" id="chkLembrarLogin" style="width:16px; height:16px; cursor:pointer;" checked />
+          <label for="chkLembrarLogin" style="cursor:pointer;">Lembrar login neste navegador</label>
+        </div>
+
+        <div id="loginErrorMsg" class="login-error"></div>
+
+        <button type="submit" class="btn-login-submit" id="btnLoginSubmit">
+          🔓 Entrar no Painel
+        </button>
+
+        <a href="index.html" class="login-back-link">← Voltar ao Site Oficial do Projeto</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO DO PAINEL (Oculto até autenticar com senha) -->
+  <div id="painelContent" style="display:none;">
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+      <div class="brand-title">
+        <span>🌱 Tabatinga Viva</span>
+        <span class="brand-badge">Área da Coordenação</span>
+      </div>
+      <div class="nav-actions">
+        <a href="pesquisa_online.html" target="_blank" class="nav-btn primary">➕ Abrir Pesquisa</a>
+        <a href="ficha_pesquisa_imprimir.html" target="_blank" class="nav-btn">🖨️ Ficha A4</a>
+        <a href="cartaz_comercios_qrcode.html" target="_blank" class="nav-btn">📌 Cartaz QR</a>
+        <a href="https://app.netlify.com/projects/tabatinga-viva/forms" target="_blank" class="nav-btn">☁️ Netlify Forms</a>
+        <button type="button" class="nav-btn" style="background:#fee2e2; color:#991b1b; border:1px solid #fecaca; cursor:pointer;" onclick="logoutAdmin()">🚪 Sair</button>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!-- BARRA DE AÇÃO PRINCIPAL -->
+      <div class="action-bar">
+        <div class="action-title">
+          <h1>Banco de Dados das Famílias &amp; Demandas</h1>
+          <p>Visão consolidada de todas as respostas coletadas via site, celular e QR Code nos comércios.</p>
+          <div id="cloudStatusIndicator" style="font-size:12px; font-weight:700; color:#15803d; margin-top:4px;">
+            🟢 Sincronização em tempo real ativa com o Netlify
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button type="button" class="btn-action excel" onclick="exportarExcelCSV()">
+            📥 Exportar para Excel / CSV
+          </button>
+          <button type="button" class="btn-action outline" id="btnLimparBanco" style="color:#b91c1c; border-color:#fca5a5;" onclick="limparBancoConfirm()">
+            🧹 Limpar Dados de Teste (Nuvem)
+          </button>
         </div>
       </div>
-      <div class="action-buttons">
-        <button type="button" class="btn-action excel" onclick="exportarExcelCSV()">
-          📥 Exportar para Excel / CSV
-        </button>
-        <button type="button" class="btn-action outline" onclick="carregarDadosExemplo()">
-          🎲 Gerar 5 Respostas Exemplo
-        </button>
-        <button type="button" class="btn-action outline" onclick="limparBancoConfirm()">
-          🗑️ Limpar Banco
-        </button>
-      </div>
-    </div>
 
     <!-- CARDS DE MÉTRICAS / KPIS -->
     <div class="metrics-grid">
@@ -626,6 +773,8 @@
     </div>
   </div>
 
+  </div> <!-- /#painelContent -->
+
   <script>
     const ATIVIDADES_LISTA = [
       '1. Futebol & Futsal',
@@ -642,6 +791,111 @@
       '12. Reforço Escolar & Apoio Pedagógico'
     ];
 
+    const ADMIN_STORAGE_KEY = 'tabatinga_admin_token';
+
+    function getAdminToken() {
+      return sessionStorage.getItem(ADMIN_STORAGE_KEY) || localStorage.getItem(ADMIN_STORAGE_KEY) || '';
+    }
+
+    function setAdminToken(token, persistir) {
+      if (persistir) {
+        localStorage.setItem(ADMIN_STORAGE_KEY, token);
+      }
+      sessionStorage.setItem(ADMIN_STORAGE_KEY, token);
+    }
+
+    function logoutAdmin() {
+      if (confirm('Deseja realmente sair da área de coordenação?')) {
+        sessionStorage.removeItem(ADMIN_STORAGE_KEY);
+        localStorage.removeItem(ADMIN_STORAGE_KEY);
+        window.location.reload();
+      }
+    }
+
+    async function verificarAutenticacao() {
+      const token = getAdminToken();
+      const loginOverlay = document.getElementById('loginOverlay');
+      const painelContent = document.getElementById('painelContent');
+
+      if (!token) {
+        if (loginOverlay) loginOverlay.style.display = 'flex';
+        if (painelContent) painelContent.style.display = 'none';
+        return false;
+      }
+
+      // Valida token com o backend
+      try {
+        const res = await fetch('/api/gerenciar-respostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verify_token', token: token })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          if (loginOverlay) loginOverlay.style.display = 'none';
+          if (painelContent) painelContent.style.display = 'block';
+          return true;
+        } else {
+          sessionStorage.removeItem(ADMIN_STORAGE_KEY);
+          localStorage.removeItem(ADMIN_STORAGE_KEY);
+          if (loginOverlay) loginOverlay.style.display = 'flex';
+          if (painelContent) painelContent.style.display = 'none';
+          return false;
+        }
+      } catch (e) {
+        // Fallback em caso de indisponibilidade momentânea
+        if (loginOverlay) loginOverlay.style.display = 'none';
+        if (painelContent) painelContent.style.display = 'block';
+        return true;
+      }
+    }
+
+    async function fazerLoginAdmin() {
+      const passInput = document.getElementById('adminPassInput');
+      const pass = passInput.value.trim();
+      const errorMsg = document.getElementById('loginErrorMsg');
+      const btnSubmit = document.getElementById('btnLoginSubmit');
+      const lembrarCheckbox = document.getElementById('chkLembrarLogin');
+
+      if (!pass) return;
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = 'Verificando...';
+      if (errorMsg) errorMsg.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/gerenciar-respostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', password: pass })
+        });
+        const data = await res.json();
+
+        if (data.ok && data.token) {
+          setAdminToken(data.token, lembrarCheckbox && lembrarCheckbox.checked);
+          document.getElementById('loginOverlay').style.display = 'none';
+          document.getElementById('painelContent').style.display = 'block';
+          sincronizarComNuvemNetlify();
+          setInterval(sincronizarComNuvemNetlify, 6000);
+        } else {
+          if (errorMsg) {
+            errorMsg.textContent = '⚠️ ' + (data.error || 'Senha incorreta.');
+            errorMsg.style.display = 'block';
+          }
+          passInput.focus();
+          passInput.select();
+        }
+      } catch (err) {
+        if (errorMsg) {
+          errorMsg.textContent = '⚠️ Erro ao validar login. Tente novamente.';
+          errorMsg.style.display = 'block';
+        }
+      } finally {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = '🔓 Entrar no Painel';
+      }
+    }
+
     let bancoEmMemoria = [];
 
     function carregarBanco() {
@@ -655,23 +909,17 @@
     }
 
     async function sincronizarComNuvemNetlify() {
+      if (!getAdminToken()) return;
+
       try {
         const res = await fetch('/api/resumo-tempo-real');
         if (res.ok) {
           const json = await res.json();
           if (json.ok && json.data) {
             const cloudSubs = json.data.submissoes_completas || [];
-            const localSubs = JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+            bancoEmMemoria = cloudSubs;
+            localStorage.setItem('tabatinga_banco_pesquisas', JSON.stringify(cloudSubs));
 
-            const mapa = new Map();
-            cloudSubs.forEach(item => mapa.set(item.protocolo, item));
-            localSubs.forEach(item => {
-              if (!mapa.has(item.protocolo)) {
-                mapa.set(item.protocolo, item);
-              }
-            });
-
-            bancoEmMemoria = Array.from(mapa.values());
             atualizarMetricasERanking();
             renderizarTabela();
 
@@ -891,17 +1139,17 @@
               ${!f.outra_sugestao && !f.colaboracao_professor ? '—' : ''}
             </td>
             <td>
-              <button type="button" class="btn-table" onclick="abrirDetalhes(${idx})">Ver Ficha</button>
-              <button type="button" class="btn-table" style="color:#b91c1c; margin-top:4px;" onclick="excluirRegistro(${idx})">Excluir</button>
+              <button type="button" class="btn-table" onclick="abrirDetalhes('${f.protocolo}')">👁️ Ver Ficha</button>
+              <button type="button" class="btn-table" style="color:#b91c1c; border-color:#fca5a5; margin-top:4px;" onclick="excluirRegistro('${f.protocolo}', '${f.id || ''}')">🗑️ Excluir</button>
             </td>
           </tr>
         `;
       }).join('');
     }
 
-    function abrirDetalhes(idx) {
+    function abrirDetalhes(protocolo) {
       const banco = carregarBanco();
-      const f = banco[idx];
+      const f = banco.find(item => item.protocolo === protocolo);
       if (!f) return;
 
       document.getElementById('detProtocolo').textContent = `Ficha #${f.protocolo} — ${f.data_envio}`;
@@ -932,20 +1180,94 @@
       document.getElementById('modalDetalhes').style.display = 'flex';
     }
 
-    function excluirRegistro(idx) {
-      if (!confirm('Tem certeza que deseja excluir este registro do banco de dados?')) return;
+    async function excluirRegistro(protocolo, netlifyId) {
       const banco = carregarBanco();
-      banco.splice(idx, 1);
-      salvarBanco(banco);
+      const f = banco.find(item => item.protocolo === protocolo || (netlifyId && item.id === netlifyId));
+      if (!f) return;
+
+      const identificacao = f.whatsapp || f.protocolo || 'esta ficha';
+      if (!confirm(`⚠️ Deseja realmente excluir permanentemente a resposta de "${identificacao}" da nuvem?\n\nProtocolo: #${f.protocolo}\nEsta ação apagará o registro do Netlify Forms e atualizará as métricas do projeto.`)) {
+        return;
+      }
+
+      const idParaExcluir = netlifyId || f.id;
+      if (idParaExcluir) {
+        try {
+          const res = await fetch('/api/gerenciar-respostas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'delete_one',
+              submission_id: idParaExcluir,
+              token: getAdminToken()
+            })
+          });
+          const data = await res.json();
+          if (!data.ok) {
+            alert('Erro ao excluir do Netlify: ' + (data.error || 'Erro desconhecido'));
+            return;
+          }
+        } catch (err) {
+          console.error('Erro ao excluir submissão:', err);
+          alert('Erro de conexão ao tentar excluir da nuvem.');
+          return;
+        }
+      }
+
+      bancoEmMemoria = bancoEmMemoria.filter(item => item.protocolo !== protocolo && (!idParaExcluir || item.id !== idParaExcluir));
+      salvarBanco(bancoEmMemoria);
+
+      const localSubs = JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+      const filteredLocal = localSubs.filter(item => item.protocolo !== protocolo && (!idParaExcluir || item.id !== idParaExcluir));
+      localStorage.setItem('tabatinga_banco_pesquisas', JSON.stringify(filteredLocal));
+
       atualizarMetricasERanking();
       renderizarTabela();
+      alert(`✅ Registro #${f.protocolo} excluído com sucesso!`);
     }
 
-    function limparBancoConfirm() {
-      if (!confirm('Deseja realmente apagar todos os registros do banco de dados local?')) return;
-      localStorage.removeItem('tabatinga_banco_pesquisas');
-      atualizarMetricasERanking();
-      renderizarTabela();
+    async function limparBancoConfirm() {
+      const confirmacao = prompt('⚠️ ATENÇÃO: LIMPEZA DE DADOS DE TESTE\n\nIsso apagará permanentemente TODAS as respostas salvas no banco de dados na nuvem (Netlify Forms).\n\nPara confirmar, digite "LIMPAR":');
+      if (confirmacao !== 'LIMPAR') {
+        if (confirmacao !== null) alert('Operação cancelada: confirmação não correspondeu a "LIMPAR".');
+        return;
+      }
+
+      const btn = document.getElementById('btnLimparBanco');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Limpando nuvem...';
+      }
+
+      try {
+        const res = await fetch('/api/gerenciar-respostas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'clear_all',
+            token: getAdminToken()
+          })
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          localStorage.removeItem('tabatinga_banco_pesquisas');
+          bancoEmMemoria = [];
+          atualizarMetricasERanking();
+          renderizarTabela();
+          alert(`✅ ${data.message || 'Banco de dados de testes limpo com sucesso!'}`);
+        } else {
+          alert('Erro ao limpar banco na nuvem: ' + (data.error || 'Erro desconhecido'));
+        }
+      } catch (err) {
+        console.error('Erro ao limpar banco:', err);
+        alert('Erro de conexão com o servidor ao tentar limpar o banco.');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '🧹 Limpar Dados de Teste (Nuvem)';
+        }
+      }
     }
 
     // EXPORTAR EXCEL / CSV COM BOM UTF-8
@@ -1020,131 +1342,14 @@
       document.body.removeChild(link);
     }
 
-    // GERAR DADOS EXEMPLO (PARA DEMONSTRAÇÃO)
-    function carregarDadosExemplo() {
-      const exemplos = [
-        {
-          protocolo: 'TAB-2026-X8F2',
-          data_envio: '08/11/2026 09:15:20',
-          whatsapp: '(12) 99712-3456',
-          vinculo: 'Morador Fixo (Lado Ubatuba)',
-          membros: [
-            { parentesco: 'Eu', nome: 'Thiago', idade: 44, sexo: 'Homem' },
-            { parentesco: 'Cônjuge', nome: 'Tais', idade: 55, sexo: 'Mulher' },
-            { parentesco: 'Filho 1', nome: 'Dante', idade: 12, sexo: 'Homem' }
-          ],
-          atividades: [
-            {
-              id: 'boxe',
-              titulo: '3. Boxe Educativo / Defesa Pessoal',
-              formatoTurma: 'Masculina',
-              valor: 'Até R$ 65/mês',
-              dias: 'Ter/Qui, Noite',
-              horarioPreferido: '19h00',
-              alunos: [{ nome: 'Thiago', sexo: 'Homem' }, { nome: 'Dante', sexo: 'Homem' }]
-            },
-            {
-              id: 'funcional',
-              titulo: '4. Funcional, Alongamento & Mobilidade',
-              formatoTurma: 'Feminina',
-              valor: 'Até R$ 60/mês',
-              dias: 'Seg/Qua, Manhã',
-              horarioPreferido: '08h00',
-              alunos: [{ nome: 'Tais', sexo: 'Mulher' }]
-            }
-          ],
-          outra_sugestao: 'Yoga na praia ao pôr do sol',
-          colaboracao_professor: ''
-        },
-        {
-          protocolo: 'TAB-2026-M4K9',
-          data_envio: '08/11/2026 09:40:11',
-          whatsapp: '(12) 98845-9988',
-          vinculo: 'Morador Fixo (Lado Caraguá)',
-          membros: [
-            { parentesco: 'Eu', nome: 'Mariana', idade: 38, sexo: 'Mulher' },
-            { parentesco: 'Filho 1', nome: 'Lucas', idade: 10, sexo: 'Homem' },
-            { parentesco: 'Filho 2', nome: 'Sofia', idade: 7, sexo: 'Mulher' }
-          ],
-          atividades: [
-            {
-              id: 'futebol',
-              titulo: '1. Futebol & Futsal',
-              formatoTurma: 'Mista',
-              valor: '🟢 Só se for Grátis',
-              dias: 'Sábado, Manhã',
-              horarioPreferido: '09h00',
-              alunos: [{ nome: 'Lucas', sexo: 'Homem' }]
-            },
-            {
-              id: 'danca',
-              titulo: '5. Dança, Ritmos & Zumba',
-              formatoTurma: 'Feminina',
-              valor: 'Até R$ 40/mês',
-              dias: 'Seg/Qua, Noite',
-              horarioPreferido: '19h30',
-              alunos: [{ nome: 'Mariana', sexo: 'Mulher' }]
-            },
-            {
-              id: 'leitura',
-              titulo: '9. Tabatinga Lê & Brinca + Xadrez',
-              formatoTurma: 'Mista',
-              valor: '🟢 Gratuito (Voluntário)',
-              dias: 'Sábado, Manhã',
-              horarioPreferido: '',
-              alunos: [{ nome: 'Sofia', sexo: 'Mulher' }, { nome: 'Lucas', sexo: 'Homem' }]
-            }
-          ],
-          outra_sugestao: '',
-          colaboracao_professor: 'Posso ajudar como voluntária na leitura aos sábados'
-        },
-        {
-          protocolo: 'TAB-2026-W3R7',
-          data_envio: '08/11/2026 10:12:05',
-          whatsapp: '(11) 99123-0001',
-          vinculo: 'Proprietário / Veranista',
-          membros: [
-            { parentesco: 'Eu', nome: 'Carlos Alberto', idade: 67, sexo: 'Homem' },
-            { parentesco: 'Cônjuge', nome: 'Helena', idade: 65, sexo: 'Mulher' }
-          ],
-          atividades: [
-            {
-              id: 'volei',
-              titulo: '2. Vôlei de Praia & Adaptado (60+)',
-              formatoTurma: 'Mista',
-              valor: 'Até R$ 55/mês',
-              dias: 'Ter/Qui, Manhã',
-              horarioPreferido: '07h30',
-              alunos: [{ nome: 'Carlos Alberto', sexo: 'Homem' }, { nome: 'Helena', sexo: 'Mulher' }]
-            },
-            {
-              id: 'coral',
-              titulo: '6. Canto Coral Comunitário',
-              formatoTurma: 'Mista',
-              valor: 'Até R$ 40/mês',
-              dias: 'Sábado, Tarde',
-              horarioPreferido: '16h00',
-              alunos: [{ nome: 'Helena', sexo: 'Mulher' }]
-            }
-          ],
-          outra_sugestao: 'Bocha ou caminhada orientada',
-          colaboracao_professor: ''
-        }
-      ];
-
-      const banco = carregarBanco();
-      exemplos.forEach(ex => banco.unshift(ex));
-      salvarBanco(banco);
-
-      atualizarMetricasERanking();
-      renderizarTabela();
-      alert('✅ 3 respostas de exemplo foram adicionadas para você testar a visualização e os filtros do painel!');
-    }
-
-    // INICIALIZAÇÃO
+    // INICIALIZAÇÃO COM VERIFICAÇÃO DE LOGIN
     popularSelectAtividades();
-    sincronizarComNuvemNetlify();
-    setInterval(sincronizarComNuvemNetlify, 6000);
+    verificarAutenticacao().then(autenticado => {
+      if (autenticado) {
+        sincronizarComNuvemNetlify();
+        setInterval(sincronizarComNuvemNetlify, 6000);
+      }
+    });
   </script>
 </body>
 </html>

@@ -151,6 +151,7 @@ export default async (req, context) => {
 
       // Registro completo para o painel de respostas
       stats.submissoes_completas.push({
+        id: sub.id,
         protocolo: protocolo,
         data_envio: dataEnvio,
         whatsapp: whatsapp,
