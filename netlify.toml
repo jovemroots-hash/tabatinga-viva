@@ -11,6 +11,6 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 [[redirects]]
-  from = "/api/resumo-tempo-real"
-  to = "/.netlify/functions/resumo-tempo-real"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
