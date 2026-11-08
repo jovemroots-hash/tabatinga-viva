@@ -816,6 +816,11 @@
       <a href="ficha_pesquisa_imprimir.html" target="_blank">🖨️ Ficha A4 para Imprimir</a>
       <a href="cartaz_comercios_qrcode.html" target="_blank">📌 Cartaz com QR Code</a>
     </div>
+
+    <div style="margin-top:14px; display:inline-flex; align-items:center; gap:8px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.25); padding:6px 16px; border-radius:999px; font-size:12.5px; font-weight:700;">
+      <span style="width:8px; height:8px; border-radius:50%; background:#4ade80; display:inline-block; box-shadow:0 0 0 3px rgba(74,222,128,0.4);"></span>
+      <span id="headerLiveStatus">🔴 Sincronizando adesão da Tabatinga em tempo real...</span>
+    </div>
   </header>
 
   <div class="container">
@@ -1173,7 +1178,10 @@
               <div class="act-title">${act.title}</div>
               <div class="act-sub">${act.sub}</div>
             </div>
-            <span class="act-price-tag">${act.badge}</span>
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+              <span class="act-price-tag">${act.badge}</span>
+              <span class="live-activity-counter" id="live_vagas_${act.id}" style="font-size:10px; font-weight:800; background:#e0f2fe; color:#0369a1; border:1px solid #bae6fd; padding:2px 7px; border-radius:5px; white-space:nowrap;">🔥 -- interessados</span>
+            </div>
           </div>
 
           <div class="act-body">
@@ -1596,6 +1604,47 @@
     renderFamilyInputs();
     renderActivities();
     refreshSelectionCounter();
+
+    // POLLE EM TEMPO REAL COM A NUVEM
+    async function sincronizarAdesaoAoVivo() {
+      try {
+        const res = await fetch('/api/resumo-tempo-real');
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.ok || !json.data) return;
+
+        const d = json.data;
+
+        // Atualiza status do cabeçalho
+        const statusEl = document.getElementById('headerLiveStatus');
+        if (statusEl) {
+          statusEl.innerHTML = `🔥 Já somos <strong>${d.total_familias} famílias</strong> cadastradas na Tabatinga (<strong>${d.total_vagas} vagas</strong> demandadas)!`;
+        }
+
+        // Atualiza contadores em cada atividade
+        ACTIVITIES.forEach(act => {
+          const ativStat = d.atividades[act.id];
+          const badgeEl = document.getElementById(`live_vagas_${act.id}`);
+          if (badgeEl && ativStat) {
+            const qtd = ativStat.vagas || 0;
+            if (qtd > 0) {
+              badgeEl.innerHTML = `🔥 ${qtd} interessado(s) (${ativStat.turmas.Feminina > 0 ? ativStat.turmas.Feminina + ' fem' : 'mista'})`;
+              badgeEl.style.background = '#dcfce7';
+              badgeEl.style.color = '#15803d';
+              badgeEl.style.borderColor = '#86efac';
+            } else {
+              badgeEl.textContent = 'Aguardando 1º voto';
+            }
+          }
+        });
+
+      } catch (err) {
+        console.log('Poller pesquisa online:', err);
+      }
+    }
+
+    sincronizarAdesaoAoVivo();
+    setInterval(sincronizarAdesaoAoVivo, 6000);
   </script>
 </body>
 </html>

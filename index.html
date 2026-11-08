@@ -99,6 +99,31 @@
       font-weight: 900;
       font-size: 1.3rem;
     }
+
+    @keyframes pulseLive {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      background: #ef4444;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
+      animation: pulseLive 1.5s infinite;
+    }
+    .live-badge-counter {
+      background: #fff3e0;
+      color: #9a3412;
+      border: 1px solid #fdba74;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
     .brand-text h1 {
       font-size: 1.25rem;
       line-height: 1.1;
@@ -882,6 +907,85 @@
             <h4>Bolsas Infantis Automáticas</h4>
             <p>O rateio adulto viabiliza vagas gratuitas para crianças.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMÔMETRO DA COMUNIDADE EM TEMPO REAL -->
+  <section id="termometro" style="background:#072a33; color:#fff; padding:36px 0; border-top:4px solid #e36414; border-bottom:4px solid #0f4c5c;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; margin-bottom:22px;">
+        <div>
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(239, 68, 68, 0.18); border:1px solid #ef4444; color:#fca5a5; padding:5px 14px; border-radius:999px; font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.6px; margin-bottom:8px;">
+            <span class="pulse-dot"></span>
+            <span>AO VIVO • Termômetro da Tabatinga</span>
+          </div>
+          <h3 style="font-family:'Outfit', sans-serif; font-size:26px; font-weight:900; line-height:1.2;">
+            Adesão em Tempo Real: <span style="color:#fde047;">Veja as Turmas se Formando!</span>
+          </h3>
+          <p style="font-size:13.5px; color:#cbd5e1; max-width:680px; margin-top:4px;">
+            Cada morador ou família que preenche a pesquisa online atualiza estes números e as barras de vagas instantaneamente.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="pesquisa_online.html" class="btn btn-primary" style="background:#16a34a; border-color:#16a34a; font-weight:800; padding:12px 20px;">
+            ✍️ Votar nas Minhas Atividades
+          </a>
+          <a href="painel_respostas.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.4); color:#fff; font-weight:700; padding:12px 18px;">
+            📊 Ver Banco Completo
+          </a>
+        </div>
+      </div>
+
+      <!-- CARDS KPIS EM TEMPO REAL -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:14px; margin-bottom:22px;">
+        <!-- Card 1 -->
+        <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:16px;">
+          <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; color:#94a3b8; letter-spacing:0.5px;">Famílias Cadastradas</div>
+          <div style="font-size:34px; font-weight:900; color:#fde047; line-height:1.1; margin:4px 0;" id="liveKpiFamilias">--</div>
+          <div style="font-size:12px; color:#e2e8f0;">Fichas registradas no bairro</div>
+        </div>
+        <!-- Card 2 -->
+        <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:16px;">
+          <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; color:#94a3b8; letter-spacing:0.5px;">Vagas Demandadas</div>
+          <div style="font-size:34px; font-weight:900; color:#38bdf8; line-height:1.1; margin:4px 0;" id="liveKpiVagas">--</div>
+          <div style="font-size:12px; color:#e2e8f0;">Inscrições individuais somadas</div>
+        </div>
+        <!-- Card 3 -->
+        <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:16px;">
+          <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; color:#94a3b8; letter-spacing:0.5px;">Formato das Turmas</div>
+          <div style="font-size:16px; font-weight:900; color:#fff; margin:6px 0;" id="liveKpiTurmas">
+            <span style="color:#a78bfa;">Mista: --%</span> | <span style="color:#f472b6;">Fem: --%</span> | <span style="color:#60a5fa;">Masc: --%</span>
+          </div>
+          <div style="font-size:12px; color:#e2e8f0;">Preferência da comunidade</div>
+        </div>
+        <!-- Card 4 -->
+        <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); border-radius:12px; padding:16px;">
+          <div style="font-size:11.5px; font-weight:800; text-transform:uppercase; color:#94a3b8; letter-spacing:0.5px;">Apoio das Prefeituras</div>
+          <div style="font-size:34px; font-weight:900; color:#4ade80; line-height:1.1; margin:4px 0;" id="liveKpiGratis">--%</div>
+          <div style="font-size:12px; color:#e2e8f0;">Preferem gratuito / voluntário</div>
+        </div>
+      </div>
+
+      <!-- BARRAS EM TEMPO REAL DAS ATIVIDADES MAIS VOTADAS -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); border-radius:14px; padding:20px; margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+          <h4 style="font-size:15px; font-weight:800; color:#fde047; text-transform:uppercase; letter-spacing:0.5px;">
+            📊 Vagas por Modalidade (Atualização Contínua)
+          </h4>
+          <span style="font-size:12px; color:#94a3b8;">Conectado à nuvem do projeto</span>
+        </div>
+        <div id="liveRankingContainer" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+          <div style="color:#cbd5e1; font-size:13px;">Carregando termômetro das atividades...</div>
+        </div>
+      </div>
+
+      <!-- FEED TICKER DE MANIFESTAÇÕES RECENTES -->
+      <div style="background:rgba(0,0,0,0.3); border-radius:10px; padding:11px 16px; font-size:13px; display:flex; align-items:center; gap:10px; border:1px solid rgba(255,255,255,0.12);">
+        <span style="font-size:18px; flex-shrink:0;">⚡</span>
+        <div id="liveTickerText" style="color:#e2e8f0; font-weight:500;">
+          Conectando ao banco de dados em tempo real...
         </div>
       </div>
     </div>
@@ -1783,6 +1887,88 @@
 
     // Inicialização
     selectCalcCategory('foco');
+
+    // 5. ATUALIZAÇÃO EM TEMPO REAL (TERMÔMETRO DA COMUNIDADE)
+    async function carregarTermometroTempoReal() {
+      try {
+        const res = await fetch('/api/resumo-tempo-real');
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!json.ok || !json.data) return;
+
+        const d = json.data;
+
+        // KPIs
+        const elFamilias = document.getElementById('liveKpiFamilias');
+        const elVagas = document.getElementById('liveKpiVagas');
+        const elTurmas = document.getElementById('liveKpiTurmas');
+        const elGratis = document.getElementById('liveKpiGratis');
+
+        if (elFamilias) elFamilias.textContent = d.total_familias;
+        if (elVagas) elVagas.textContent = d.total_vagas;
+
+        if (elTurmas) {
+          const somaTurmas = (d.turmas.Mista + d.turmas.Feminina + d.turmas.Masculina) || 1;
+          const pMista = Math.round((d.turmas.Mista / somaTurmas) * 100);
+          const pFem = Math.round((d.turmas.Feminina / somaTurmas) * 100);
+          const pMasc = Math.round((d.turmas.Masculina / somaTurmas) * 100);
+          elTurmas.innerHTML = `
+            <span style="color:#a78bfa;">Mista: ${pMista}%</span> | 
+            <span style="color:#f472b6;">Fem: ${pFem}%</span> | 
+            <span style="color:#60a5fa;">Masc: ${pMasc}%</span>
+          `;
+        }
+
+        if (elGratis) {
+          const somaFin = (d.financeiro.gratis + d.financeiro.rateio) || 1;
+          const pGratis = Math.round((d.financeiro.gratis / somaFin) * 100);
+          elGratis.textContent = `${pGratis}%`;
+        }
+
+        // BARRAS DE RANKING EM TEMPO REAL
+        const rankContainer = document.getElementById('liveRankingContainer');
+        if (rankContainer && d.ranking_atividades) {
+          const maxVagas = Math.max(...d.ranking_atividades.map(a => a.vagas), 1);
+          rankContainer.innerHTML = d.ranking_atividades.slice(0, 8).map((a, i) => {
+            const pct = Math.max(Math.round((a.vagas / maxVagas) * 100), a.vagas > 0 ? 8 : 2);
+            return `
+              <div style="background:rgba(255,255,255,0.06); padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.1);">
+                <div style="display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; margin-bottom:5px;">
+                  <span>${a.icone} ${a.titulo}</span>
+                  <span style="color:#fde047; font-weight:800;">${a.vagas} vaga(s)</span>
+                </div>
+                <div style="background:rgba(255,255,255,0.15); height:7px; border-radius:999px; overflow:hidden;">
+                  <div style="background:linear-gradient(90deg, #16a34a, #fde047); width:${pct}%; height:100%; border-radius:999px; transition:width 0.5s;"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:10px; color:#cbd5e1; margin-top:3px;">
+                  <span>👥 Mista: ${a.turmas.Mista} | 👩 Fem: ${a.turmas.Feminina} | 👨 Masc: ${a.turmas.Masculina}</span>
+                  <span>${a.gratis > 0 ? '🟢 ' + a.gratis + ' grátis' : ''}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // TICKER DE MANIFESTAÇÃO MAIS RECENTE
+        const ticker = document.getElementById('liveTickerText');
+        if (ticker && d.ultimas_manifestacoes && d.ultimas_manifestacoes.length > 0) {
+          const ult = d.ultimas_manifestacoes[0];
+          const ativs = (ult.atividades || []).slice(0, 2).join(' e ') || 'atividades no bairro';
+          ticker.innerHTML = `
+            <strong>Última adesão registrada:</strong> Uma família do <em>${ult.vinculo}</em> escolheu <strong>${ativs}</strong> às ${ult.hora}!
+          `;
+        } else if (ticker) {
+          ticker.textContent = 'Banco de dados ativo. Seja o primeiro a registrar o interesse da sua família hoje!';
+        }
+
+      } catch (err) {
+        console.log('Poller termômetro tempo real:', err);
+      }
+    }
+
+    // Polling a cada 6 segundos
+    carregarTermometroTempoReal();
+    setInterval(carregarTermometroTempoReal, 6000);
   </script>
 </body>
 </html>

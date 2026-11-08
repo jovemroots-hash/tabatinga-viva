@@ -448,6 +448,9 @@
       <div class="action-title">
         <h1>Banco de Dados das Famílias &amp; Demandas</h1>
         <p>Visão consolidada de todas as respostas coletadas via site, celular e QR Code nos comércios.</p>
+        <div id="cloudStatusIndicator" style="font-size:12px; font-weight:700; color:#15803d; margin-top:4px;">
+          🟢 Sincronização em tempo real ativa com o Netlify
+        </div>
       </div>
       <div class="action-buttons">
         <button type="button" class="btn-action excel" onclick="exportarExcelCSV()">
@@ -639,12 +642,54 @@
       '12. Reforço Escolar & Apoio Pedagógico'
     ];
 
+    let bancoEmMemoria = [];
+
     function carregarBanco() {
+      if (bancoEmMemoria.length > 0) return bancoEmMemoria;
       return JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
     }
 
     function salvarBanco(banco) {
+      bancoEmMemoria = banco;
       localStorage.setItem('tabatinga_banco_pesquisas', JSON.stringify(banco));
+    }
+
+    async function sincronizarComNuvemNetlify() {
+      try {
+        const res = await fetch('/api/resumo-tempo-real');
+        if (res.ok) {
+          const json = await res.json();
+          if (json.ok && json.data) {
+            const cloudSubs = json.data.submissoes_completas || [];
+            const localSubs = JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+
+            const mapa = new Map();
+            cloudSubs.forEach(item => mapa.set(item.protocolo, item));
+            localSubs.forEach(item => {
+              if (!mapa.has(item.protocolo)) {
+                mapa.set(item.protocolo, item);
+              }
+            });
+
+            bancoEmMemoria = Array.from(mapa.values());
+            atualizarMetricasERanking();
+            renderizarTabela();
+
+            const statusBadge = document.getElementById('cloudStatusIndicator');
+            if (statusBadge) {
+              statusBadge.innerHTML = `🟢 Sincronizado com o Netlify: ${bancoEmMemoria.length} fichas no banco de dados`;
+              statusBadge.style.color = '#15803d';
+            }
+            return;
+          }
+        }
+      } catch (err) {
+        console.log('Falha ao sincronizar com nuvem:', err);
+      }
+
+      bancoEmMemoria = JSON.parse(localStorage.getItem('tabatinga_banco_pesquisas') || '[]');
+      atualizarMetricasERanking();
+      renderizarTabela();
     }
 
     function popularSelectAtividades() {
@@ -1098,8 +1143,8 @@
 
     // INICIALIZAÇÃO
     popularSelectAtividades();
-    atualizarMetricasERanking();
-    renderizarTabela();
+    sincronizarComNuvemNetlify();
+    setInterval(sincronizarComNuvemNetlify, 6000);
   </script>
 </body>
 </html>
