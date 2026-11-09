@@ -71,22 +71,23 @@ II. **Desgaste Natural vs. Mau Uso:** O desgaste natural de uso (ex: corda de vi
 
 ## CAPÍTULO V — DAS REGRAS FINANCEIRAS, TESTE, RATEIO E CONTINUIDADE
 
-**Art. 8º — Aula Experimental e 1º Mês de Adaptação:**  
+**Art. 8º — Aula Experimental, Entrada no Meio do Mês e 1º Mês de Adaptação:**  
 I. **Aula-Teste Paga com Abatimento:** O interessado poderá fazer 1 (uma) aula experimental mediante pagamento avulso de **R$ 20,00** direto ao professor. Se efetivar a matrícula na mesma semana, esse valor será **100% abatido da sua 1ª mensalidade**;  
-II. **1º Mês sem Fidelidade:** O primeiro mês de participação é considerado período de adaptação. Caso o aluno decida não continuar para o 2º mês, deverá apenas avisar até o **dia 20 do primeiro mês**.
+II. **Entrada no Meio do Mês (Pagamento Proporcional):** O aluno que ingressar na turma com o mês já em andamento pagará naquele mês apenas a **diferença proporcional às aulas/semanas restantes**, iniciando o pagamento do **valor cheio (integral) do rateio no mês seguinte**;  
+III. **1º Mês sem Fidelidade:** O primeiro mês completo de participação é considerado período de adaptação. Caso o aluno decida não continuar, deverá apenas avisar até o **dia 25 do mês**.
 
-**Art. 9º — Pagamento do Rateio, Vencimento e Inadimplência:**  
-I. As cotas mensais do rateio do professor e da zeladoria técnica vencem todo **dia 05 de cada mês**;  
+**Art. 9º — Pagamento do Rateio, Vencimento (Dia 10 ou a Combinar) e Inadimplência:**  
+I. As cotas mensais do rateio do professor e da zeladoria técnica vencem até o **dia 10 de cada mês** (ou em data específica combinada de comum acordo entre o professor e a turma);  
 II. O pagamento é feito diretamente ao prestador (via PIX com anexo do comprovante no aplicativo ou em dinheiro mediante baixa do próprio profissional);  
-III. **Faltas do Aluno:** Não existe abatimento por aula avulsa. Se o aluno faltar por motivo pessoal, viagem ou chuva, sua cota mensal é mantida integralmente para sustentar o custo fixo da turma;  
+III. **Faltas do Aluno:** Não existe abatimento por aula avulsa após matriculado. Se o aluno faltar por motivo pessoal, viagem ou chuva, sua cota mensal é mantida integralmente para sustentar o custo fixo da turma;  
 IV. **Atrasos e Tolerância:**
-* O aplicativo enviará lembretes preventivos 2 dias e 1 dia antes do dia 05 (apenas para quem ainda não anexou o comprovante);
-* Após o dia 05, haverá tolerância até o **dia 10** para regularização;
-* A partir do **dia 11** sem justificativa ou acordo, a vaga do aluno fica suspensa para participação nas aulas daquele mês, evitando que os demais vizinhos sejam prejudicados;  
+* O aplicativo enviará lembretes preventivos 2 dias e 1 dia antes da data de vencimento (apenas para quem ainda não anexou o comprovante);
+* Após o vencimento no dia 10, haverá tolerância até o **dia 15** para regularização;
+* A partir do **dia 16** sem justificativa ou acordo, a vaga do aluno fica suspensa para participação nas aulas daquele mês, evitando que os demais vizinhos sejam prejudicados;  
 V. **Dificuldade Financeira Temporária (Solução Humana):** Caso um morador assíduo enfrente desemprego ou emergência familiar comprovada, deverá procurar a Coordenação **antes do vencimento** para avaliar bolsa temporária ou contrapartida em mutirão comunitário, sem constrangimento.
 
-**Art. 10 — Compromisso de Continuidade (Ciclo Trimestral) e Regra do Dia 20:**  
-A partir do 2º mês, a participação renova-se em **ciclos de 3 (três) meses**. Qualquer desligamento deverá ser comunicado no aplicativo até o **dia 20 do mês corrente**, garantindo 15 dias para convocação de novo integrante da Lista de Espera.
+**Art. 10 — Compromisso de Continuidade (Ciclo Trimestral) e Aviso Prévio (Dia 25):**  
+A partir do 2º mês, a participação renova-se em **ciclos de 3 (três) meses**. Qualquer desligamento deverá ser comunicado no aplicativo até o **dia 25 do mês corrente** (15 dias antes do vencimento do dia 10 seguinte), garantindo tempo hábil para convocação de novo integrante da Lista de Espera.
 
 ---
 
@@ -96,9 +97,9 @@ A partir do 2º mês, a participação renova-se em **ciclos de 3 (três) meses*
 I. Cumprir o horário, o Cronograma Pedagógico da modalidade e conduzir os *5 Minutos de Ouro*;  
 II. **Falta do Professor:** Se o professor precisar faltar, deverá avisar com antecedência mínima de 4 horas e agendar a **reposição dentro do mesmo mês**. Caso não reponha no mês, **25% do valor mensal por aula não dada** será descontado/abatido da cota dos alunos no mês seguinte;  
 III. **Substituição por Insatisfação da Turma (Garantia de Qualidade):** Prezamos para que o tempo e dinheiro investidos sejam aproveitados da melhor forma possível. Se o profissional não corresponder às expectativas da turma, será substituído, observando-se o **Processo Justo**:
-1. Garantia de conclusão do mês já pago (salvo falta grave);
+1. Garantia de conclusão do ciclo mensal já pago (salvo falta grave);
 2. Realização de 1 (uma) reunião de alinhamento e feedback pela Coordenação;
-3. Persistindo o problema, aprovação da troca por **no mínimo 60% (maioria qualificada) dos alunos pagantes ativos da turma**, com aviso até o dia 20 do mês.
+3. Persistindo o problema, aprovação da troca por **no mínimo 60% (maioria qualificada) dos alunos pagantes ativos da turma**, com aviso prévio de 15 dias (até o dia 25 do mês).
 
 ---
 
