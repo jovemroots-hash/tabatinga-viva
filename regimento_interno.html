@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regimento Interno & Código de Conduta — Projeto Piloto Tabatinga Viva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #072a33;
+      --accent: #e36414;
+      --green: #15803d;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding-bottom: 60px;
+    }
+
+    .top-bar {
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .top-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+    .btn-back {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.25); }
+    .btn-print {
+      background: #facc15;
+      color: #0f172a;
+    }
+    .btn-print:hover { background: #fde047; }
+
+    .container {
+      max-width: 900px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+
+    .doc-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 40px 36px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .doc-header {
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 30px;
+    }
+    .doc-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .doc-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .doc-header p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .chapter {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .chapter:last-of-type {
+      border-bottom: none;
+    }
+    .chapter-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chapter-title.orange { background: var(--accent); }
+    .chapter-title.green { background: var(--green); }
+    .chapter-title.red { background: #b91c1c; }
+
+    .article {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #1e293b;
+    }
+    .article strong.art-num {
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+    .article ul {
+      margin: 8px 0 8px 22px;
+    }
+    .article li {
+      margin-bottom: 5px;
+    }
+
+    .highlight-note {
+      background: #f8fafc;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .step-box {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .step-box.s1 { background: #f0fdf4; border-left: 4px solid #16a34a; }
+    .step-box.s2 { background: #fffbeb; border-left: 4px solid #d97706; }
+    .step-box.s3 { background: #fef2f2; border-left: 4px solid #dc2626; }
+    .step-box h4 {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .doc-footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 2px dashed var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      .doc-card { padding: 24px 18px; }
+      .doc-header h1 { font-size: 22px; }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .top-bar { display: none !important; }
+      .container { margin: 0; max-width: 100%; padding: 0; }
+      .doc-card { box-shadow: none; border: none; padding: 10px; }
+      .chapter { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand">📜 Regimento Interno — Tabatinga Viva</div>
+      <div class="actions">
+        <a href="index.html" class="btn btn-back">← Voltar ao Site do Projeto</a>
+        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-card">
+      <div class="doc-header">
+        <div class="doc-badge">Documento Oficial de Governança Comunitária</div>
+        <h1>REGIMENTO INTERNO E CÓDIGO DE CONDUTA</h1>
+        <p><strong>Projeto Piloto Tabatinga Viva &amp; Tabatinga Lê e Brinca</strong><br>Regras de Convivência, Uso do Espaço, Rateio Financeiro, Proteção Mútua e Resolução de Conflitos</p>
+      </div>
+
+      <!-- CAPÍTULO I -->
+      <section class="chapter">
+        <div class="chapter-title">🌱 CAPÍTULO I — DA NATUREZA E PRINCÍPIOS DO PROJETO</div>
+        <div class="article">
+          <strong class="art-num">Art. 1º — O que é o Projeto:</strong> O <strong>Projeto Tabatinga Viva</strong> (integrado ao projeto cultural <strong>Tabatinga Lê &amp; Brinca</strong>) é uma iniciativa comunitária autônoma, apartidária e sem fins lucrativos, organizada por moradores e apoiadores do bairro da Tabatinga (divisa Caraguatatuba/Ubatuba), com o objetivo de oferecer atividades esportivas, culturais, educacionais, de leitura e saúde preventiva para crianças, jovens, adultos e idosos.
+        </div>
+        <div class="article">
+          <strong class="art-num">Art. 2º — Princípios Inegociáveis:</strong>
+          <ul>
+            <li><strong>União e Neutralidade:</strong> O projeto pertence a toda a comunidade, servindo como elo de união entre famílias.</li>
+            <li><strong>Autossustentabilidade e Rateio Justo:</strong> Quando não houver instrutor gratuito ou público, os próprios moradores viabilizam o profissional dividindo os custos de forma transparente.</li>
+            <li><strong>Solidariedade Intergeracional:</strong> O rateio das turmas adultas viabiliza bolsas gratuitas para as crianças da comunidade.</li>
+            <li><strong>Cultura do Cuidado Coletivo (<em>O-Soji</em> &amp; Waldorf):</strong> "Fazer por si e por todos". Quem usa o espaço ajuda a conservá-lo limpo.</li>
+            <li><strong>Excelência e Aproveitamento:</strong> O tempo e o dinheiro investidos pelas famílias são sagrados e devem gerar aprendizado e bem-estar real.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO II -->
+      <section class="chapter">
+        <div class="chapter-title orange">🕊️ CAPÍTULO II — DA NEUTRALIDADE POLÍTICA E ASSOCIATIVA ("ZONA DE PAZ")</div>
+        <div class="article">
+          <strong class="art-num">Art. 3º — Proibição de Disputas Políticas ou de Chapas:</strong> O Centro Comunitário e os espaços de aula durante as atividades são declarados <strong>Zona de Paz e Neutralidade Comunitária</strong>. É expressamente proibido a qualquer aluno, professor, voluntário ou visitante:
+          <ul>
+            <li>Utilizar as aulas, reuniões ou grupos de WhatsApp do projeto para campanha político-partidária, pedido de votos ou promoção de candidatos;</li>
+            <li>Trazer para dentro das oficinas disputas de chapas de associação de bairro, rixas pessoais antigas ou provocações entre grupos;</li>
+            <li>Praticar qualquer forma de discriminação por religião, origem, gênero, orientação sexual, condição social ou lado do município em que reside (Caraguá ou Ubatuba).</li>
+          </ul>
+          <div class="highlight-note">
+            <strong>Parágrafo Único:</strong> Qualquer morador — independentemente de quem apoiou em eleições municipais ou comunitárias — será recebido com igual respeito, desde que cumpra este Regimento.
+          </div>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO III -->
+      <section class="chapter">
+        <div class="chapter-title">🤝 CAPÍTULO III — DAS REGRAS DE CONDUTA E CONVIVÊNCIA NAS AULAS</div>
+        <div class="article">
+          <strong class="art-num">Art. 4º — Deveres de Todos os Participantes:</strong>
+          <ul>
+            <li><strong>Respeito Mútuo:</strong> Tratar colegas, professores, estagiários, voluntários e equipe de zeladoria com educação, cordialidade e respeito;</li>
+            <li><strong>Pontualidade:</strong> Chegar com 5 minutos de antecedência e respeitar o término da aula para não atrasar a turma seguinte;</li>
+            <li><strong>Proibições Estritas no Espaço das Aulas:</strong> É terminantemente proibido no interior do Centro Comunitário e áreas de aula durante as oficinas:
+              <ul>
+                <li>Consumo de bebidas alcoólicas, cigarros, <em>vapes</em> ou substâncias ilícitas;</li>
+                <li>Porte de armas ou objetos perfurocortantes;</li>
+                <li>Uso de caixas de som particulares em volume que perturbe as aulas ou vizinhos;</li>
+                <li>Palavrões, agressões verbais/físicas, <em>bullying</em>, intimidação ou assédio de qualquer natureza;</li>
+                <li>Entrada de animais domésticos soltos nas salas durante as aulas (salvo cão-guia).</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="article">
+          <strong class="art-num">Art. 5º — Regras para Menores de Idade e Responsáveis:</strong>
+          <ul>
+            <li>Menores de 18 anos só participam mediante <strong>Ficha de Adesão e Autorização</strong> assinada pelo responsável legal;</li>
+            <li><strong>Crianças menores de 10 anos:</strong> Devem ser entregues e retiradas pontualmente pelo responsável. O projeto não funciona como creche fora do horário estrito da oficina;</li>
+            <li>Em caso de indisciplina recorrente ou agressividade, os pais serão chamados para alinhamento pedagógico.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO IV -->
+      <section class="chapter">
+        <div class="chapter-title green">🧹 CAPÍTULO IV — DO USO DO ESPAÇO, MATERIAIS E "OS 5 MINUTOS DE OURO"</div>
+        <div class="article">
+          <strong class="art-num">Art. 6º — Ritual Obrigatório dos "5 Minutos de Ouro":</strong> Toda oficina encerra as atividades práticas <strong>5 minutos antes do horário final</strong> para que professor e alunos realizem juntos:
+          <ul>
+            <li>Higienização rápida dos colchoetes, luvas ou apoios utilizados;</li>
+            <li>Guarda organizada de bolas, jogos, livros e instrumentos musicais nos locais corretos;</li>
+            <li>Varrição rápida do piso da sala e descarte de resíduos nas lixeiras;</li>
+            <li>Desligamento de luzes, ventiladores e conferência de torneiras ao sair.</li>
+          </ul>
+        </div>
+        <div class="article">
+          <strong class="art-num">Art. 7º — Zelo pelos Equipamentos Compartilhados:</strong> Violões, ukuleles, luvas, bolas, redes, jogos de xadrez e livros são patrimônio coletivo:
+          <ul>
+            <li>É proibida a retirada de materiais para uso particular em casa (exceto livros emprestados formalmente no <em>Tabatinga Lê &amp; Brinca</em>);</li>
+            <li>O desgaste natural de uso é coberto pelo projeto, mas <strong>danos causados por vandalismo ou mau uso intencional</strong> deverão ser reparados pelo causador (ou responsável legal).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO V -->
+      <section class="chapter">
+        <div class="chapter-title">💳 CAPÍTULO V — DAS REGRAS FINANCEIRAS, TESTE, RATEIO E CONTINUIDADE</div>
+        <div class="article">
+          <strong class="art-num">Art. 8º — Aula Experimental Paga e 1º Mês de Adaptação:</strong>
+          <ul>
+            <li><strong>Aula-Teste Avulsa com Abatimento:</strong> O interessado pode realizar <strong>1 aula experimental</strong> pagando <strong>R$ 20,00</strong> direto ao professor. Se efetivar a matrícula na mesma semana, esse valor é <strong>100% abatido da sua 1ª mensalidade</strong>;</li>
+            <li><strong>1º Mês sem Fidelidade:</strong> O primeiro mês funciona como adaptação mútua. Se não quiser continuar para o 2º mês, basta avisar até o <strong>dia 20 do primeiro mês</strong>.</li>
+          </ul>
+        </div>
+        <div class="article">
+          <strong class="art-num">Art. 9º — Vencimento, Comprovantes e Inadimplência:</strong>
+          <ul>
+            <li>As cotas mensais do rateio (professor + zeladoria técnica) vencem todo <strong>dia 05 de cada mês</strong>, pagas via PIX direto ao prestador (com anexo do comprovante no aplicativo) ou em espécie (com baixa pelo próprio profissional);</li>
+            <li><strong>Faltas do Aluno:</strong> Não há pagamento por aula avulsa nem desconto por faltas pessoais do aluno;</li>
+            <li><strong>Tolerância e Suspensão:</strong> O app envia avisos 2 e 1 dia antes do vencimento (apenas para quem ainda não pagou). Há tolerância até o <strong>dia 10</strong>. A partir do <strong>dia 11</strong> sem regularização, a participação nas aulas do mês fica suspensa;</li>
+            <li><strong>Dificuldade Financeira Temporária:</strong> Moradores assíduos que passarem por imprevisto financeiro devem procurar a Coordenação <em>antes do vencimento</em> para avaliar bolsa temporária ou contrapartida em mutirão, sem constrangimento.</li>
+          </ul>
+        </div>
+        <div class="article">
+          <strong class="art-num">Art. 10 — Ciclo Trimestral e Regra do Dia 20:</strong> A partir do 2º mês, a participação renova-se em <strong>ciclos de 3 meses</strong>. Qualquer saída deve ser avisada no app até o <strong>dia 20 do mês corrente</strong>, permitindo chamar um morador da Lista de Espera sem alterar o valor do rateio dos vizinhos.
+        </div>
+      </section>
+
+      <!-- CAPÍTULO VI -->
+      <section class="chapter">
+        <div class="chapter-title">🛡️ CAPÍTULO VI — DOS PROFESSORES, SUBSTITUIÇÃO E PROTEÇÃO MÚTUA</div>
+        <div class="article">
+          <strong class="art-num">Art. 11 — Deveres e Garantias do Profissional:</strong>
+          <ul>
+            <li><strong>Falta do Professor:</strong> Se o professor faltar e não repuser a aula dentro do próprio mês, <strong>25% do valor mensal por aula não dada</strong> é descontado e abatido da cota dos alunos no mês seguinte;</li>
+            <li><strong>Substituição por Insatisfação x Proteção contra Arbitrariedade:</strong> Prezamos para que o tempo e dinheiro investidos sejam aproveitados da melhor forma possível. Se o profissional não corresponder à turma, a solução é a substituição, respeitando-se o <strong>Processo Justo</strong>:
+              <ol style="margin:6px 0 6px 22px;">
+                <li>Garantia de conclusão do mês já pago pelos alunos (salvo falta grave);</li>
+                <li>Realização de 1 reunião prévia de alinhamento e feedback pela Coordenação;</li>
+                <li>Aprovação da troca por <strong>no mínimo 60% (maioria qualificada) dos alunos pagantes ativos</strong> da turma, com aviso prévio até o dia 20 do mês.</li>
+              </ol>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CAPÍTULO VII -->
+      <section class="chapter">
+        <div class="chapter-title">📱 CAPÍTULO VII — DOS GRUPOS DE WHATSAPP E COMUNICAÇÃO</div>
+        <div class="article">
+          <strong class="art-num">Art. 12 — Uso dos Grupos Oficiais:</strong> Os grupos de WhatsApp das turmas são <strong>exclusivamente informativos e pedagógicos</strong>. É proibido enviar correntes, política, religião, vendas não autorizadas, fofocas ou discussões pessoais. Dúvidas financeiras ou queixas devem ser tratadas <strong>no privado da Coordenação</strong>.
+        </div>
+      </section>
+
+      <!-- CAPÍTULO VIII -->
+      <section class="chapter">
+        <div class="chapter-title red">⚖️ CAPÍTULO VIII — DAS PENALIDADES E RESOLUÇÃO DE CONFLITOS</div>
+        <div class="article">
+          <strong class="art-num">Art. 13 — Escala Pedagógica de Mediação (Como agimos quando há confusão):</strong> Para evitar injustiças ou decisões de cabeça quente, qualquer infração segue 3 etapas claras:
+          <div class="steps-grid">
+            <div class="step-box s1">
+              <h4 style="color:#15803d;">1ª Etapa: Conversa e Orientação em Privado</h4>
+              Aplicada em faltas leves (atrasos, esquecer os 5 minutos de limpeza, postagem indevida no grupo). Chamamos em particular, com respeito, para orientar.
+            </div>
+            <div class="step-box s2">
+              <h4 style="color:#b45309;">2ª Etapa: Advertência Formal e Suspensão (7 a 15 dias)</h4>
+              Aplicada em caso de reincidência após orientação, desrespeito verbal a colegas/professor ou tentativa de gerar intriga política nas aulas.
+            </div>
+            <div class="step-box s3">
+              <h4 style="color:#b91c1c;">3ª Etapa: Desligamento Definitivo do Projeto</h4>
+              Aplicada na 3ª reincidência OU <strong>imediatamente</strong> em casos graves: agressão física, ameaça, assédio, furto, vandalismo, álcool/drogas nas aulas ou sabotagem deliberada.
+            </div>
+          </div>
+        </div>
+        <div class="article" style="margin-top:14px;">
+          <strong class="art-num">Art. 14 — Casos Omissos:</strong> Situações não previstas neste Regimento serão decididas pela <strong>Comissão Comunitária</strong> (Coordenação Geral + 1 Professor + 1 Representante da Turma), priorizando sempre a paz, a segurança das famílias e o bem coletivo da Tabatinga.
+        </div>
+      </section>
+
+      <div class="doc-footer">
+        <p>🌱 <strong>Projeto Piloto Tabatinga Viva &amp; Tabatinga Lê e Brinca</strong> — Tabatinga (Caraguatatuba / Ubatuba — SP)</p>
+        <p style="margin-top:4px;">Documento público de adesão obrigatória para todos os participantes, instrutores, voluntários e apoiadores.</p>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
