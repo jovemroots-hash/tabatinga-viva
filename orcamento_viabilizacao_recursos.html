@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plano Orçamentário e Viabilização de Recursos — Projeto Tabatinga Viva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #072a33;
+      --accent: #e36414;
+      --green: #15803d;
+      --blue: #0284c7;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    .top-bar {
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .top-bar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .actions { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-back { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-print { background: #facc15; color: #0f172a; }
+
+    .container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+
+    .doc-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 42px 38px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .doc-header {
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .doc-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .doc-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .doc-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .doc-header p {
+      font-size: 13.5px;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    h3.section-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+      padding: 9px 16px;
+      border-radius: 8px;
+      margin: 30px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3.section-heading.orange { background: var(--accent); }
+    h3.section-heading.green { background: var(--green); }
+    h3.section-heading.blue { background: var(--blue); }
+
+    h4.kit-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 22px 0 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+    }
+    .kit-badge {
+      font-size: 13px;
+      font-weight: 800;
+      background: #f0fdf4;
+      color: #166534;
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid #bbf7d0;
+    }
+
+    .kit-desc {
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    p { margin-bottom: 12px; font-size: 14px; }
+    ul, ol { margin: 8px 0 14px 22px; font-size: 14px; }
+    li { margin-bottom: 6px; }
+
+    .highlight-card {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    .highlight-card.blue {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
+    .highlight-card.orange {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .matrix-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      background: #fff;
+    }
+    .matrix-card.c1 { border-top: 4px solid var(--accent); }
+    .matrix-card.c2 { border-top: 4px solid var(--green); }
+    .matrix-card.c3 { border-top: 4px solid var(--blue); }
+    .matrix-card h5 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    tr.total-row {
+      background: #f8fafc;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+
+    .doc-footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 2px dashed var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .top-bar { display: none !important; }
+      .container { margin: 0; max-width: 100%; padding: 0; }
+      .doc-card { box-shadow: none; border: none; padding: 10px; }
+      h3.section-heading { break-after: avoid; }
+      .highlight-card, .matrix-card, tr, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand">📊 Plano Orçamentário e Viabilização — Tabatinga Viva</div>
+      <div class="actions">
+        <a href="index.html" class="btn btn-back">← Voltar ao Site</a>
+        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-card">
+
+      <div class="doc-header">
+        <div class="doc-badge">Planejamento Orçamentário &amp; Matriz de Decisão Estratégica</div>
+        <h1>PLANO ORÇAMENTÁRIO E VIABILIZAÇÃO DE RECURSOS DAS ATIVIDADES</h1>
+        <h2>Projeto Piloto Tabatinga Viva &amp; Tabatinga Lê e Brinca</h2>
+        <p>Levantamento Modular de Custos, Investimento em Materiais e Matriz Estratégica Baseada nas Fichas de Pesquisa Comunitária</p>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-grid">
+          <div><strong>Finalidade:</strong> Levantamento de Custos e Viabilização Modular</div>
+          <div><strong>Local de Ação:</strong> Centro Comunitário, Campo e Praia da Tabatinga</div>
+          <div><strong>Método de Decisão:</strong> Cruzamento de Demanda da Pesquisa com Custo de Kit</div>
+          <div><strong>Modelo Financeiro:</strong> Rateio Direto Aluno-Professor (Zero Fundo Caixa)</div>
+          <div><strong>Diagnóstico Comunitário:</strong> Fichas de Pesquisa Online e Físicas nos Comércios</div>
+          <div><strong>Plataforma Online:</strong> <code>tabatinga-viva.netlify.app</code></div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1: APRESENTAÇÃO E MÉTODO -->
+      <h3 class="section-heading">1. APRESENTAÇÃO E MÉTODO DE DECISÃO ESTRATÉGICA</h3>
+      <p>
+        Este documento estabelece o <strong>Plano Orçamentário e de Viabilização de Recursos</strong> para a implantação das oficinas esportivas, culturais, educacionais e de saúde do <strong>Projeto Tabatinga Viva</strong> no Centro Comunitário, campo e orla da Tabatinga.
+      </p>
+
+      <div class="highlight-card blue">
+        <p><strong>O Princípio Fundamental: Demanda Real Cruzada com Custo de Arranque</strong></p>
+        <p style="margin-bottom:0;">
+          Diferente de iniciativas convencionais que adquirem equipamentos antes de saber se haverá adesão, o Tabatinga Viva trabalha com uma <strong>Matriz Estratégica de Decisão</strong>:
+        </p>
+        <ol style="margin-top: 8px; margin-bottom: 0;">
+          <li><strong>Diagnóstico Ativo (Fichas de Pesquisa das Famílias):</strong> Mapeamos em tempo real, via formulário online e cartazes com QR Code no comércio local, quais modalidades têm maior procura, horários preferidos, perfil etário (crianças, jovens, adultos, idosos) e capacidade de contribuição no rateio solidário;</li>
+          <li><strong>Orçamento Modular por Oficina:</strong> Cada atividade possui seu custo de equipamentos e remuneração calculado de forma independente (kits modulares);</li>
+          <li><strong>Alocação Inteligente de Força e Recursos:</strong> Cruzamos a demanda das fichas com os custos de cada kit para decidir <strong>onde concentrar a força de trabalho, os equipamentos doados e os recursos captados primeiro</strong>. A turma que tem maior quórum e menor custo de arranque entra em campo imediatamente, gerando tração e credibilidade para as fases seguintes.</li>
+        </ol>
+      </div>
+
+      <!-- SEÇÃO 2: ORÇAMENTO MODULAR DE KITS -->
+      <h3 class="section-heading orange">2. ORÇAMENTO MODULAR DE EQUIPAMENTOS (INVESTIMENTO ÚNICO)</h3>
+      <p>
+        O investimento em materiais foi estruturado em <strong>6 Kits Modulares Independentes</strong>. Isso permite que parceiros institucionais (como o Rotary Club, empresários locais, editais públicos ou vaquinhas comunitárias) possam apadrinhar um módulo específico ou o conjunto completo.
+      </p>
+
+      <!-- KIT 1 -->
+      <h4 class="kit-title">
+        <span>⚽ KIT 1: Futebol Comunitário Sub-12 (Campo / Praia)</span>
+        <span class="kit-badge">Total: R$ 780,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Crianças e adolescentes em contraturno escolar; disciplina, coordenação motora e trabalho em equipe.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bolas de Futebol de Campo (Costuradas / Tam. 4 e 5)</td>
+            <td class="text-center">5 un.</td>
+            <td class="text-right">R$ 70,00</td>
+            <td class="text-right">R$ 350,00</td>
+          </tr>
+          <tr>
+            <td>Kit Funcional de Treino (20 cones + 20 chapéus chineses)</td>
+            <td class="text-center">1 kit</td>
+            <td class="text-right">R$ 90,00</td>
+            <td class="text-right">R$ 90,00</td>
+          </tr>
+          <tr>
+            <td>Coletes de Treino Dupla Face (2 cores)</td>
+            <td class="text-center">20 un.</td>
+            <td class="text-right">R$ 8,00</td>
+            <td class="text-right">R$ 160,00</td>
+          </tr>
+          <tr>
+            <td>Par de Redes para Traves + Bomba de Encher + Apito</td>
+            <td class="text-center">1 conj.</td>
+            <td class="text-right">R$ 180,00</td>
+            <td class="text-right">R$ 180,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 1 (FUTEBOL)</td>
+            <td class="text-right">R$ 780,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KIT 2 -->
+      <h4 class="kit-title">
+        <span>🏐 KIT 2: Vôlei Adaptado (60+) e Vôlei de Praia</span>
+        <span class="kit-badge">Total: R$ 520,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Idosos, adultos e jovens; saúde cardiovascular, socialização e baixo impacto articular.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rede de Vôlei Oficial Reforçada (9,5m com lona dupla e cabos)</td>
+            <td class="text-center">1 un.</td>
+            <td class="text-right">R$ 180,00</td>
+            <td class="text-right">R$ 180,00</td>
+          </tr>
+          <tr>
+            <td>Bolas Macias de Vôlei (EVA / Microfibra para melhor idade e iniciantes)</td>
+            <td class="text-center">3 un.</td>
+            <td class="text-right">R$ 90,00</td>
+            <td class="text-right">R$ 270,00</td>
+          </tr>
+          <tr>
+            <td>Fita de Marcação de Quadra (Areia e Salão) com fixadores</td>
+            <td class="text-center">1 conj.</td>
+            <td class="text-right">R$ 70,00</td>
+            <td class="text-right">R$ 70,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 2 (VÔLEI ADAPTADO E PRAIA)</td>
+            <td class="text-right">R$ 520,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KIT 3 -->
+      <h4 class="kit-title">
+        <span>🥊 KIT 3: Boxe Educativo, Funcional e Defesa Pessoal</span>
+        <span class="kit-badge">Total: R$ 1.520,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Jovens e adultos; agilidade, reflexo, queima calórica e disciplina (sem tatame ou quimono caros).</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cordas de Pular em PVC com rolamento</td>
+            <td class="text-center">10 un.</td>
+            <td class="text-right">R$ 15,00</td>
+            <td class="text-right">R$ 150,00</td>
+          </tr>
+          <tr>
+            <td>Pares de Luvas de Boxe Compartilhadas (12oz / 14oz)</td>
+            <td class="text-center">4 pares</td>
+            <td class="text-right">R$ 140,00</td>
+            <td class="text-right">R$ 560,00</td>
+          </tr>
+          <tr>
+            <td>Pares de Manoplas de Foco (Aparadores de soco para treino em duplas)</td>
+            <td class="text-center">3 pares</td>
+            <td class="text-right">R$ 110,00</td>
+            <td class="text-right">R$ 330,00</td>
+          </tr>
+          <tr>
+            <td>Pares de Bandagens Elásticas Laváveis (3 metros)</td>
+            <td class="text-center">10 pares</td>
+            <td class="text-right">R$ 20,00</td>
+            <td class="text-right">R$ 200,00</td>
+          </tr>
+          <tr>
+            <td>Saco de Pancadas Preenchido (1,20m) + Suporte de teto/parede</td>
+            <td class="text-center">1 conj.</td>
+            <td class="text-right">R$ 280,00</td>
+            <td class="text-right">R$ 280,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 3 (BOXE EDUCATIVO E DEFESA)</td>
+            <td class="text-right">R$ 1.520,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KIT 4 -->
+      <h4 class="kit-title">
+        <span>🧘 KIT 4: Condicionamento Físico, Alongamento, Mobilidade e Dança</span>
+        <span class="kit-badge">Total: R$ 1.355,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Mulheres, adultos e 60+; postura, alívio de dores, tônus muscular e saúde integral.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Colchonetes de Ginástica Laváveis em Napa (Espuma D23)</td>
+            <td class="text-center">15 un.</td>
+            <td class="text-right">R$ 45,00</td>
+            <td class="text-right">R$ 675,00</td>
+          </tr>
+          <tr>
+            <td>Kits de Elásticos Extensores (Minibands e Therabands)</td>
+            <td class="text-center">3 kits</td>
+            <td class="text-right">R$ 60,00</td>
+            <td class="text-right">R$ 180,00</td>
+          </tr>
+          <tr>
+            <td>Bastões Posturais de Mobilidade (Madeira plastificada)</td>
+            <td class="text-center">15 un.</td>
+            <td class="text-right">R$ 8,00</td>
+            <td class="text-right">R$ 120,00</td>
+          </tr>
+          <tr>
+            <td>Caixa de Som Portátil Alta Potência com Bluetooth e Microfone</td>
+            <td class="text-center">1 un.</td>
+            <td class="text-right">R$ 380,00</td>
+            <td class="text-right">R$ 380,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 4 (FUNCIONAL, MOBILIDADE E DANÇA)</td>
+            <td class="text-right">R$ 1.355,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KIT 5 -->
+      <h4 class="kit-title">
+        <span>🎵 KIT 5: Música, Iniciação Musical e Canto Coral</span>
+        <span class="kit-badge">Total: R$ 550,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Crianças, jovens e adultos; afinação, ritmo, concentração e valorização cultural.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#f0fdf4;">
+            <td><strong>Contrapartida da Coordenação:</strong> 2 Violões + 2 Ukuleles (Thiago Siqueira)</td>
+            <td class="text-center">4 instr.</td>
+            <td class="text-right"><em>Já doados (R$ 1.400)</em></td>
+            <td class="text-right"><strong>R$ 0,00</strong></td>
+          </tr>
+          <tr>
+            <td>Jogos de Cordas Reserva (Violão Nylon e Ukulele) + Palhetas</td>
+            <td class="text-center">4 jogos</td>
+            <td class="text-right">R$ 35,00</td>
+            <td class="text-right">R$ 140,00</td>
+          </tr>
+          <tr>
+            <td>Afinadores Digitais de Clip + Suportes de Chão/Parede</td>
+            <td class="text-center">1 conj.</td>
+            <td class="text-right">R$ 130,00</td>
+            <td class="text-right">R$ 130,00</td>
+          </tr>
+          <tr>
+            <td>Kit de Percussão Rítmica (Pandeiros, Ganzás e Clavas de madeira)</td>
+            <td class="text-center">1 kit</td>
+            <td class="text-right">R$ 220,00</td>
+            <td class="text-right">R$ 220,00</td>
+          </tr>
+          <tr>
+            <td>Pastas Catálogo com Plásticos (Cifras e Letras do Coral)</td>
+            <td class="text-center">2 un.</td>
+            <td class="text-right">R$ 30,00</td>
+            <td class="text-right">R$ 60,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 5 (MÚSICA E CORAL)</td>
+            <td class="text-right">R$ 550,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- KIT 6 -->
+      <h4 class="kit-title">
+        <span>📖 KIT 6: Cognição, Tabatinga Lê &amp; Brinca, Xadrez e Idiomas</span>
+        <span class="kit-badge">Total: R$ 970,00</span>
+      </h4>
+      <div class="kit-desc">Foco: Estímulo intelectual, raciocínio lógico, incentivo à leitura infantil e inglês/espanhol para o turismo.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th class="text-center" style="width:110px;">Quantidade</th>
+            <th class="text-right" style="width:130px;">Valor Unit.</th>
+            <th class="text-right" style="width:130px;">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quadro Branco Magnético (120x90cm) + Marcadores Recarregáveis + Apagador</td>
+            <td class="text-center">1 conj.</td>
+            <td class="text-right">R$ 240,00</td>
+            <td class="text-right">R$ 240,00</td>
+          </tr>
+          <tr>
+            <td>Jogos Cognitivos de Tabuleiro (6 Xadrez/Damas + 4 Dominós + 4 Baralhos)</td>
+            <td class="text-center">14 jogos</td>
+            <td class="text-right">R$ 20,00</td>
+            <td class="text-right">R$ 280,00</td>
+          </tr>
+          <tr>
+            <td>Kit Artes Visuais (Papel Canson A4, Lápis de Cor, Guaches, Pincéis e 10 Telas)</td>
+            <td class="text-center">1 lote</td>
+            <td class="text-right">R$ 450,00</td>
+            <td class="text-right">R$ 450,00</td>
+          </tr>
+          <tr class="total-row">
+            <td colspan="3">TOTAL DO KIT 6 (LEITURA, XADREZ E IDIOMAS)</td>
+            <td class="text-right">R$ 970,00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- QUADRO RESUMO GERAL -->
+      <div style="margin-top: 24px; background: #f8fafc; border: 2px solid var(--primary); border-radius: 12px; padding: 18px;">
+        <h4 style="font-family:'Outfit',sans-serif; font-size:16px; font-weight:800; color:var(--primary-dark); margin-bottom:10px;">
+          📊 QUADRO-RESUMO GERAL DO INVESTIMENTO EM MATERIAIS
+        </h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Módulo / Kit</th>
+              <th>Modalidades Atendidas</th>
+              <th class="text-right" style="width:140px;">Valor do Módulo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>KIT 1</strong></td>
+              <td>Futebol Comunitário Sub-12</td>
+              <td class="text-right">R$ 780,00</td>
+            </tr>
+            <tr>
+              <td><strong>KIT 2</strong></td>
+              <td>Vôlei Adaptado (60+) e Praia</td>
+              <td class="text-right">R$ 520,00</td>
+            </tr>
+            <tr>
+              <td><strong>KIT 3</strong></td>
+              <td>Boxe Educativo, Funcional e Defesa Pessoal</td>
+              <td class="text-right">R$ 1.520,00</td>
+            </tr>
+            <tr>
+              <td><strong>KIT 4</strong></td>
+              <td>Condicionamento Físico, Mobilidade e Dança</td>
+              <td class="text-right">R$ 1.355,00</td>
+            </tr>
+            <tr>
+              <td><strong>KIT 5</strong></td>
+              <td>Violão, Ukulele e Canto Coral</td>
+              <td class="text-right">R$ 550,00</td>
+            </tr>
+            <tr>
+              <td><strong>KIT 6</strong></td>
+              <td>Tabatinga Lê &amp; Brinca, Xadrez, Reforço e Idiomas</td>
+              <td class="text-right">R$ 970,00</td>
+            </tr>
+            <tr class="total-row" style="background:#e0f2fe; font-size:14px;">
+              <td colspan="2"><strong>INVESTIMENTO TOTAL COMPLETO (12 MODALIDADES)</strong></td>
+              <td class="text-right"><strong>R$ 5.695,00</strong></td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:12.5px; color:var(--muted); margin-bottom:0;">
+          * Nota: Mais de R$ 1.400,00 em instrumentos musicais e o desenvolvimento tecnológico dos portais online foram aportados voluntariamente pela coordenação.
+        </p>
+      </div>
+
+      <!-- SEÇÃO 3: CUSTOS OPERACIONAIS E AUTOSSUSTENTABILIDADE -->
+      <h3 class="section-heading green">3. CUSTOS OPERACIONAIS E SISTEMA DE AUTOSSUSTENTABILIDADE</h3>
+      <p>
+        O projeto foi desenhado para <strong>não depender de manutenção financeira pública eterna</strong>. As oficinas que não contarem com oficineiro voluntário ou enviado pelas Prefeituras funcionam sob o <strong>Sistema de Rateio Progressivo</strong>:
+      </p>
+
+      <ul>
+        <li><strong>Valor Padrão de Hora-Aula Social:</strong> Parâmetro regional de R$ 45,00 a R$ 50,00 por hora para profissional qualificado (MEI morador do Litoral Norte).</li>
+        <li><strong>Turma de 1h30 semanal (6 horas/mês):</strong> Custo fixo mensal de <strong>R$ 300,00 a R$ 360,00</strong>.</li>
+        <li><strong>Turma de 2h semanais (8 horas/mês):</strong> Custo fixo mensal de <strong>R$ 400,00</strong>.</li>
+      </ul>
+
+      <div class="highlight-card">
+        <p><strong>O Efeito do Rateio Progressivo (Quanto mais alunos, menor a cota individual):</strong></p>
+        <p style="margin-bottom:6px;">Em uma oficina cujo custo total do professor seja de R$ 360,00/mês:</p>
+        <ul style="margin-bottom:0;">
+          <li><strong>Com 5 alunos (Arranque):</strong> R$ 72,00 / mês por aluno;</li>
+          <li><strong>Com 8 alunos:</strong> R$ 45,00 / mês por aluno;</li>
+          <li><strong>Com 10 alunos:</strong> R$ 36,00 / mês por aluno (+ 2 bolsas gratuitas para crianças da escola);</li>
+          <li><strong>Com 15 alunos (Turma cheia):</strong> R$ 24,00 / mês por aluno (+ 3 bolsas infantis gratuitas).</li>
+        </ul>
+      </div>
+
+      <p><strong>Zeladoria Sustentável a Baixo Custo:</strong></p>
+      <ul>
+        <li><strong>Salas e Salão (Custo R$ 0,00):</strong> Mantidas limpas diariamente pelos próprios alunos e professores no ritual dos "5 Minutos de Ouro" (inspiração no <em>O-Soji</em> japonês e Pedagogia Waldorf).</li>
+        <li><strong>Banheiros e Roçada:</strong> Cobertos pela caixinha simbólica de zeladoria técnica rateada entre os alunos ativos.</li>
+      </ul>
+
+      <!-- SEÇÃO 4: MATRIZ DE PRIORIZAÇÃO -->
+      <h3 class="section-heading blue">4. MATRIZ DE PRIORIZAÇÃO: CRUZANDO A PESQUISA COM OS RECURSOS</h3>
+      <p>
+        Com base no levantamento orçamentário acima e nas respostas das <strong>Fichas de Pesquisa Comunitária</strong>, a Coordenação e os Parceiros definem a ordem de abertura das turmas através de 3 critérios objetivos:
+      </p>
+
+      <div class="matrix-grid">
+        <div class="matrix-card c1">
+          <h5>1. Densidade de Demanda</h5>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:0;">
+            Modalidades que atingirem primeiro o quórum mínimo de 5 a 6 moradores confirmados na pesquisa de campo e online.
+          </p>
+        </div>
+        <div class="matrix-card c2">
+          <h5>2. Menor Custo de Arranque</h5>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:0;">
+            Modalidades cujo investimento em kit é mais baixo (ex: Vôlei R$ 520, Música R$ 550, Futebol R$ 780), viabilizando início imediato.
+          </p>
+        </div>
+        <div class="matrix-card c3">
+          <h5>3. Impacto Intergeracional</h5>
+          <p style="font-size:13px; color:var(--muted); margin-bottom:0;">
+            Atividades que combinem saúde e mobilidade para idosos (Vôlei 60+/Funcional) ou formação de crianças (Futebol/Lê e Brinca).
+          </p>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 5: FORMAS DE APOIO E VIABILIZAÇÃO -->
+      <h3 class="section-heading">5. FORMAS DE APOIO E VIABILIZAÇÃO DE RECURSOS (PARCEIROS E APOIADORES)</h3>
+      <p>
+        Para garantir <strong>100% de transparência, conformidade fiscal e segurança jurídica</strong>, os parceiros institucionais (Rotary Club, empresas e doadores) podem viabilizar recursos das seguintes formas:
+      </p>
+
+      <div class="highlight-card orange">
+        <ol style="margin-bottom:0;">
+          <li style="margin-bottom:10px;">
+            <strong>Aquisição Direta dos Kits de Equipamentos:</strong><br>
+            O parceiro adquire diretamente os materiais nas lojas/fornecedores com <strong>Nota Fiscal emitida em nome da própria instituição compradora (CNPJ do parceiro)</strong>, entregando os materiais lacrados para uso público da comunidade no Centro Comunitário.
+          </li>
+          <li style="margin-bottom:10px;">
+            <strong>Apadrinhamento de Turmas Sociais ("Adote uma Turma de Crianças"):</strong><br>
+            O apoiador viabiliza 3 a 6 meses de uma turma infantil gratuita (ex: Música, Inglês ou Futebol), remunerando diretamente o MEI do instrutor mediante Nota Fiscal de prestação de serviços.
+          </li>
+          <li style="margin-bottom:10px;">
+            <strong>Captação Concorrente via Rateio Comunitário:</strong><br>
+            Caso determinado kit demore a ser viabilizado externamente, os próprios alunos adultos da modalidade podem realizar vaquinha rateada no primeiro mês para adquirir os materiais da sua oficina.
+          </li>
+          <li>
+            <strong>Articulação Institucional com o Poder Público:</strong><br>
+            A chancela de entidades como o Rotary Club fortalece os ofícios protocolados nas Prefeituras de Caraguatatuba e Ubatuba para cessão regular do prédio e fornecimento de monitores esportivos.
+          </li>
+        </ol>
+      </div>
+
+      <div class="doc-footer">
+        <p>🌱 <strong>Projeto Tabatinga Viva &amp; Tabatinga Lê e Brinca</strong> • Caraguatatuba / Ubatuba — SP</p>
+        <p style="margin-top:4px;">Coordenação Geral: Thiago Siqueira • Painel Online: <code>tabatinga-viva.netlify.app</code></p>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
