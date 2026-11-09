@@ -8,10 +8,10 @@
 O Rotary Internacional pauta sua atuação em **projetos sustentáveis, de orçamento transparente e impacto mensurável** dentro de suas Áreas de Enfoque:
 1. **Educação Básica e Alfabetização:** *Tabatinga Lê & Brinca*, Jogos de Raciocínio (Xadrez/Damas) e Idiomas (Inglês/Espanhol);
 2. **Prevenção de Doenças e Promoção da Saúde:** Futebol Infantil, Vôlei Adaptado (60+), Boxe Educativo, Condicionamento Físico, Alongamento e Mobilidade;
-3. **Desenvolvimento Comunitário e Paz Social:** Ocupação produtiva do Centro Comunitário em uma região vulnerável de fronteira (onde **70% dos alunos e trabalhadores moram em Ubatuba e 30% em Caraguatatuba**).
+3. **Desenvolvimento Comunitário e Paz Social:** Ocupação produtiva do Centro Comunitário em uma região estratégica de divisa entre Caraguatatuba e Ubatuba, atendendo famílias e trabalhadores de ambos os lados da ponte.
 
 **Diferencial competitivo para apresentar na terça-feira:**
-* O projeto **não pede um cheque em branco**. Ele já está acontecendo (1º Encontro dia 14, plataforma web no ar e primeiros instrumentos musicais já doados pela coordenação);
+* O projeto **não pede um cheque em branco**. Ele já está estruturado com plataformas digitais no ar ([**Tabatinga Viva**](https://tabatinga-viva.netlify.app) e [**Tabatinga Lê & Brinca**](https://livroslivres.netlify.app)), pesquisa comunitária em tempo real e primeiros instrumentos musicais já doados pela coordenação;
 * As modalidades foram escolhidas a dedo para terem **custo mínimo de equipamento** (sem tatames caros, sem quimonos) e **custo zero de material para o aluno**;
 * Possui um **modelo de autossustentabilidade financeira (Sistema Facilitador de Rateio)** para não depender eternamente de favores políticos das Prefeituras.
 

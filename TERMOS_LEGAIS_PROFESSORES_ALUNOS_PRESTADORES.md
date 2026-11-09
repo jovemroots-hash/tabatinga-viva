@@ -42,6 +42,11 @@ Em contrapartida à organização comunitária da turma e ao uso do espaço cole
 **5. DA CULTURA DO CUIDADO COLETIVO ("OS 5 MINUTOS DE OURO"):**  
 Comprometo-me a encerrar as atividades práticas **5 (cinco) minutos antes do horário final** para conduzir, junto com os alunos, o ritual educativo de cuidado coletivo: guardar materiais, higienizar equipamentos utilizados e passar vassoura na sala, entregando o espaço limpo e organizado para a turma seguinte.
 
+**6. DA GARANTIA DE QUALIDADE, PROTEÇÃO MÚTUA E REGRA DE SUBSTITUIÇÃO JUSTA:**  
+6.1. **Estabilidade do Ciclo Mensal:** Uma vez iniciado o mês e efetuado o pagamento do rateio pelos alunos (dia 05), fica assegurada ao(à) Profissional a condução integral das aulas daquele mês, sendo vedada a dispensa ou encerramento abrupto da turma no meio do mês (salvo por falta grave, conduta antiética ou abandono).  
+6.2. **Proteção contra Dispensa Indevida e Direito de Alinhamento:** O(A) Profissional **não poderá** ser substituído(a) por caprichos individuais, motivos políticos ou queixas isoladas. Havendo necessidade de ajuste didático ou metodológico, a Coordenação realizará primeiro um **Feedback Formal de Alinhamento**, garantindo prazo para adequação. A substituição por insatisfação da turma só ocorrerá se, após o alinhamento, houver aprovação fundamentada de **no mínimo 60% (maioria qualificada) dos alunos pagantes ativos**.  
+6.3. **Aviso Prévio Recíproco até o Dia 20:** Tanto na hipótese de substituição decidida pela maioria qualificada da turma quanto no caso de desligamento voluntário por iniciativa do(a) próprio(a) Profissional, a comunicação deverá ser feita até o **dia 20 do mês corrente**, garantindo 15 (quinze) dias de transição para que a turma não fique desassistida nem o profissional seja pego de surpresa.
+
 Por ser a expressão da verdade e de minha livre vontade, assino o presente termo em 2 (duas) vias.
 
 Tabatinga, _____ de ____________________ de 2026.
@@ -69,16 +74,21 @@ _____________________________________________________
 * **RG/CPF:** ___________________________ **WhatsApp:** (___) _________________________  
 * **Endereço / Bairro:** ____________________________________ ( ) Lado Ubatuba ( ) Lado Caraguá  
 * **Oficina(s) Escolhida(s):** _________________________________________________________  
-* **Modalidade de Participação:** ( ) Rateio Solidário Adulto   ( ) Bolsa Gratuita Infantil/Juvenil  
+* **Modalidade de Participação:** ( ) Aula Experimental Avulsa   ( ) 1º Mês de Experiência   ( ) Rateio Solidário Adulto (Ciclo Trimestral)   ( ) Bolsa Gratuita Infantil/Juvenil  
 * **Possui alguma restrição médica, cardíaca, articular ou alergia?** ( ) Não  ( ) Sim: _____________
 
 ### TERMO DE COMPROMISSO E REGRAS DE CONVIVÊNCIA:
 
-1. **COTA MENSAL FIXA (PARA PARTICIPANTES DO RATEIO):** Estou ciente de que a viabilidade da turma depende da divisão justa dos custos entre os vizinhos. Comprometo-me a pagar minha **Cota Mensal Fixa** até o **dia 05 de cada mês** diretamente na chave PIX do professor da modalidade e a anexar o comprovante no aplicativo/grupo. Entendo que **não existe pagamento por aula avulsa** e que minhas faltas pessoais não geram desconto na cota mensal.
-2. **PARTICIPAÇÃO NA ZELADORIA TÉCNICA:** Comprometo-me a contribuir mensalmente com a cota simbólica de **R$ ______** destinada exclusivamente à limpeza pesada dos banheiros, faxina geral e roçada do mato do Centro Comunitário.
-3. **CULTURA DO CUIDADO COLETIVO ("FAZER POR SI E POR TODOS"):** Aqui ninguém é cliente passivo; somos uma comunidade! Comprometo-me (e orientarei meu filho) a participar ativamente dos **5 minutos finais de cada aula** para guardar os materiais, limpar meu colchoete e deixar a sala varrida e em ordem para o próximo grupo (inspiração nas escolas do Japão e Pedagogia Waldorf).
-4. **DECLARAÇÃO DE SAÚDE E APTIDÃO FÍSICA:** Declaro que o(a) participante acima encontra-se em plenas condições de saúde física e mental para a prática de atividades recreativas, esportivas e culturais, isentando os organizadores comunitários voluntários de responsabilidade por acidentes decorrentes de condições médicas pré-existentes ou fortuitas.
-5. **USO DE IMAGEM COMUNITÁRIA:** Autorizo o uso gratuito de fotos e vídeos registrados durante as oficinas e eventos exclusivamente para prestação de contas, murais e divulgação institucional do Projeto Tabatinga Viva junto à comunidade, Prefeituras, Faculdades e entidades apoiadoras (como o Rotary Club).
+1. **AULA EXPERIMENTAL E 1º MÊS DE ADAPTAÇÃO (SEM FIDELIDADE):**  
+   1.1. **Aula-Teste Paga (Sem Compromisso):** O morador interessado pode realizar **1 (uma) aula experimental** pagando o valor avulso de **R$ 20,00** diretamente ao professor. Caso decida se matricular na turma na mesma semana, **esse valor pago na aula-teste é 100% abatido/descontado da sua 1ª mensalidade**. Se optar por não continuar, encerra-se sem qualquer vínculo.  
+   1.2. **Primeiro Mês de Experiência:** O 1º mês de matrícula funciona como período de adaptação mútua sem fidelidade. Caso o aluno não queira continuar para o 2º mês, basta avisar no aplicativo ou à coordenação até o **dia 20 do primeiro mês**.
+2. **COMPROMISSO DE CONTINUIDADE (CICLO TRIMESTRAL) E REGRA DO DIA 20:**  
+   2.1. **Estabilidade para a Turma e o Professor:** A partir do 2º mês, visando garantir a continuidade do professor e não onerar os vizinhos da turma, o aluno assume o compromisso comunitário de **Ciclo Trimestral (3 meses)**, pagando sua **Cota Mensal Fixa** até o **dia 05 de cada mês** diretamente na chave PIX do professor e anexando o comprovante no aplicativo. Faltas pessoais do aluno não geram desconto na cota mensal.  
+   2.2. **Aviso Prévio de Saída (Até o Dia 20):** Caso o aluno precise se desligar da turma ao final do ciclo ou por motivo de força maior, compromete-se a comunicar sua saída até o **dia 20 do mês corrente**, dando 15 dias de prazo para que a coordenação chame um novo morador da Lista de Espera sem prejudicar o rateio dos colegas nem a renda do professor.
+3. **PARTICIPAÇÃO NA ZELADORIA TÉCNICA:** Comprometo-me a contribuir mensalmente com a cota simbólica de **R$ ______** destinada exclusivamente à limpeza pesada dos banheiros, faxina geral e roçada do mato do Centro Comunitário.
+4. **CULTURA DO CUIDADO COLETIVO ("FAZER POR SI E POR TODOS"):** Aqui ninguém é cliente passivo; somos uma comunidade! Comprometo-me (e orientarei meu filho) a participar ativamente dos **5 minutos finais de cada aula** para guardar os materiais, limpar meu colchoete e deixar a sala varrida e em ordem para o próximo grupo (inspiração nas escolas do Japão e Pedagogia Waldorf).
+5. **DECLARAÇÃO DE SAÚDE E APTIDÃO FÍSICA:** Declaro que o(a) participante acima encontra-se em plenas condições de saúde física e mental para a prática de atividades recreativas, esportivas e culturais, isentando os organizadores comunitários voluntários de responsabilidade por acidentes decorrentes de condições médicas pré-existentes ou fortuitas.
+6. **USO DE IMAGEM COMUNITÁRIA:** Autorizo o uso gratuito de fotos e vídeos registrados durante as oficinas e eventos exclusivamente para prestação de contas, murais e divulgação institucional do Projeto Tabatinga Viva junto à comunidade, Prefeituras, Faculdades e entidades apoiadoras (como o Rotary Club).
 
 Tabatinga, _____ de ____________________ de 2026.
 
