@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto Tabatinga Viva — Documento Executivo Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #072a33;
+      --accent: #e36414;
+      --green: #15803d;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    .top-bar {
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .top-bar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .actions { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-back { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-print { background: #facc15; color: #0f172a; }
+
+    .container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+
+    .doc-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 42px 38px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .doc-header {
+      text-align: center;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .doc-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .doc-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .doc-header h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .doc-header p {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .meta-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      font-size: 13.5px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    h3.section-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+      padding: 9px 16px;
+      border-radius: 8px;
+      margin: 26px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3.section-heading.orange { background: var(--accent); }
+    h3.section-heading.green { background: var(--green); }
+
+    p { margin-bottom: 12px; font-size: 14px; }
+    ul, ol { margin: 8px 0 14px 22px; font-size: 14px; }
+    li { margin-bottom: 6px; }
+
+    .hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .hub-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      background: #fff;
+    }
+    .hub-card.h1 { border-top: 4px solid #2563eb; }
+    .hub-card.h2 { border-top: 4px solid #e36414; }
+    .hub-card.h3 { border-top: 4px solid #16a34a; }
+    .hub-card.h4 { border-top: 4px solid #7c3aed; }
+    .hub-card h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .highlight-card {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+      font-size: 13.5px;
+    }
+    .highlight-card.blue {
+      background: #eff6ff;
+      border-color: #93c5fd;
+    }
+    .highlight-card.orange {
+      background: #fff7ed;
+      border-color: #fed7aa;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .doc-footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 2px dashed var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .top-bar { display: none !important; }
+      .container { margin: 0; max-width: 100%; padding: 0; }
+      .doc-card { box-shadow: none; border: none; padding: 12px; }
+      h3.section-heading { break-after: avoid; }
+      .hub-card, .highlight-card, tr { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand">🌱 Projeto Tabatinga Viva — Documento Executivo</div>
+      <div class="actions">
+        <a href="index.html" class="btn btn-back">← Voltar ao Site</a>
+        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-card">
+
+      <div class="doc-header">
+        <div class="doc-badge">Programa Comunitário Integrado</div>
+        <h1>PROJETO TABATINGA VIVA</h1>
+        <h2>Esporte, Cultura, Cognição, Idiomas e Cidadania</h2>
+        <p>Centro Comunitário da Tabatinga, Campo de Futebol, Praia e Espaços Comunitários</p>
+      </div>
+
+      <div class="meta-box">
+        <div class="meta-grid">
+          <div><strong>Coordenação Geral:</strong> Thiago Siqueira &amp; Comissão de Moradores</div>
+          <div><strong>Território:</strong> Bairro da Tabatinga (Divisa Caraguá / Ubatuba)</div>
+          <div><strong>Natureza:</strong> Iniciativa Comunitária Apartidária Sem Fins Lucrativos</div>
+          <div><strong>Público:</strong> Crianças (Contraturno), Jovens, Adultos e 60+</div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1 -->
+      <h3 class="section-heading">1. APRESENTAÇÃO E DIAGNÓSTICO DO TERRITÓRIO</h3>
+      <p>
+        O Bairro Tabatinga ocupa uma posição geográfica singular no Litoral Norte paulista: situado na divisa exata entre Caraguatatuba e Ubatuba, a cerca de 18 km do centro de Caraguatatuba e 30 km do centro de Ubatuba. Essa distância histórica dos centros administrativos gera escassez de opções públicas continuadas de cultura formativa, contraturno escolar, esportes estruturados e saúde preventiva para os moradores locais.
+      </p>
+      <p>
+        Embora a Escola Municipal Pedro João de Oliveira e o Centro Comunitário estejam territorialmente em Caraguatatuba, a vida cotidiana, as famílias, os alunos e os trabalhadores do comércio integram moradores de ambos os municípios. O <strong>Projeto Tabatinga Viva</strong> nasce para ser a ponte de união comunitária, articulando os moradores para transformar os espaços públicos do bairro em um polo vivo de aprendizagem, convivência sadia e cidadania.
+      </p>
+
+      <!-- SEÇÃO 2: A PESQUISA DIAGNÓSTICA -->
+      <h3 class="section-heading orange">2. DIAGNÓSTICO ATIVO: A PESQUISA COMUNITÁRIA DAS FAMÍLIAS</h3>
+      <div class="highlight-card orange">
+        <strong>Inovação: Nós não "adivinhamos" o que a comunidade quer — nós perguntamos!</strong>
+        <p style="margin-top:6px; margin-bottom:0;">
+          Para garantir adesão real desde o primeiro dia, desenvolvemos uma **Pesquisa Diagnóstica Oficial da Família**, aplicada via aplicativo/site e cartazes com QR Code fixados nos comércios locais (padarias, mercados, farmácias):
+        </p>
+        <ul style="margin-top:8px; margin-bottom:0;">
+          <li><strong>Mapeamento por Membro da Casa:</strong> Cadastra pai, mãe, filhos e idosos, idades e sexo de cada um;</li>
+          <li><strong>Preferência de Turmas:</strong> Identifica o interesse por Turmas Mistas, Exclusivas Femininas ou Masculinas;</li>
+          <li><strong>Capacidade Financeira:</strong> O morador indica sua faixa de rateio viável ou se precisa de bolsa social 100% gratuita;</li>
+          <li><strong>Termômetro em Tempo Real:</strong> As respostas alimentam instantaneamente um painel de dados com ranking ao vivo de demandas no site oficial (<code>tabatinga-viva.netlify.app</code>).</li>
+        </ul>
+      </div>
+
+      <!-- SEÇÃO 3: NÚCLEOS -->
+      <h3 class="section-heading">3. OS 4 NÚCLEOS DE ATUAÇÃO E AS 12 ATIVIDADES</h3>
+      <div class="hub-grid">
+        <div class="hub-card h1">
+          <h4>⚽ Núcleo 1: Esporte e Luta</h4>
+          <ul>
+            <li><strong>Futebol Comunitário Sub-12:</strong> Campo do bairro, disciplina e cooperação.</li>
+            <li><strong>Vôlei de Praia e Adaptado (60+):</strong> Areia e salão coberto, integração de idosos e jovens.</li>
+            <li><strong>Boxe Educativo / Defesa Pessoal:</strong> Coordenação, esquiva e autocontrole (sem tatame ou quimono caros).</li>
+          </ul>
+        </div>
+        <div class="hub-card h2">
+          <h4>💃 Núcleo 2: Movimento e Arte</h4>
+          <ul>
+            <li><strong>Dança, Ritmos &amp; Zumba:</strong> Expressão corporal e autoestima para todas as idades.</li>
+            <li><strong>Teatro &amp; Expressão:</strong> Oratória, desinibição e valorização da cultura caiçara.</li>
+            <li><strong>Desenho &amp; Artes Visuais:</strong> Criatividade com lápis, guache e pintura em tela.</li>
+          </ul>
+        </div>
+        <div class="hub-card h3">
+          <h4>📚 Núcleo 3: Cognição e Letramento</h4>
+          <ul>
+            <li><strong>Tabatinga Lê &amp; Brinca:</strong> Roda de leitura, contação de causos, troca de livros e brinquedoteca.</li>
+            <li><strong>Xadrez, Damas e Raciocínio:</strong> Jogos de estratégia e concentração.</li>
+            <li><strong>Inglês e Espanhol Prático:</strong> Conversação voltada ao turismo e atendimento no comércio.</li>
+            <li><strong>Reforço Escolar:</strong> Apoio pedagógico na alfabetização e matemática.</li>
+          </ul>
+        </div>
+        <div class="hub-card h4">
+          <h4>🧘 Núcleo 4: Música e Saúde</h4>
+          <ul>
+            <li><strong>Violão &amp; Ukulele:</strong> Iniciação musical com instrumentos compartilhados do projeto.</li>
+            <li><strong>Canto Coral Comunitário:</strong> Prática vocal intergeracional a custo zero.</li>
+            <li><strong>Funcional &amp; Mobilidade (60+):</strong> Alongamento, fortalecimento e prevenção de quedas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 4: MODELO DE SUSTENTABILIDADE -->
+      <h3 class="section-heading green">4. MODELO DE AUTOSSUSTENTABILIDADE (SISTEMA DE RATEIO SOLIDÁRIO)</h3>
+      <p>
+        O projeto possui um modelo inteligente para <strong>não depender eternamente de favores políticos</strong>. Quando a Prefeitura ou voluntários não suprirem o instrutor, a própria turma viabiliza o profissional:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Etapa</th>
+            <th>Como Funciona</th>
+            <th>Impacto Social</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Arranque Rápido</strong></td>
+            <td>Turmas começam com grupos pequenos de 5 a 6 moradores adultos determinados.</td>
+            <td>A aula acontece sem esperar multidão ou verba pública.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Rateio Progressivo</strong></td>
+            <td>O valor fixo mensal da hora-aula é dividido igualmente entre os alunos adultos.</td>
+            <td>Quanto mais vizinhos entram, menor fica a mensalidade para todos.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Bolsas Automáticas</strong></td>
+            <td>Cada turma de adultos viabilizada por rateio acolhe gratuitamente crianças da escola pública.</td>
+            <td><strong>Bolsas 100% gratuitas</strong> para as crianças de baixa renda da comunidade.</td>
+          </tr>
+          <tr>
+            <td><strong>4. Pagamento Direto</strong></td>
+            <td>O aluno paga via PIX direto na conta do professor titular até o dia 10 (ou a combinar).</td>
+            <td><strong>Zero dinheiro passa pela coordenação.</strong> Transparência absoluta.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SEÇÃO 5: CUIDADO COLETIVO -->
+      <h3 class="section-heading">5. A CULTURA DO CUIDADO COLETIVO ("OS 5 MINUTOS DE OURO")</h3>
+      <div class="highlight-card">
+        <p><strong>Inspiração no Modelo Japonês (<em>O-Soji</em>) e Pedagogia Waldorf:</strong></p>
+        <p style="margin-bottom:0;">
+          No Tabatinga Viva, ninguém é "cliente passivo". Nos <strong>5 minutos finais de toda aula</strong>, professor e alunos higienizam materiais, guardam equipamentos e passam vassoura rápida na sala utilizada. As salas permanecem limpas a custo zero para o bairro, restando para o rateio de zeladoria apenas os serviços técnicos pesados (desinfecção de banheiros e roçada mensal de grama).
+        </p>
+      </div>
+
+      <!-- SEÇÃO 6: PARCERIAS -->
+      <h3 class="section-heading">6. PARCERIAS ESTATÉGICAS E ARTICULAÇÃO INSTITUCIONAL</h3>
+      <ul>
+        <li><strong>Rotary Club:</strong> Parceria estratégica para apadrinhamento dos Kits Modulares de materiais esportivos/didáticos e chancela cidadã;</li>
+        <li><strong>Prefeitura de Caraguatatuba:</strong> Autorização e cessão regular do Centro Comunitário da Tabatinga;</li>
+        <li><strong>Prefeitura de Ubatuba:</strong> Apoio com materiais esportivos e suporte institucional aos munícipes da divisa;</li>
+        <li><strong>Faculdades Locais (Módulo / IFSP):</strong> Recepção de estagiários curriculares de Educação Física, Letras e Pedagogia sob supervisão do professor titular âncora.</li>
+      </ul>
+
+      <div class="doc-footer">
+        <p>🌱 <strong>Projeto Tabatinga Viva &amp; Tabatinga Lê e Brinca</strong> • Caraguatatuba / Ubatuba — SP</p>
+        <p style="margin-top:4px;">Site Oficial: <code>tabatinga-viva.netlify.app</code> • Livros Livres: <code>livroslivres.netlify.app</code></p>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

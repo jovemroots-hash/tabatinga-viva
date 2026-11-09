@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proposta Executiva ao Rotary Club — Projeto Tabatinga Viva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f4c5c;
+      --primary-dark: #072a33;
+      --accent: #e36414;
+      --green: #15803d;
+      --rotary-blue: #005daa;
+      --rotary-gold: #ffb81c;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    .top-bar {
+      background: var(--rotary-blue);
+      color: #fff;
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .top-bar-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .actions { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-back { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-print { background: var(--rotary-gold); color: #0f172a; }
+
+    .container {
+      max-width: 920px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+
+    .doc-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 42px 38px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .doc-header {
+      text-align: center;
+      border-bottom: 3px solid var(--rotary-blue);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .doc-badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--rotary-blue);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      border: 1px solid #bfdbfe;
+    }
+    .doc-header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .doc-header h2 {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--rotary-blue);
+      margin-bottom: 8px;
+    }
+    .doc-header p {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    h3.section-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--rotary-blue);
+      padding: 9px 16px;
+      border-radius: 8px;
+      margin: 26px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3.section-heading.gold { background: #b45309; }
+    h3.section-heading.green { background: var(--green); }
+
+    p { margin-bottom: 12px; font-size: 14px; }
+    ul, ol { margin: 8px 0 14px 22px; font-size: 14px; }
+    li { margin-bottom: 6px; }
+
+    .kit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .kit-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+      position: relative;
+    }
+    .kit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .kit-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .kit-price {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--green);
+      background: #dcfce7;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+    .kit-card ul {
+      margin: 6px 0 0 18px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .total-box {
+      background: #eff6ff;
+      border: 2px solid var(--rotary-blue);
+      border-radius: 12px;
+      padding: 18px 24px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .total-box h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--rotary-blue);
+      margin-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .doc-footer {
+      margin-top: 36px;
+      padding-top: 22px;
+      border-top: 2px dashed var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .top-bar { display: none !important; }
+      .container { margin: 0; max-width: 100%; padding: 0; }
+      .doc-card { box-shadow: none; border: none; padding: 12px; }
+      .kit-card, tr { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <div class="brand">⚙️ Proposta de Parceria — Rotary Club &amp; Tabatinga Viva</div>
+      <div class="actions">
+        <a href="index.html" class="btn btn-back">← Voltar ao Site</a>
+        <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="doc-card">
+
+      <div class="doc-header">
+        <div class="doc-badge">Proposta Executiva de Parceria Comunitária</div>
+        <h1>PROJETO TABATINGA VIVA &amp; TABATINGA LÊ E BRINCA</h1>
+        <h2>Orçamento Modular de Materiais e Modelo de Autossustentabilidade</h2>
+        <p>Apresentado ao Rotary Club para Apadrinhamento de Kits e Fomento Comunitário</p>
+      </div>
+
+      <!-- SEÇÃO 1: POR QUE TEM A CARA DO ROTARY -->
+      <h3 class="section-heading">1. POR QUE ESTE PROJETO CONECTA-SE ÀS ÁREAS DE ENFOQUE DO ROTARY?</h3>
+      <p>
+        O Rotary Internacional pauta sua atuação em <strong>projetos autossustentáveis, transparentes e de impacto mensurável</strong>. O Projeto Tabatinga Viva atua diretamente em 3 áreas de enfoque:
+      </p>
+      <ul>
+        <li><strong>Educação Básica e Alfabetização:</strong> Encontros do <em>Tabatinga Lê &amp; Brinca</em>, jogos de raciocínio (Xadrez/Damas), reforço escolar e línguas estrangeiras (Inglês/Espanhol);</li>
+        <li><strong>Prevenção de Doenças e Promoção da Saúde:</strong> Vôlei adaptado (60+), futebol comunitário, boxe educativo e ginástica funcional/alongamento;</li>
+        <li><strong>Desenvolvimento Econômico e Comunitário:</strong> Ativação do Centro Comunitário em território de divisa e capacitação de jovens para o atendimento no comércio e turismo.</li>
+      </ul>
+
+      <!-- SEÇÃO 2: ORÇAMENTO DOS KITS -->
+      <h3 class="section-heading gold">2. ORÇAMENTO MODULAR DE EQUIPAMENTOS (INVESTIMENTO ÚNICO)</h3>
+      <p>
+        O investimento em materiais foi dividido em **6 Kits Modulares Independentes**. O Rotary (ou rotarianos apadrinhando individualmente) pode optar por apoiar um kit específico ou o pacote integral:
+      </p>
+
+      <div class="kit-grid">
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 1: Futebol Sub-12</span>
+            <span class="kit-price">R$ 780,00</span>
+          </div>
+          <ul>
+            <li>5 Bolas de futebol de campo costuradas (tam. 4 e 5)</li>
+            <li>Kit Funcional (20 cones + 20 chapéus chineses)</li>
+            <li>20 Coletes de treino dupla face</li>
+            <li>Redes para traves + bomba de ar + apito</li>
+          </ul>
+        </div>
+
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 2: Vôlei Adaptado (60+) &amp; Praia</span>
+            <span class="kit-price">R$ 520,00</span>
+          </div>
+          <ul>
+            <li>1 Rede oficial reforçada (9,5m com lona e cabos)</li>
+            <li>3 Bolas macias de vôlei (EVA/microfibra para idosos)</li>
+            <li>Fita de marcação para areia/salão com fixadores</li>
+          </ul>
+        </div>
+
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 3: Boxe Educativo &amp; Defesa</span>
+            <span class="kit-price">R$ 1.520,00</span>
+          </div>
+          <ul>
+            <li>10 Cordas de pular com rolamento em PVC</li>
+            <li>4 Pares de luvas de boxe compartilhadas (12/14oz)</li>
+            <li>3 Pares de manoplas de foco (aparadores)</li>
+            <li>10 Pares de bandagens laváveis + 1 saco de pancadas</li>
+          </ul>
+        </div>
+
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 4: Funcional, Mobilidade &amp; Dança</span>
+            <span class="kit-price">R$ 1.355,00</span>
+          </div>
+          <ul>
+            <li>15 Colchoetes de ginástica laváveis em napa D23</li>
+            <li>3 Kits de elásticos extensores (minibands/therabands)</li>
+            <li>15 Bastões de mobilidade postural</li>
+            <li>1 Caixa de som portátil potente Bluetooth</li>
+          </ul>
+        </div>
+
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 5: Música &amp; Coral</span>
+            <span class="kit-price">R$ 550,00</span>
+          </div>
+          <ul>
+            <li><em>Contrapartida da Coordenação: 2 violões + 2 ukuleles (R$ 1.400 doados)</em></li>
+            <li>Cordas de nylon reserva, palhetas e afinadores de clip</li>
+            <li>Kit percussão rítmica (pandeiros, ganzás e clavas)</li>
+            <li>Pastas catálogo com cifras e letras do coral</li>
+          </ul>
+        </div>
+
+        <div class="kit-card">
+          <div class="kit-header">
+            <span class="kit-title">KIT 6: Leitura, Xadrez &amp; Idiomas</span>
+            <span class="kit-price">R$ 970,00</span>
+          </div>
+          <ul>
+            <li>1 Quadro branco (120x90cm) + marcadores e apagador</li>
+            <li>14 Jogos cognitivos (6 xadrez/damas, dominó e baralhos)</li>
+            <li>Kit de artes visuais (papéis, guaches, pincéis e 10 telas)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="total-box">
+        <h4>INVESTIMENTO TOTAL EM TODOS OS 6 KITS: R$ 5.695,00</h4>
+        <p style="margin:0; font-size:13.5px; color:var(--muted);">
+          Equipa integralmente as 12 modalidades comunitárias para atender centenas de famílias o ano todo.
+        </p>
+      </div>
+
+      <!-- SEÇÃO 3: COMO O ROTARY APOIA -->
+      <h3 class="section-heading green">3. MODELO DE APOIO 100% SEGURO PARA A TESOURARIA DO ROTARY</h3>
+      <p>
+        O projeto <strong>não solicita repasse de verba para CPF de pessoa física</strong>:
+      </p>
+      <ul>
+        <li><strong>Compra Direta dos Materiais:</strong> O próprio Rotary Club adquire os kits diretamente nas lojas ou na internet, emitindo a <strong>Nota Fiscal em nome do CNPJ do Rotary Club</strong> e entregando os materiais físicos lacrados ao projeto;</li>
+        <li><strong>Apadrinhamento de Turmas Infantis:</strong> Caso rotarianos desejem apadrinhar 3 meses de professor para crianças de baixa renda, o pagamento é feito diretamente na chave PIX/MEI do professor com Nota Fiscal;</li>
+        <li><strong>Palestrantes Voluntários do Rotary:</strong> Visitas mensais de profissionais rotarianos (médicos, dentistas, advogados, empresários) para palestras de cidadania e saúde;</li>
+        <li><strong>Chancela Institucional:</strong> Fortalecimento dos ofícios enviados às Prefeituras e Faculdades.</li>
+      </ul>
+
+      <div class="doc-footer">
+        <p>⚙️ <strong>Rotary Club &amp; Projeto Tabatinga Viva / Tabatinga Lê e Brinca</strong></p>
+        <p style="margin-top:4px;">Parceria por uma Tabatinga viva, educadora e saudável.</p>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

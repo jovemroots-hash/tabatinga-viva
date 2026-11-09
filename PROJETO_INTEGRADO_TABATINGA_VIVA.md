@@ -11,9 +11,9 @@
 * **Público-Alvo:** 
   - Crianças e adolescentes (5 a 17 anos) em contraturno escolar;
   - Adultos e melhor idade da comunidade em geral.
-* **Abrangência Territorial e Realidade Demográfica:** 
+* **Abrangência Territorial e Realidade Comunitária:** 
   - Região de divisa intermunicipal Caraguatatuba–Ubatuba.
-  - **Fator Demográfico Essencial:** Embora a Escola Municipal Pedro João de Oliveira e o Centro Comunitário estejam territorialmente em Caraguatatuba, **aproximadamente 70% dos alunos, famílias e trabalhadores do comércio local residem em Ubatuba**.
+  - **Fator Comunitário Essencial:** Embora a Escola Municipal Pedro João de Oliveira e o Centro Comunitário estejam territorialmente no município de Caraguatatuba, a vida comunitária, os alunos, as famílias e os trabalhadores do comércio local integram moradores de ambos os lados da divisa.
 * **Natureza:** Ação Comunitária Independente e Voluntária de Interesse Público e Integração Social (sem fins lucrativos).
 
 ---
@@ -22,13 +22,13 @@
 
 O Bairro Tabatinga ocupa uma posição geográfica singular no Litoral Norte de São Paulo: situado no limite exato entre os municípios de Caraguatatuba e Ubatuba. Devido à grande distância dos centros urbanos das duas cidades (cerca de 30 km do centro de Ubatuba e 18 km do centro de Caraguatatuba), as famílias da Tabatinga convivem com a escassez de opções públicas continuadas de cultura, lazer formativo, atividades esportivas e estímulo intelectual.
 
-Existe no bairro uma configuração territorial peculiar:
+Existe no bairro uma configuração comunitária compartilhada:
 1. **Polo Educacional e Comunitário:** O Centro Comunitário e a Escola Municipal Pedro João de Oliveira concentram o fluxo diário do bairro no território de Caraguatatuba;
-2. **Público Majoritário de Ubatuba:** Cerca de **70% dos alunos matriculados na E.M. Pedro João de Oliveira, bem como 70% dos trabalhadores do comércio e famílias do entorno, residem em Ubatuba**.
+2. **Integração das Famílias:** Alunos matriculados na escola local, trabalhadores do comércio e famílias do entorno residem tanto no lado de Caraguatatuba quanto no lado de Ubatuba, compartilhando o mesmo espaço e os mesmos desafios cotidianos.
 
 O **Projeto Tabatinga Viva** nasce para unir a comunidade e estruturar um polo integrado de oficinas gratuitas voltadas ao desenvolvimento integral de crianças, jovens e famílias. 
 
-A proposta parte da premissa prática de **"começar com o que temos"** — apoiando-se em iniciativas já em andamento, como o projeto de letramento e trocas culturais **"Tabatinga Lê & Brinca"** e o **"Núcleo de Iniciação Esportiva e Futebol Sub-12"** — e articulando a cooperação formal entre a **Prefeitura de Caraguatatuba** (cessão do Centro Comunitário), a **Prefeitura de Ubatuba** (apoio direto à sua população que representa 70% do público) e as **Faculdades de Caraguatatuba** (estagiários e extensão universitária).
+A proposta parte da premissa prática de **"começar com o que temos"** — apoiando-se em iniciativas já em andamento, como o projeto de letramento e trocas culturais **"Tabatinga Lê & Brinca"** e o **"Núcleo de Iniciação Esportiva e Futebol Sub-12"** — e articulando a cooperação formal entre a **Prefeitura de Caraguatatuba** (cessão do Centro Comunitário), a **Prefeitura de Ubatuba** (apoio direto à população da divisa) e as **Faculdades de Caraguatatuba** (estagiários e extensão universitária).
 
 ---
 
@@ -107,15 +107,15 @@ O programa está estruturado em **4 Núcleos de Atuação Comunitária**:
 ┌──────────────────────────────────────────────┐       ┌──────────────────────────────────────────────┐
 │          PREFEITURA DE CARAGUATATIBA         │       │            PREFEITURA DE UBATUBA             │
 ├──────────────────────────────────────────────┤       ├──────────────────────────────────────────────┤
-│ • Cede e autoriza o uso regular do Centro    │       │ • Atende diretamente sua população (70% dos  │
-│   Comunitário da Tabatinga                   │ <===> │   alunos e famílias moram em Ubatuba)        │
+│ • Cede e autoriza o uso regular do Centro    │       │ • Atende diretamente suas famílias e alunos  │
+│   Comunitário da Tabatinga                   │ <===> │   que residem no lado de Ubatuba             │
 │ • Apoio institucional via Desenvolvimento     │       │ • Apoio com materiais esportivos e didáticos │
 │   Social, SECER e FUNDACC                    │       │ • Apoio via Secretaria de Esportes e FUNDART │
 └──────────────────────────────────────────────┘       └──────────────────────────────────────────────┘
 ```
 
 * **Prefeitura de Caraguatatuba:** Entra principalmente com a cessão do equipamento público (Centro Comunitário), valorizando o espaço e acolhendo a comunidade.
-* **Prefeitura de Ubatuba:** Entra com o apoio em materiais esportivos, artísticos e suporte institucional para seus munícipes (70% do público-alvo), que residem distantes do centro de Ubatuba.
+* **Prefeitura de Ubatuba:** Entra com o apoio em materiais esportivos, artísticos e suporte institucional para seus munícipes residentes na divisa da Tabatinga, que residem distantes do centro de Ubatuba.
 
 ---
 
